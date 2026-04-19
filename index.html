@@ -142,25 +142,36 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(255,255,255,0.97);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid rgba(0,0,0,0.08);
-  transition: background 0.3s;
+  /* Kein eigener Hintergrund – die Pill trägt ihn */
+  background: transparent;
+  padding: 12px 20px;
 }
 .header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 28px;
-  max-width: 1080px;
+  padding: 10px 24px;
+  max-width: 1040px;
   margin: 0 auto;
   gap: 20px;
+  /* Floating Pill */
+  background: rgba(255,255,255,0.93);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  border-radius: 20px;
+  box-shadow: 0 4px 28px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.06);
+  transition: box-shadow 0.3s;
 }
+.header-inner:hover { box-shadow: 0 6px 36px rgba(0,0,0,0.13), 0 0 0 1px rgba(0,0,0,0.07); }
 
-/* Logo – freigestellt, kein Rahmen */
+/* Logo – mix-blend-mode entfernt weißen Hintergrund auf hellem Pill */
 .logo { display: flex; align-items: center; flex-shrink: 0; }
-.logo img { height: 42px; width: auto; display: block; }
+.logo img {
+  height: 52px;
+  width: auto;
+  display: block;
+  mix-blend-mode: multiply; /* weißer Hintergrund verschwindet */
+}
 .logo-fallback {
   color: var(--dark);
   font-weight: 900;
