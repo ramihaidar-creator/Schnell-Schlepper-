@@ -159,10 +159,19 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* Logo */
-.logo { display: flex; align-items: center; flex-shrink: 0; }
-.logo img { height: 40px; width: auto; }
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.96);
+  padding: 5px 12px;
+  border-radius: 9px;
+  transition: background 0.2s;
+}
+.logo:hover { background: #fff; }
+.logo img { height: 36px; width: auto; display: block; }
 .logo-fallback {
-  color: white;
+  color: #1a1a1a;
   font-weight: 900;
   font-size: 1rem;
   letter-spacing: 0.08em;
