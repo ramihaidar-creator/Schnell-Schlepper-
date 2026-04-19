@@ -249,66 +249,219 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .nav a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
 
 /* ═══════════════════════════════════════════
-   HERO – split: Notfall | Planung
+   HERO SLIDESHOW
 ═══════════════════════════════════════════ */
-.hero {
-  min-height: 94vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 100px 28px 80px;
-  background:
-    radial-gradient(ellipse 70% 50% at 20% 60%, rgba(204,0,0,0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 80% 30%, rgba(204,0,0,0.04) 0%, transparent 60%),
-    var(--black);
+.slideshow {
   position: relative;
+  height: 100vh;
+  min-height: 620px;
   overflow: hidden;
 }
-.hero::after {
-  content: '';
+
+/* Background slides */
+.slide-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 1.3s ease-in-out, transform 8s ease-out;
+  will-change: opacity, transform;
+}
+.slide-bg.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Placeholder gradients – ersetzen durch eigene Fotos: url('img/slide1.jpg') etc. */
+.slide-bg:nth-child(1) {
+  background:
+    linear-gradient(135deg, #0d0d0d 0%, #1a0a00 40%, #2a1200 100%);
+}
+.slide-bg:nth-child(2) {
+  background:
+    linear-gradient(135deg, #0a0a1a 0%, #0d1a0d 40%, #001a10 100%);
+}
+.slide-bg:nth-child(3) {
+  background:
+    linear-gradient(135deg, #1a0000 0%, #2d0000 50%, #0d0d0d 100%);
+}
+
+/* Dark overlay */
+.slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    rgba(0,0,0,0.78) 0%,
+    rgba(0,0,0,0.48) 55%,
+    rgba(0,0,0,0.65) 100%
+  );
+  z-index: 1;
+}
+
+/* Bottom fade into next section */
+.slide-fade-bottom {
   position: absolute;
   bottom: 0; left: 0; right: 0;
   height: 200px;
   background: linear-gradient(0deg, var(--surface) 0%, transparent 100%);
+  z-index: 2;
   pointer-events: none;
 }
 
-.hero-top { text-align: center; max-width: 800px; margin: 0 auto 60px; position: relative; z-index: 1; }
-.hero-badge {
-  display: inline-flex;
+/* Text panel */
+.slide-content {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
   align-items: center;
-  gap: 8px;
-  background: rgba(204,0,0,0.1);
-  border: 1px solid rgba(204,0,0,0.25);
-  color: #ff7070;
-  padding: 7px 16px;
-  border-radius: var(--r-pill);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  margin-bottom: 28px;
-  text-transform: uppercase;
+  padding: 0 28px;
 }
-.hero h1 { margin-bottom: 20px; }
-.hero-sub {
-  font-size: 1.15rem;
-  color: var(--text-dim);
+.slide-text {
+  position: absolute;
+  max-width: 720px;
+  left: max(28px, calc((100% - 1080px) / 2 + 28px));
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.slide-text.active { opacity: 1; pointer-events: auto; }
+
+/* Each text element animates independently */
+.slide-pre {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 18px;
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.slide-pre .r { color: var(--red); }
+
+.slide-h1 {
+  font-size: clamp(2.6rem, 6.5vw, 4.6rem);
+  font-weight: 900;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin-bottom: 22px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.72s ease 0.14s, transform 0.72s ease 0.14s;
+}
+.slide-h1 .r { color: var(--red); }
+
+.slide-sub {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.6);
   line-height: 1.65;
-  max-width: 500px;
-  margin: 0 auto;
+  max-width: 520px;
+  margin-bottom: 38px;
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease 0.28s, transform 0.7s ease 0.28s;
 }
 
-/* Hero split cards */
+.slide-ctas {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease 0.42s, transform 0.7s ease 0.42s;
+}
+
+/* Trigger animations when slide is active */
+.slide-text.active .slide-pre,
+.slide-text.active .slide-h1,
+.slide-text.active .slide-sub,
+.slide-text.active .slide-ctas {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Progress bar */
+.slide-progress {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: rgba(255,255,255,0.08);
+  z-index: 10;
+}
+.slide-progress-bar {
+  height: 100%;
+  background: var(--red);
+  width: 0%;
+}
+
+/* Dot nav */
+.slide-dots {
+  position: absolute;
+  bottom: 28px;
+  right: max(28px, calc((100% - 1080px) / 2 + 28px));
+  z-index: 10;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.28);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.35s ease;
+}
+.dot.active { background: #fff; width: 24px; border-radius: 4px; }
+
+/* Scroll cue */
+.scroll-cue {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.3);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  animation: cueFloat 2.2s ease-in-out infinite;
+}
+.scroll-cue-line {
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 100%);
+}
+@keyframes cueFloat {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(7px); }
+}
+
+/* Split cards below slideshow */
+.hero-split-section {
+  background: linear-gradient(180deg, var(--surface) 0%, var(--surface2) 100%);
+  padding: 72px 28px;
+}
 .hero-split {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
   max-width: 900px;
   margin: 0 auto;
-  position: relative;
-  z-index: 1;
 }
-
 .hero-card {
   background: var(--surface2);
   border: 1px solid var(--border);
@@ -320,59 +473,24 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .hero-card::before {
   content: '';
-  position: absolute;
-  inset: 0;
+  position: absolute; inset: 0;
   border-radius: var(--r-xl);
   opacity: 0;
   transition: opacity 0.3s;
 }
-.hero-card:hover { transform: translateY(-4px); }
-.hero-card:hover { border-color: var(--border-hover); }
-
+.hero-card:hover { transform: translateY(-4px); border-color: var(--border-hover); }
 .hero-card.emergency::before { background: radial-gradient(ellipse at top left, rgba(204,0,0,0.08), transparent 70%); }
 .hero-card.emergency:hover::before { opacity: 1; }
 .hero-card.plan::before { background: radial-gradient(ellipse at top right, rgba(255,255,255,0.03), transparent 70%); }
 .hero-card.plan:hover::before { opacity: 1; }
-
-.card-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.4rem;
-  margin-bottom: 20px;
-}
+.card-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 20px; }
 .emergency .card-icon { background: rgba(204,0,0,0.15); }
 .plan .card-icon { background: rgba(255,255,255,0.06); }
-
-.hero-card .card-label {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-subtle);
-  margin-bottom: 8px;
-}
+.hero-card .card-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-subtle); margin-bottom: 8px; }
 .hero-card h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 12px; line-height: 1.2; }
 .hero-card p { color: var(--text-dim); font-size: 0.9rem; line-height: 1.6; margin-bottom: 28px; }
-
-.card-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 28px;
-}
-.meta-tag {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid var(--border);
-  padding: 5px 12px;
-  border-radius: var(--r-pill);
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: var(--text-dim);
-}
+.card-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+.meta-tag { background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 5px 12px; border-radius: var(--r-pill); font-size: 0.78rem; font-weight: 500; color: var(--text-dim); }
 .meta-tag.red { background: rgba(204,0,0,0.1); border-color: rgba(204,0,0,0.2); color: #ff8080; }
 
 /* ═══════════════════════════════════════════
@@ -746,7 +864,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .header-phone { display: none; }
   .header-tagline { display: none; }
 
-  .hero { padding: 80px 20px 70px; min-height: auto; }
+  .slideshow { height: 100svh; min-height: 560px; }
+  .slide-text { left: 20px; right: 20px; }
+  .slide-h1 { font-size: 2.2rem; }
+  .slide-ctas { flex-direction: column; }
+  .slide-ctas .btn { justify-content: center; }
+  .hero-split-section { padding: 48px 20px; }
+  .hero-split { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
   .booking-inner { padding: 36px 22px; }
   .form-grid { grid-template-columns: 1fr; }
   .booking { padding: 72px 20px; }
@@ -809,56 +933,99 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 </header>
 
 
-<!-- ═══════ HERO ═══════ -->
-<section class="hero" id="start">
-  <div class="container">
+<!-- ═══════ HERO SLIDESHOW ═══════ -->
+<section class="slideshow" id="start">
 
-    <div class="hero-top fade-up">
-      <div class="hero-badge">🚨 Notfallservice aktiv – jetzt erreichbar</div>
-      <h1 class="display">
-        Abschleppdienst Hannover.<br>
-        <span class="accent">Wenn's drauf ankommt.</span>
-      </h1>
-      <p class="hero-sub">
-        Panne, Unfall oder geplanter Transport – wir sind die richtige Wahl. Schnell, fair und professionell.
-      </p>
+  <!-- Hintergrundbilder: eigene Fotos in img/slide1.jpg, img/slide2.jpg, img/slide3.jpg ablegen -->
+  <div class="slide-bg active"></div>
+  <div class="slide-bg"></div>
+  <div class="slide-bg"></div>
+
+  <div class="slide-overlay"></div>
+  <div class="slide-fade-bottom"></div>
+
+  <!-- Slide 1: Vertrauen / Partnerschaft -->
+  <div class="slide-content">
+    <div class="slide-text active" id="st-0">
+      <p class="slide-pre">Ihr verlässlicher Partner · Seit <span class="r">1999</span></p>
+      <h1 class="slide-h1">Bei uns sind Sie<br>in <span class="r">SICHEREN</span> Händen.</h1>
+      <p class="slide-sub">Kooperation mit Werkstätten, Kfz-Gutachtern &amp; Autoverwertungen – für Ihre lückenlose Betreuung.</p>
+      <div class="slide-ctas">
+        <a href="tel:+49XXXXXXXXXX" class="btn btn-red btn-lg">📞 Jetzt anrufen</a>
+        <a href="#anfrage" class="btn btn-ghost btn-lg">Auftrag anfragen</a>
+      </div>
     </div>
 
-    <div class="hero-split">
-
-      <!-- NOTFALL -->
-      <div class="hero-card emergency fade-up">
-        <div class="card-icon">🚨</div>
-        <div class="card-label">Sofortiger Einsatz</div>
-        <h2>Notfall &amp; Panne</h2>
-        <p>Liegengeblieben? Unfall? Wir sind in ca. 30 Minuten bei Ihnen – zu jeder Uhrzeit, 365 Tage im Jahr.</p>
-        <div class="card-meta">
-          <span class="meta-tag red">24/7 aktiv</span>
-          <span class="meta-tag red">~30 Min. vor Ort</span>
-          <span class="meta-tag">Pannenhilfe</span>
-          <span class="meta-tag">Bergung</span>
-        </div>
-        <a href="tel:+49XXXXXXXXXX" class="btn btn-red btn-lg" style="width:100%;justify-content:center;">
-          📞 Jetzt sofort anrufen
-        </a>
+    <!-- Slide 2: Fachkompetenz -->
+    <div class="slide-text" id="st-1">
+      <p class="slide-pre">Fachgerecht &amp; <span class="r">transportversichert</span></p>
+      <h1 class="slide-h1">Jedes Fahrzeug.<br>Jede <span class="r">Herausforderung</span>.</h1>
+      <p class="slide-sub">Von der Bergung bis zum Spezialtransport – professionell ausgerüstet, pünktlich &amp; transparent.</p>
+      <div class="slide-ctas">
+        <a href="tel:+49XXXXXXXXXX" class="btn btn-red btn-lg">📞 Sofort Hilfe</a>
+        <a href="#leistungen" class="btn btn-ghost btn-lg">Leistungen ansehen</a>
       </div>
+    </div>
 
-      <!-- PLANUNG -->
-      <div class="hero-card plan fade-up" style="transition-delay:0.1s">
-        <div class="card-icon">📍</div>
-        <div class="card-label">Geplanter Transport</div>
-        <h2>Route anfragen</h2>
-        <p>Transport planen, Fahrzeugrückführung oder Spedition? Wählen Sie Termin und Route – wir melden uns.</p>
-        <div class="card-meta">
-          <span class="meta-tag">100 km Regional</span>
-          <span class="meta-tag">Deutschlandweit</span>
-          <span class="meta-tag">Europaweit</span>
-        </div>
-        <a href="#anfrage" class="btn btn-ghost btn-lg" style="width:100%;justify-content:center;">
-          Auftrag anfragen →
-        </a>
+    <!-- Slide 3: 24/7 -->
+    <div class="slide-text" id="st-2">
+      <p class="slide-pre">Pünktlich · Transparent · <span class="r">Fair</span></p>
+      <h1 class="slide-h1"><span class="r">24 / 7</span> für Sie<br>im Einsatz.</h1>
+      <p class="slide-sub">Faire Festpreise, keine Überraschungen – Hannover &amp; Umgebung, Deutschlandweit &amp; Europaweit.</p>
+      <div class="slide-ctas">
+        <a href="tel:+49XXXXXXXXXX" class="btn btn-red btn-lg">📞 Jetzt anrufen</a>
+        <a href="#einsatzgebiet" class="btn btn-ghost btn-lg">Einsatzgebiet</a>
       </div>
+    </div>
+  </div>
 
+  <!-- Dot-Navigation -->
+  <div class="slide-dots">
+    <button class="dot active" onclick="goToSlide(0)" aria-label="Slide 1"></button>
+    <button class="dot"        onclick="goToSlide(1)" aria-label="Slide 2"></button>
+    <button class="dot"        onclick="goToSlide(2)" aria-label="Slide 3"></button>
+  </div>
+
+  <!-- Fortschrittsbalken -->
+  <div class="slide-progress">
+    <div class="slide-progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Scroll-Hinweis -->
+  <div class="scroll-cue">
+    <span>Scrollen</span>
+    <div class="scroll-cue-line"></div>
+  </div>
+
+</section>
+
+<!-- Notfall / Planung Split -->
+<section class="hero-split-section">
+  <div class="hero-split">
+    <div class="hero-card emergency fade-up">
+      <div class="card-icon">🚨</div>
+      <div class="card-label">Sofortiger Einsatz</div>
+      <h2>Notfall &amp; Panne</h2>
+      <p>Liegengeblieben? Unfall? Wir sind in ca. 30 Minuten bei Ihnen – zu jeder Uhrzeit, 365 Tage im Jahr.</p>
+      <div class="card-meta">
+        <span class="meta-tag red">24/7 aktiv</span>
+        <span class="meta-tag red">~30 Min. vor Ort</span>
+        <span class="meta-tag">Pannenhilfe</span>
+        <span class="meta-tag">Bergung</span>
+      </div>
+      <a href="tel:+49XXXXXXXXXX" class="btn btn-red btn-lg" style="width:100%;justify-content:center;">📞 Jetzt sofort anrufen</a>
+    </div>
+    <div class="hero-card plan fade-up" style="transition-delay:0.1s">
+      <div class="card-icon">📍</div>
+      <div class="card-label">Geplanter Transport</div>
+      <h2>Route anfragen</h2>
+      <p>Transport planen, Fahrzeugrückführung oder Spedition? Wählen Sie Termin und Route – wir melden uns.</p>
+      <div class="card-meta">
+        <span class="meta-tag">100 km Regional</span>
+        <span class="meta-tag">Deutschlandweit</span>
+        <span class="meta-tag">Europaweit</span>
+      </div>
+      <a href="#anfrage" class="btn btn-ghost btn-lg" style="width:100%;justify-content:center;">Auftrag anfragen →</a>
     </div>
   </div>
 </section>
@@ -1205,6 +1372,41 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 
 <script>
+  /* ── Slideshow ── */
+  var SLIDE_DURATION = 6000;
+  var currentSlide   = 0;
+  var totalSlides    = 3;
+  var slideTimer;
+
+  var bgs   = document.querySelectorAll('.slide-bg');
+  var texts = document.querySelectorAll('.slide-text');
+  var dots  = document.querySelectorAll('.dot');
+  var bar   = document.getElementById('progressBar');
+
+  function goToSlide(n) {
+    bgs[currentSlide].classList.remove('active');
+    texts[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = (n + totalSlides) % totalSlides;
+    bgs[currentSlide].classList.add('active');
+    texts[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+    startProgress();
+  }
+
+  function startProgress() {
+    clearTimeout(slideTimer);
+    if (!bar) return;
+    bar.style.transition = 'none';
+    bar.style.width = '0%';
+    bar.offsetHeight; /* reflow */
+    bar.style.transition = 'width ' + SLIDE_DURATION + 'ms linear';
+    bar.style.width = '100%';
+    slideTimer = setTimeout(function() { goToSlide(currentSlide + 1); }, SLIDE_DURATION);
+  }
+
+  startProgress();
+
   /* Nav toggle */
   function toggleNav() {
     document.getElementById('nav').classList.toggle('open');
