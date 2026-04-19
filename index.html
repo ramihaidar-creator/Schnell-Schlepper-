@@ -170,36 +170,58 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* Header animated tagline */
-.header-tagline {
+/* ── 3D Drum / Kreisel ── */
+.drum-wrap {
   flex: 1;
-  text-align: center;
-  overflow: hidden;
-  height: 22px;
-  position: relative;
-}
-.tagline-words {
   display: flex;
-  flex-direction: column;
-  animation: slideWords 16s infinite;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  perspective: 260px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(transparent 0%, black 28%, black 72%, transparent 100%);
+  mask-image: linear-gradient(transparent 0%, black 28%, black 72%, transparent 100%);
 }
-.tagline-word {
-  height: 22px;
-  line-height: 22px;
-  font-size: 0.82rem;
+.drum-inner {
+  width: 300px;
+  height: 36px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: drumRoll 17.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@keyframes drumRoll {
+  0%,  16%  { transform: rotateX(0deg); }
+  20%, 36%  { transform: rotateX(-72deg); }
+  40%, 56%  { transform: rotateX(-144deg); }
+  60%, 76%  { transform: rotateX(-216deg); }
+  80%, 96%  { transform: rotateX(-288deg); }
+  100%      { transform: rotateX(-360deg); }
+}
+.drum-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--text-dim);
-  flex-shrink: 0;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.025em;
+  white-space: nowrap;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
-.tagline-word .kw { color: var(--red); font-weight: 700; }
+.drum-face .di { font-size: 0.9rem; flex-shrink: 0; }
+.drum-face .kw { color: var(--red); font-weight: 700; }
+.drum-face:nth-child(1) { transform: rotateX(  0deg) translateZ(25px); }
+.drum-face:nth-child(2) { transform: rotateX( 72deg) translateZ(25px); }
+.drum-face:nth-child(3) { transform: rotateX(144deg) translateZ(25px); }
+.drum-face:nth-child(4) { transform: rotateX(216deg) translateZ(25px); }
+.drum-face:nth-child(5) { transform: rotateX(288deg) translateZ(25px); }
 
-@keyframes slideWords {
-  0%,  17% { transform: translateY(0); }
-  20%, 37% { transform: translateY(-22px); }
-  40%, 57% { transform: translateY(-44px); }
-  60%, 77% { transform: translateY(-66px); }
-  80%, 97% { transform: translateY(-88px); }
-  100%      { transform: translateY(0); }
+/* keep old class so mobile hide rule still works */
+.header-tagline { display: contents; }
 }
 
 /* Header right */
@@ -779,12 +801,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     </a>
 
     <div class="header-tagline" aria-hidden="true">
-      <div class="tagline-words">
-        <span class="tagline-word"><span class="kw">24/7</span> erreichbar – Tag und Nacht</span>
-        <span class="tagline-word">In <span class="kw">30 Minuten</span> vor Ort</span>
-        <span class="tagline-word"><span class="kw">100 km</span> Einsatzradius Hannover</span>
-        <span class="tagline-word"><span class="kw">Fairer</span> Festpreis – keine Überraschungen</span>
-        <span class="tagline-word"><span class="kw">Deutschlandweit</span> &amp; europaweit</span>
+      <div class="drum-wrap">
+        <div class="drum-inner">
+          <div class="drum-face"><span class="di">⚡</span><span><span class="kw">24/7</span> Bereitschaft – immer erreichbar</span></div>
+          <div class="drum-face"><span class="di">🚗</span><span>In <span class="kw">30 Minuten</span> am Einsatzort</span></div>
+          <div class="drum-face"><span class="di">📍</span><span><span class="kw">100 km</span> Einsatzradius · Hannover</span></div>
+          <div class="drum-face"><span class="di">🇩🇪</span><span>Transporte <span class="kw">deutschlandweit</span> &amp; europaweit</span></div>
+          <div class="drum-face"><span class="di">💶</span><span><span class="kw">Faire Festpreise</span> – keine Überraschungen</span></div>
+        </div>
+      </div>
       </div>
     </div>
 
