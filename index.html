@@ -415,18 +415,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* Progress bar */
-.slide-progress {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 2px;
-  background: rgba(255,255,255,0.08);
-  z-index: 10;
-}
-.slide-progress-bar {
-  height: 100%;
-  background: var(--red);
-  width: 0%;
-}
+.slide-progress { display: none; }
+.slide-progress-bar { display: none; }
 
 /* Dot nav */
 .slide-dots {
@@ -1398,7 +1388,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 <script>
   /* ── Slideshow ── */
-  var SLIDE_DURATION = 6000;
+  var SLIDE_DURATION = 5000;
   var currentSlide   = 0;
   var totalSlides    = 3;
   var slideTimer;
