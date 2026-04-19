@@ -295,9 +295,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .slide-bg:nth-child(1) {
   background: url('img/slide1.jpg') center/cover no-repeat;
 }
-/* Video-Slide: wird per JS gesteuert */
+/* Slide 2: eigenes Fahrzeug mit Logo */
 .slide-bg:nth-child(2) {
-  background: #0a0a0a;
+  background: url('img/slide2.jpg') center/cover no-repeat;
 }
 .slide-bg:nth-child(3) {
   background: url('img/slide2.jpg') center/cover no-repeat;
@@ -963,11 +963,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 <section class="slideshow" id="start">
 
   <div class="slide-bg active"></div>
-  <div class="slide-bg" id="slide-video-bg">
-    <video id="heroVideo" muted playsinline preload="auto">
-      <source src="video/hero.mp4" type="video/mp4">
-    </video>
-  </div>
+  <div class="slide-bg"></div>
   <div class="slide-bg"></div>
 
   <div class="slide-overlay"></div>
@@ -1412,45 +1408,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   var dots  = document.querySelectorAll('.dot');
   var bar   = document.getElementById('progressBar');
 
-  var vid = document.getElementById('heroVideo');
-
   function goToSlide(n) {
     bgs[currentSlide].classList.remove('active');
     texts[currentSlide].classList.remove('active');
     dots[currentSlide].classList.remove('active');
-    if (vid) { vid.pause(); vid.onended = null; }
     currentSlide = (n + totalSlides) % totalSlides;
     bgs[currentSlide].classList.add('active');
     texts[currentSlide].classList.add('active');
     dots[currentSlide].classList.add('active');
-    if (currentSlide === 1 && vid) {
-      startVideoSlide();
-    } else {
-      startProgress();
-    }
-  }
-
-  function startVideoSlide() {
-    clearTimeout(slideTimer);
-    if (!bar) return;
-    /* Progressbar läuft mit Video-Dauer – Fallback 10s */
-    var dur = (vid.duration && isFinite(vid.duration)) ? vid.duration * 1000 : 10000;
-    bar.style.transition = 'none';
-    bar.style.width = '0%';
-    bar.offsetHeight;
-    bar.style.transition = 'width ' + dur + 'ms linear';
-    bar.style.width = '100%';
-    vid.currentTime = 0;
-    vid.play().catch(function(){});
-    vid.onended = function() {
-      vid.onended = null;
-      goToSlide(currentSlide + 1);
-    };
-    /* Sicherheits-Fallback falls Video nicht endet */
-    slideTimer = setTimeout(function() {
-      vid.onended = null;
-      goToSlide(currentSlide + 1);
-    }, Math.max(dur + 500, 10500));
+    startProgress();
   }
 
   function startProgress() {
