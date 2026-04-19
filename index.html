@@ -3,802 +3,1246 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Schnell Schlepper – 24h Abschleppdienst in Hannover. Pannenhilfe, Bergung & Fahrzeugtransport. Wenn's drauf ankommt." />
-  <meta name="keywords" content="Abschleppdienst Hannover, Pannenhilfe, Bergung, 24h Abschleppen, Schnell Schlepper" />
+  <meta name="description" content="Schnell Schlepper – 24h Abschleppdienst Hannover. Pannenhilfe, Bergung & Fahrzeugtransport im Radius 100 km und national. Wenn's drauf ankommt." />
   <title>Schnell Schlepper – 24h Abschleppdienst Hannover</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --red: #CC0000;
-      --red-dark: #a00000;
-      --dark: #1a1a1a;
-      --dark2: #2d2d2d;
-      --gray: #f5f5f5;
-      --gray2: #e0e0e0;
-      --text: #222222;
-      --text-light: #666666;
-      --white: #ffffff;
-      --shadow: 0 4px 20px rgba(0,0,0,0.10);
-      --shadow-lg: 0 8px 40px rgba(0,0,0,0.18);
-      --radius: 8px;
-      --radius-lg: 16px;
-    }
+/* ═══════════════════════════════════════════
+   BASE & VARIABLES
+═══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { scroll-behavior: smooth; }
+:root {
+  --black:        #000000;
+  --dark:         #0a0a0a;
+  --surface:      #111111;
+  --surface2:     #161616;
+  --surface3:     #1c1c1e;
+  --red:          #CC0000;
+  --red-bright:   #e60000;
+  --red-glow:     rgba(204,0,0,0.15);
+  --red-glow-lg:  rgba(204,0,0,0.08);
+  --text:         #f5f5f7;
+  --text-dim:     rgba(245,245,247,0.65);
+  --text-subtle:  rgba(245,245,247,0.35);
+  --border:       rgba(255,255,255,0.07);
+  --border-hover: rgba(255,255,255,0.14);
+  --white:        #ffffff;
+  --r-sm:   10px;
+  --r-md:   16px;
+  --r-lg:   24px;
+  --r-xl:   32px;
+  --r-pill: 100px;
+}
 
-    body {
-      font-family: 'Inter', sans-serif;
-      color: var(--text);
-      background: var(--white);
-      overflow-x: hidden;
-    }
+html { scroll-behavior: smooth; font-size: 16px; }
 
-    img { max-width: 100%; height: auto; display: block; }
-    a { text-decoration: none; color: inherit; }
-    ul { list-style: none; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--black);
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
 
-    h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; line-height: 1.1; }
-    h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 800; line-height: 1.2; }
-    h3 { font-size: 1.1rem; font-weight: 700; }
-    p { line-height: 1.65; }
+img { max-width: 100%; height: auto; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-    .section-title { text-align: center; margin-bottom: 12px; }
-    .section-subtitle { text-align: center; color: var(--text-light); margin-bottom: 48px; font-size: 1rem; max-width: 560px; margin-left: auto; margin-right: auto; }
-    .red { color: var(--red); }
+/* ═══════════════════════════════════════════
+   TYPOGRAPHY
+═══════════════════════════════════════════ */
+.display { font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.03em; }
+.headline { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; }
+.title { font-size: clamp(1.3rem, 2.5vw, 1.8rem); font-weight: 700; line-height: 1.2; }
+.body { font-size: 1rem; line-height: 1.7; }
+.caption { font-size: 0.82rem; line-height: 1.5; color: var(--text-subtle); letter-spacing: 0.02em; }
 
-    /* BUTTONS */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 28px;
-      border-radius: var(--radius);
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      border: none;
-      font-family: inherit;
-      transition: all 0.2s;
-      white-space: nowrap;
-    }
-    .btn-primary { background: var(--red); color: var(--white); }
-    .btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); box-shadow: var(--shadow); }
-    .btn-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.6); }
-    .btn-outline:hover { background: var(--white); color: var(--dark); border-color: var(--white); }
-    .btn-lg { padding: 18px 36px; font-size: 1.05rem; }
+.accent { color: var(--red); }
+.dim { color: var(--text-dim); }
 
-    .btn-phone {
-      background: var(--red);
-      color: white;
-      font-size: 1.25rem;
-      font-weight: 900;
-      padding: 18px 36px;
-      border-radius: 12px;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      box-shadow: 0 6px 30px rgba(204,0,0,0.4);
-      transition: all 0.2s;
-    }
-    .btn-phone:hover { background: var(--red-dark); transform: translateY(-2px); box-shadow: 0 10px 40px rgba(204,0,0,0.5); }
+/* ═══════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════ */
+.container { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+.section { padding: 100px 28px; }
+.section-sm { padding: 72px 28px; }
 
-    /* HEADER */
-    .header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: var(--dark);
-      box-shadow: 0 2px 20px rgba(0,0,0,0.4);
-    }
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 24px;
-      max-width: 1100px;
-      margin: 0 auto;
-      gap: 16px;
-    }
-    .logo { display: flex; align-items: center; }
-    .logo img { height: 46px; width: auto; }
-    .logo-fallback { color: white; font-weight: 900; font-size: 1.1rem; letter-spacing: 1px; }
+.section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 16px;
+  display: block;
+}
+.section-head { text-align: center; margin-bottom: 16px; }
+.section-sub {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 520px;
+  margin: 0 auto 60px;
+}
 
-    .nav { display: flex; align-items: center; gap: 20px; }
-    .nav a { color: #bbb; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
-    .nav a:hover { color: white; }
+/* ═══════════════════════════════════════════
+   GRADIENT DIVIDERS – smooth section transitions
+═══════════════════════════════════════════ */
+.grad-to-surface  { background: linear-gradient(180deg, var(--black) 0%, var(--surface) 100%); }
+.grad-to-black    { background: linear-gradient(180deg, var(--surface) 0%, var(--black) 100%); }
+.grad-surface     { background: linear-gradient(180deg, var(--surface) 0%, var(--surface2) 100%); }
 
-    .header-cta {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--red);
-      color: white;
-      padding: 10px 20px;
-      border-radius: var(--radius);
-      font-weight: 800;
-      font-size: 0.95rem;
-      transition: background 0.2s;
-      white-space: nowrap;
-    }
-    .header-cta:hover { background: var(--red-dark); }
+/* ═══════════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 26px;
+  border-radius: var(--r-pill);
+  font-weight: 600;
+  font-size: 0.93rem;
+  letter-spacing: 0.01em;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+.btn-red {
+  background: var(--red);
+  color: white;
+  box-shadow: 0 0 0 0 rgba(204,0,0,0);
+}
+.btn-red:hover {
+  background: var(--red-bright);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 32px rgba(204,0,0,0.35);
+}
+.btn-ghost {
+  background: rgba(255,255,255,0.07);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.13);
+  border-color: var(--border-hover);
+}
+.btn-lg { padding: 16px 36px; font-size: 1rem; font-weight: 700; }
+.btn-xl { padding: 20px 48px; font-size: 1.1rem; font-weight: 800; }
 
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; background: none; border: none; }
-    .hamburger span { display: block; width: 24px; height: 2px; background: white; border-radius: 2px; transition: 0.3s; }
+/* ═══════════════════════════════════════════
+   HEADER
+═══════════════════════════════════════════ */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(0,0,0,0.82);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s;
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  max-width: 1080px;
+  margin: 0 auto;
+  gap: 20px;
+}
 
-    /* URGENCY BAR */
-    .urgency-bar {
-      background: var(--red);
-      color: white;
-      text-align: center;
-      padding: 9px 16px;
-      font-weight: 600;
-      font-size: 0.85rem;
-      letter-spacing: 0.3px;
-    }
-    .urgency-bar .sep { margin: 0 14px; opacity: 0.5; }
+/* Logo */
+.logo { display: flex; align-items: center; flex-shrink: 0; }
+.logo img { height: 40px; width: auto; }
+.logo-fallback {
+  color: white;
+  font-weight: 900;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
 
-    /* HERO */
-    .hero {
-      background: linear-gradient(135deg, #111111 0%, #1f1f1f 55%, #2a0000 100%);
-      color: white;
-      padding: 90px 24px 80px;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: -100px;
-      right: -150px;
-      width: 700px;
-      height: 700px;
-      background: radial-gradient(circle, rgba(204,0,0,0.12) 0%, transparent 65%);
-      pointer-events: none;
-    }
-    .hero-content { max-width: 680px; position: relative; z-index: 1; }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(204,0,0,0.18);
-      border: 1px solid rgba(204,0,0,0.35);
-      color: #ff8080;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      margin-bottom: 22px;
-    }
-    .hero h1 { margin-bottom: 18px; }
-    .hero > .container > .hero-content > p { font-size: 1.15rem; color: #bbb; margin-bottom: 36px; max-width: 540px; }
-    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; margin-bottom: 52px; }
-    .hero-stats { display: flex; gap: 36px; flex-wrap: wrap; }
-    .hero-stat { border-left: 3px solid var(--red); padding-left: 16px; }
-    .hero-stat strong { display: block; font-size: 1.9rem; font-weight: 900; color: white; }
-    .hero-stat span { font-size: 0.82rem; color: #888; }
+/* Header animated tagline */
+.header-tagline {
+  flex: 1;
+  text-align: center;
+  overflow: hidden;
+  height: 22px;
+  position: relative;
+}
+.tagline-words {
+  display: flex;
+  flex-direction: column;
+  animation: slideWords 16s infinite;
+}
+.tagline-word {
+  height: 22px;
+  line-height: 22px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  flex-shrink: 0;
+  letter-spacing: 0.03em;
+}
+.tagline-word .kw { color: var(--red); font-weight: 700; }
 
-    /* SERVICES */
-    .services { padding: 88px 24px; background: var(--white); }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 22px;
-    }
-    .service-card {
-      background: var(--white);
-      border: 1.5px solid var(--gray2);
-      border-radius: var(--radius-lg);
-      padding: 28px 24px;
-      transition: all 0.22s;
-      position: relative;
-      overflow: hidden;
-    }
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 4px; height: 100%;
-      background: var(--red);
-      transform: scaleY(0);
-      transform-origin: bottom;
-      transition: transform 0.22s;
-    }
-    .service-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); border-color: transparent; }
-    .service-card:hover::before { transform: scaleY(1); }
-    .service-icon { font-size: 2rem; margin-bottom: 14px; display: block; }
-    .service-card h3 { margin-bottom: 8px; }
-    .service-card p { color: var(--text-light); font-size: 0.9rem; }
+@keyframes slideWords {
+  0%,  17% { transform: translateY(0); }
+  20%, 37% { transform: translateY(-22px); }
+  40%, 57% { transform: translateY(-44px); }
+  60%, 77% { transform: translateY(-66px); }
+  80%, 97% { transform: translateY(-88px); }
+  100%      { transform: translateY(0); }
+}
 
-    /* USPs */
-    .usps { background: var(--dark); color: white; padding: 80px 24px; }
-    .usps .section-title { color: white; }
-    .usps .section-subtitle { color: #888; }
-    .usps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 36px; }
-    .usp-item { text-align: center; }
-    .usp-icon {
-      width: 68px; height: 68px;
-      background: rgba(204,0,0,0.12);
-      border: 2px solid rgba(204,0,0,0.25);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 18px;
-      font-size: 1.7rem;
-    }
-    .usp-item h3 { margin-bottom: 8px; font-size: 1rem; }
-    .usp-item p { color: #999; font-size: 0.87rem; line-height: 1.6; }
+/* Header right */
+.header-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.header-phone {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.header-phone svg { opacity: 0.7; }
+.header-call-btn {
+  background: var(--red);
+  color: white;
+  padding: 9px 20px;
+  border-radius: var(--r-pill);
+  font-weight: 700;
+  font-size: 0.85rem;
+  transition: background 0.2s, transform 0.2s;
+}
+.header-call-btn:hover { background: var(--red-bright); transform: scale(1.02); }
 
-    /* BOOKING FORM */
-    .booking { padding: 88px 24px; background: var(--gray); }
-    .booking-inner {
-      max-width: 740px;
-      margin: 0 auto;
-      background: white;
-      border-radius: var(--radius-lg);
-      padding: 52px 48px;
-      box-shadow: var(--shadow-lg);
-    }
-    .booking-header { text-align: center; margin-bottom: 36px; }
-    .booking-header h2 { margin-bottom: 8px; }
-    .booking-header p { color: var(--text-light); }
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .form-full { grid-column: 1 / -1; }
-    .form-group { display: flex; flex-direction: column; gap: 6px; }
-    .form-group label { font-weight: 600; font-size: 0.88rem; color: var(--text); }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      padding: 12px 14px;
-      border: 2px solid var(--gray2);
-      border-radius: var(--radius);
-      font-size: 0.94rem;
-      font-family: inherit;
-      color: var(--text);
-      background: white;
-      transition: border-color 0.2s;
-    }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus { outline: none; border-color: var(--red); }
-    .form-group textarea { resize: vertical; min-height: 100px; }
-    .form-submit { text-align: center; margin-top: 28px; }
-    .form-submit .btn { width: 100%; justify-content: center; padding: 16px; font-size: 1.05rem; }
-    .form-note { text-align: center; margin-top: 12px; color: var(--text-light); font-size: 0.82rem; }
+/* Mobile hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 6px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.hamburger:hover { background: rgba(255,255,255,0.06); }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text); border-radius: 2px; transition: 0.3s; }
 
-    /* SERVICE AREA */
-    .area { padding: 88px 24px; background: white; }
-    .area-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
-    .area h2 { margin-bottom: 14px; }
-    .area > .container > .area-inner > div > p { color: var(--text-light); margin-bottom: 24px; }
-    .area-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .area-list li {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 0.93rem;
-    }
-    .area-list li::before { content: '✓'; color: var(--red); font-weight: 800; flex-shrink: 0; }
-    .area-note { margin-top: 18px; font-size: 0.87rem; color: var(--text-light); font-style: italic; }
-    .area-visual {
-      background: var(--dark);
-      border-radius: var(--radius-lg);
-      padding: 52px 36px;
-      text-align: center;
-      color: white;
-    }
-    .area-visual .big-icon { font-size: 4rem; margin-bottom: 16px; }
-    .area-visual h3 { font-size: 1.4rem; margin-bottom: 10px; }
-    .area-visual p { color: #999; font-size: 0.9rem; line-height: 1.7; }
-    .area-visual .red-line {
-      width: 40px; height: 3px; background: var(--red);
-      margin: 16px auto;
-    }
+/* Nav (mobile) */
+.nav { display: flex; align-items: center; gap: 6px; }
+.nav a {
+  color: var(--text-dim);
+  font-size: 0.83rem;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: var(--r-sm);
+  transition: color 0.2s, background 0.2s;
+}
+.nav a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
 
-    /* REVIEWS */
-    .reviews { padding: 88px 24px; background: var(--gray); }
-    .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; }
-    .review-card {
-      background: white;
-      border-radius: var(--radius-lg);
-      padding: 28px 24px;
-      box-shadow: var(--shadow);
-    }
-    .review-stars { color: #f59e0b; font-size: 1.05rem; margin-bottom: 14px; letter-spacing: 2px; }
-    .review-text { color: var(--text); font-size: 0.93rem; line-height: 1.65; margin-bottom: 18px; font-style: italic; }
-    .review-author { font-weight: 700; font-size: 0.85rem; color: var(--text-light); }
+/* ═══════════════════════════════════════════
+   HERO – split: Notfall | Planung
+═══════════════════════════════════════════ */
+.hero {
+  min-height: 94vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px 28px 80px;
+  background:
+    radial-gradient(ellipse 70% 50% at 20% 60%, rgba(204,0,0,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 30%, rgba(204,0,0,0.04) 0%, transparent 60%),
+    var(--black);
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 200px;
+  background: linear-gradient(0deg, var(--surface) 0%, transparent 100%);
+  pointer-events: none;
+}
 
-    /* B2B */
-    .b2b { padding: 80px 24px; background: var(--red); color: white; }
-    .b2b .section-title { color: white; }
-    .b2b .section-subtitle { color: rgba(255,255,255,0.8); }
-    .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
-    .b2b-item {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.18);
-      border-radius: var(--radius);
-      padding: 22px 16px;
-      text-align: center;
-      transition: background 0.2s;
-    }
-    .b2b-item:hover { background: rgba(255,255,255,0.18); }
-    .b2b-item .icon { font-size: 1.9rem; margin-bottom: 10px; }
-    .b2b-item p { font-size: 0.88rem; opacity: 0.9; font-weight: 500; }
-    .b2b-cta { text-align: center; margin-top: 40px; font-size: 1rem; opacity: 0.95; }
-    .b2b-cta a { color: white; font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
+.hero-top { text-align: center; max-width: 800px; margin: 0 auto 60px; position: relative; z-index: 1; }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(204,0,0,0.1);
+  border: 1px solid rgba(204,0,0,0.25);
+  color: #ff7070;
+  padding: 7px 16px;
+  border-radius: var(--r-pill);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: 28px;
+  text-transform: uppercase;
+}
+.hero h1 { margin-bottom: 20px; }
+.hero-sub {
+  font-size: 1.15rem;
+  color: var(--text-dim);
+  line-height: 1.65;
+  max-width: 500px;
+  margin: 0 auto;
+}
 
-    /* CONTACT */
-    .contact { padding: 88px 24px; background: var(--dark); color: white; }
-    .contact .section-title { color: white; }
-    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 36px; margin-top: 52px; }
-    .contact-item { text-align: center; }
-    .contact-icon {
-      width: 72px; height: 72px;
-      background: rgba(204,0,0,0.13);
-      border: 2px solid rgba(204,0,0,0.28);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 18px;
-      font-size: 1.8rem;
-    }
-    .contact-item h3 { margin-bottom: 10px; }
-    .contact-main { font-size: 1.2rem; font-weight: 800; color: white; display: block; margin-bottom: 6px; transition: color 0.2s; }
-    .contact-main:hover { color: var(--red); }
-    .contact-sub { color: #888; font-size: 0.83rem; }
+/* Hero split cards */
+.hero-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
 
-    /* FOOTER */
-    .footer {
-      background: #0e0e0e;
-      color: #555;
-      padding: 28px 24px;
-      text-align: center;
-      font-size: 0.83rem;
-    }
-    .footer-links { margin-bottom: 8px; }
-    .footer-links a { color: #777; margin: 0 10px; transition: color 0.2s; }
-    .footer-links a:hover { color: white; }
+.hero-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 40px 36px;
+  transition: border-color 0.3s, transform 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.hero-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r-xl);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.hero-card:hover { transform: translateY(-4px); }
+.hero-card:hover { border-color: var(--border-hover); }
 
-    /* MOBILE STICKY CTA */
-    .mobile-cta {
-      display: none;
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      z-index: 999;
-      background: var(--dark);
-      padding: 10px 14px;
-      gap: 10px;
-      border-top: 1px solid #333;
-    }
-    .mobile-cta a {
-      flex: 1;
-      text-align: center;
-      padding: 14px 8px;
-      border-radius: var(--radius);
-      font-weight: 700;
-      font-size: 0.9rem;
-    }
-    .cta-call { background: var(--red); color: white; }
-    .cta-whatsapp { background: #25D366; color: white; }
+.hero-card.emergency::before { background: radial-gradient(ellipse at top left, rgba(204,0,0,0.08), transparent 70%); }
+.hero-card.emergency:hover::before { opacity: 1; }
+.hero-card.plan::before { background: radial-gradient(ellipse at top right, rgba(255,255,255,0.03), transparent 70%); }
+.hero-card.plan:hover::before { opacity: 1; }
 
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #111; flex-direction: column; padding: 20px 24px; gap: 18px; border-top: 1px solid #333; }
-      .nav.open { display: flex; }
-      .hamburger { display: flex; }
-      .header-cta .cta-label { display: none; }
+.card-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+}
+.emergency .card-icon { background: rgba(204,0,0,0.15); }
+.plan .card-icon { background: rgba(255,255,255,0.06); }
 
-      .hero { padding: 60px 24px 90px; }
-      .hero-ctas { flex-direction: column; align-items: flex-start; }
-      .btn-phone { font-size: 1.05rem; padding: 16px 24px; }
-      .hero-stats { gap: 22px; }
+.hero-card .card-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+  margin-bottom: 8px;
+}
+.hero-card h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 12px; line-height: 1.2; }
+.hero-card p { color: var(--text-dim); font-size: 0.9rem; line-height: 1.6; margin-bottom: 28px; }
 
-      .booking-inner { padding: 32px 20px; }
-      .form-grid { grid-template-columns: 1fr; }
+.card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.meta-tag {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  padding: 5px 12px;
+  border-radius: var(--r-pill);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-dim);
+}
+.meta-tag.red { background: rgba(204,0,0,0.1); border-color: rgba(204,0,0,0.2); color: #ff8080; }
 
-      .area-inner { grid-template-columns: 1fr; }
-      .area-visual { display: none; }
+/* ═══════════════════════════════════════════
+   SERVICES
+═══════════════════════════════════════════ */
+.services {
+  background: linear-gradient(180deg, var(--surface) 0%, var(--surface2) 100%);
+  padding: 100px 28px;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 2px;
+  background: var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.service-card {
+  background: var(--surface2);
+  padding: 32px 28px;
+  transition: background 0.25s;
+  position: relative;
+}
+.service-card:hover { background: var(--surface3); }
+.service-card:hover .service-arrow { opacity: 1; transform: translateX(0); }
+.s-icon { font-size: 1.8rem; margin-bottom: 18px; display: block; }
+.service-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+.service-card p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.6; }
+.service-arrow {
+  position: absolute;
+  top: 28px; right: 28px;
+  color: var(--red);
+  font-size: 1rem;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: all 0.25s;
+}
 
-      .mobile-cta { display: flex; }
-      body { padding-bottom: 68px; }
+/* ═══════════════════════════════════════════
+   EINSATZGEBIET – radius / national split
+═══════════════════════════════════════════ */
+.area {
+  background: linear-gradient(180deg, var(--surface2) 0%, var(--black) 100%);
+  padding: 100px 28px;
+}
+.area-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.area-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 44px 40px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+.area-card:hover { border-color: var(--border-hover); }
+.area-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(204,0,0,0.1);
+  border: 1px solid rgba(204,0,0,0.2);
+  color: #ff7070;
+  padding: 5px 13px;
+  border-radius: var(--r-pill);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.area-card h3 { font-size: 1.6rem; font-weight: 800; margin-bottom: 12px; }
+.area-card > p { color: var(--text-dim); font-size: 0.9rem; line-height: 1.65; margin-bottom: 28px; }
+.area-radius {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--red);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.area-radius-label { font-size: 0.82rem; color: var(--text-subtle); margin-bottom: 28px; }
 
-      .urgency-bar .sep { display: none; }
-      .urgency-bar { font-size: 0.78rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 4px; padding: 8px 12px; }
-    }
+.city-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.city-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.83rem;
+  color: var(--text-dim);
+}
+.city-tag::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
 
-    @media (max-width: 480px) {
-      .usps-grid { grid-template-columns: 1fr 1fr; }
-      .hero-stats { flex-direction: column; gap: 18px; }
-      .area-list { grid-template-columns: 1fr; }
-    }
+.national-icon { font-size: 3rem; margin-bottom: 20px; display: block; }
+.national-features { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
+.nat-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+}
+.nat-feature .nf-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+.nat-feature h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 2px; }
+.nat-feature p { font-size: 0.8rem; color: var(--text-dim); line-height: 1.4; }
+
+/* ═══════════════════════════════════════════
+   USPs
+═══════════════════════════════════════════ */
+.usps {
+  background: var(--black);
+  padding: 100px 28px;
+}
+.usps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+.usp-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 36px 28px;
+  text-align: center;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.usp-card:hover { border-color: rgba(204,0,0,0.3); transform: translateY(-4px); }
+.usp-num {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--red);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.usp-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; }
+.usp-card p { font-size: 0.83rem; color: var(--text-dim); line-height: 1.6; }
+
+/* ═══════════════════════════════════════════
+   BOOKING FORM
+═══════════════════════════════════════════ */
+.booking {
+  background: linear-gradient(180deg, var(--black) 0%, var(--surface) 100%);
+  padding: 100px 28px;
+}
+.booking-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 56px 52px;
+}
+.booking-header { text-align: center; margin-bottom: 44px; }
+.booking-header h2 { margin-bottom: 10px; }
+.booking-header p { color: var(--text-dim); font-size: 0.95rem; }
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-full { grid-column: 1 / -1; }
+.form-group { display: flex; flex-direction: column; gap: 7px; }
+.form-group label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 13px 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  font-size: 0.93rem;
+  font-family: inherit;
+  color: var(--text);
+  transition: border-color 0.2s, background 0.2s;
+  outline: none;
+  -webkit-appearance: none;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: var(--text-subtle); }
+.form-group select option { background: #1c1c1e; color: var(--text); }
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: rgba(204,0,0,0.5);
+  background: rgba(255,255,255,0.06);
+}
+.form-group textarea { resize: vertical; min-height: 96px; }
+
+.form-submit { text-align: center; margin-top: 32px; }
+.form-submit .btn { width: 100%; justify-content: center; padding: 17px; font-size: 1rem; }
+.form-note {
+  text-align: center;
+  margin-top: 14px;
+  color: var(--text-subtle);
+  font-size: 0.78rem;
+}
+
+/* ═══════════════════════════════════════════
+   REVIEWS
+═══════════════════════════════════════════ */
+.reviews {
+  background: linear-gradient(180deg, var(--surface) 0%, var(--surface2) 100%);
+  padding: 100px 28px;
+}
+.reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.review-card {
+  background: var(--surface3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 32px 28px;
+  transition: border-color 0.25s;
+}
+.review-card:hover { border-color: var(--border-hover); }
+.review-stars { color: #f59e0b; font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 16px; }
+.review-text { font-size: 0.9rem; line-height: 1.7; color: var(--text-dim); font-style: italic; margin-bottom: 20px; }
+.review-author { font-size: 0.78rem; font-weight: 700; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* ═══════════════════════════════════════════
+   B2B
+═══════════════════════════════════════════ */
+.b2b {
+  background: var(--surface2);
+  padding: 100px 28px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.b2b-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+.b2b-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 24px 18px;
+  text-align: center;
+  transition: background 0.2s, border-color 0.2s;
+}
+.b2b-card:hover { background: rgba(255,255,255,0.06); border-color: var(--border-hover); }
+.b2b-card .icon { font-size: 1.6rem; margin-bottom: 10px; }
+.b2b-card p { font-size: 0.82rem; color: var(--text-dim); font-weight: 500; line-height: 1.4; }
+
+/* ═══════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════ */
+.contact {
+  background: linear-gradient(180deg, var(--surface2) 0%, var(--black) 100%);
+  padding: 100px 28px;
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.contact-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 40px 32px;
+  text-align: center;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.contact-card:hover { border-color: rgba(204,0,0,0.3); transform: translateY(-4px); }
+.contact-icon-wrap {
+  width: 60px; height: 60px;
+  background: rgba(204,0,0,0.08);
+  border: 1px solid rgba(204,0,0,0.18);
+  border-radius: 18px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 1.5rem;
+}
+.contact-card h3 { font-size: 0.9rem; font-weight: 600; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
+.contact-card a.main-link {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text);
+  display: block;
+  margin-bottom: 6px;
+  transition: color 0.2s;
+}
+.contact-card a.main-link:hover { color: var(--red); }
+.contact-card .sub { font-size: 0.78rem; color: var(--text-subtle); }
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+.footer {
+  background: var(--black);
+  border-top: 1px solid var(--border);
+  padding: 32px 28px;
+  text-align: center;
+}
+.footer-links { display: flex; justify-content: center; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+.footer-links a {
+  color: var(--text-subtle);
+  font-size: 0.82rem;
+  padding: 4px 12px;
+  border-radius: var(--r-pill);
+  transition: color 0.2s, background 0.2s;
+}
+.footer-links a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+.footer p { font-size: 0.78rem; color: var(--text-subtle); }
+
+/* ═══════════════════════════════════════════
+   MOBILE STICKY BAR
+═══════════════════════════════════════════ */
+.mobile-bar {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 999;
+  background: rgba(0,0,0,0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border);
+  padding: 10px 16px;
+  gap: 10px;
+}
+.mobile-bar a {
+  flex: 1;
+  text-align: center;
+  padding: 13px 10px;
+  border-radius: var(--r-md);
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+.mb-call { background: var(--red); color: white; }
+.mb-wa { background: #1a7a3e; color: white; }
+
+/* ═══════════════════════════════════════════
+   SCROLL FADE-IN
+═══════════════════════════════════════════ */
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .hero-split { grid-template-columns: 1fr; max-width: 480px; }
+  .area-grid { grid-template-columns: 1fr; max-width: 480px; }
+}
+
+@media (max-width: 768px) {
+  .nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0;
+    background: rgba(0,0,0,0.96); border-bottom: 1px solid var(--border);
+    padding: 16px 20px; gap: 4px; }
+  .nav.open { display: flex; }
+  .nav a { padding: 11px 14px; border-radius: var(--r-md); }
+  .hamburger { display: flex; }
+  .header-phone { display: none; }
+  .header-tagline { display: none; }
+
+  .hero { padding: 80px 20px 70px; min-height: auto; }
+  .booking-inner { padding: 36px 22px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .booking { padding: 72px 20px; }
+
+  .mobile-bar { display: flex; }
+  body { padding-bottom: 64px; }
+
+  .section, .services, .area, .usps, .reviews, .b2b, .contact { padding: 72px 20px; }
+}
+
+@media (max-width: 480px) {
+  .display { font-size: 2rem; }
+  .usps-grid { grid-template-columns: 1fr 1fr; }
+  .city-grid { grid-template-columns: 1fr 1fr; }
+}
+
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="header-inner">
-      <a href="#" class="logo" aria-label="Schnell Schlepper – Startseite">
-        <img src="logo.png" alt="Schnell Schlepper" id="logo-img" style="height:46px;width:auto;" onerror="document.getElementById('logo-img').style.display='none';document.getElementById('logo-fallback').style.display='block'">
-        <span class="logo-fallback" id="logo-fallback" style="display:none">SCHNELL SCHLEPPER</span>
-      </a>
+<!-- ═══════ HEADER ═══════ -->
+<header class="header">
+  <div class="header-inner">
+
+    <a href="#" class="logo" aria-label="Schnell Schlepper Startseite">
+      <img src="logo.png" alt="Schnell Schlepper"
+           style="height:38px;width:auto;"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span class="logo-fallback" style="display:none">SCHNELL SCHLEPPER</span>
+    </a>
+
+    <div class="header-tagline" aria-hidden="true">
+      <div class="tagline-words">
+        <span class="tagline-word"><span class="kw">24/7</span> erreichbar – Tag und Nacht</span>
+        <span class="tagline-word">In <span class="kw">30 Minuten</span> vor Ort</span>
+        <span class="tagline-word"><span class="kw">100 km</span> Einsatzradius Hannover</span>
+        <span class="tagline-word"><span class="kw">Fairer</span> Festpreis – keine Überraschungen</span>
+        <span class="tagline-word"><span class="kw">Deutschlandweit</span> &amp; europaweit</span>
+      </div>
+    </div>
+
+    <div class="header-right">
       <nav class="nav" id="nav">
         <a href="#leistungen">Leistungen</a>
-        <a href="#anfrage">Auftrag anfragen</a>
         <a href="#einsatzgebiet">Einsatzgebiet</a>
-        <a href="#bewertungen">Bewertungen</a>
+        <a href="#anfrage">Anfrage</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
-      <a href="tel:+49XXXXXXXXXX" class="header-cta">
-        📞 <span class="cta-label">+49 XXX XXXXXXX</span>
-      </a>
-      <button class="hamburger" onclick="toggleNav()" aria-label="Menü öffnen">
+      <div class="header-phone">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 13.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.88 2.84h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        +49 XXX XXXXXXX
+      </div>
+      <a href="tel:+49XXXXXXXXXX" class="header-call-btn">Anrufen</a>
+      <button class="hamburger" onclick="toggleNav()" aria-label="Menü">
         <span></span><span></span><span></span>
       </button>
     </div>
-  </header>
 
-  <!-- URGENCY BAR -->
-  <div class="urgency-bar" role="banner">
-    <span>⚡ 24/7 Bereitschaft</span>
-    <span class="sep">|</span>
-    <span>🚗 In 30 Min. vor Ort</span>
-    <span class="sep">|</span>
-    <span>📍 Hannover &amp; Umgebung</span>
-    <span class="sep">|</span>
-    <span>✅ Festpreise – keine Überraschungen</span>
   </div>
+</header>
 
-  <!-- HERO -->
-  <section class="hero" id="start">
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-badge">🚨 24h Notfallservice aktiv</div>
-        <h1>Abschleppdienst<br>in Hannover –<br><span class="red">Wenn's drauf ankommt.</span></h1>
-        <p>Panne, Unfall oder Notfall? Wir sind 24 Stunden, 7 Tage die Woche für Sie da. Schnell, zuverlässig und zu fairen Preisen.</p>
-        <div class="hero-ctas">
-          <a href="tel:+49XXXXXXXXXX" class="btn-phone">📞 Jetzt anrufen: +49 XXX XXXXXXX</a>
-          <a href="#anfrage" class="btn btn-outline btn-lg">Auftrag online anfragen</a>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero" id="start">
+  <div class="container">
+
+    <div class="hero-top fade-up">
+      <div class="hero-badge">🚨 Notfallservice aktiv – jetzt erreichbar</div>
+      <h1 class="display">
+        Abschleppdienst Hannover.<br>
+        <span class="accent">Wenn's drauf ankommt.</span>
+      </h1>
+      <p class="hero-sub">
+        Panne, Unfall oder geplanter Transport – wir sind die richtige Wahl. Schnell, fair und professionell.
+      </p>
+    </div>
+
+    <div class="hero-split">
+
+      <!-- NOTFALL -->
+      <div class="hero-card emergency fade-up">
+        <div class="card-icon">🚨</div>
+        <div class="card-label">Sofortiger Einsatz</div>
+        <h2>Notfall &amp; Panne</h2>
+        <p>Liegengeblieben? Unfall? Wir sind in ca. 30 Minuten bei Ihnen – zu jeder Uhrzeit, 365 Tage im Jahr.</p>
+        <div class="card-meta">
+          <span class="meta-tag red">24/7 aktiv</span>
+          <span class="meta-tag red">~30 Min. vor Ort</span>
+          <span class="meta-tag">Pannenhilfe</span>
+          <span class="meta-tag">Bergung</span>
         </div>
-        <div class="hero-stats">
-          <div class="hero-stat">
-            <strong>24/7</strong>
-            <span>Erreichbar</span>
-          </div>
-          <div class="hero-stat">
-            <strong>~30 Min.</strong>
-            <span>Einsatzzeit</span>
-          </div>
-          <div class="hero-stat">
-            <strong>100%</strong>
-            <span>Faire Preise</span>
-          </div>
-        </div>
+        <a href="tel:+49XXXXXXXXXX" class="btn btn-red btn-lg" style="width:100%;justify-content:center;">
+          📞 Jetzt sofort anrufen
+        </a>
       </div>
-    </div>
-  </section>
 
-  <!-- LEISTUNGEN -->
-  <section class="services" id="leistungen">
-    <div class="container">
-      <h2 class="section-title">Unsere <span class="red">Leistungen</span></h2>
-      <p class="section-subtitle">Vom PKW bis zum Spezialfahrzeug – wir haben für jede Situation die passende Lösung.</p>
-      <div class="services-grid">
-        <div class="service-card">
-          <span class="service-icon">🚗</span>
-          <h3>Abschleppen</h3>
-          <p>PKW, Transporter, Motorräder – sicher und schonend zu Ihrer Wunschwerk­statt transportiert.</p>
+      <!-- PLANUNG -->
+      <div class="hero-card plan fade-up" style="transition-delay:0.1s">
+        <div class="card-icon">📍</div>
+        <div class="card-label">Geplanter Transport</div>
+        <h2>Route anfragen</h2>
+        <p>Transport planen, Fahrzeugrückführung oder Spedition? Wählen Sie Termin und Route – wir melden uns.</p>
+        <div class="card-meta">
+          <span class="meta-tag">100 km Regional</span>
+          <span class="meta-tag">Deutschlandweit</span>
+          <span class="meta-tag">Europaweit</span>
         </div>
-        <div class="service-card">
-          <span class="service-icon">🔧</span>
-          <h3>Pannenhilfe vor Ort</h3>
-          <p>Starthilfe, Reifenwechsel, Kraftstoff bringen – wir lösen das Problem direkt bei Ihnen.</p>
-        </div>
-        <div class="service-card">
-          <span class="service-icon">🏔️</span>
-          <h3>Fahrzeugbergung</h3>
-          <p>Unfall, Graben, Schnee, Hochwasser – mit Spezialausrüstung Bergen wir jedes Fahrzeug sicher.</p>
-        </div>
-        <div class="service-card">
-          <span class="service-icon">🚛</span>
-          <h3>Fahrzeugtransport</h3>
-          <p>Regional und national – Oldtimer, Elektrofahrzeuge und Spezialfahrzeuge sicher transportiert.</p>
-        </div>
-        <div class="service-card">
-          <span class="service-icon">🔄</span>
-          <h3>Fahrzeugrückführung</h3>
-          <p>Fahrzeug im Ausland liegengeblieben? Wir holen es zurück – deutschlandweit und europaweit.</p>
-        </div>
-        <div class="service-card">
-          <span class="service-icon">📋</span>
-          <h3>Versicherungsservice</h3>
-          <p>Unfallfahrzeuge sichern, Dokumentation und Unterstützung bei der Versicherungsabwicklung.</p>
-        </div>
-        <div class="service-card">
-          <span class="service-icon">🏠</span>
-          <h3>Fahrzeugeinlagerung</h3>
-          <p>Sicheres Einlagern von Fahrzeugen – kurz- oder langfristig, witterungsgeschützt.</p>
-        </div>
-        <div class="service-card">
-          <span class="service-icon">♻️</span>
-          <h3>Altfahrzeug­entsorgung</h3>
-          <p>Altfahrzeuge fachgerecht entsorgen und verwerten – umweltgerecht und auf Anfrage kostenlos.</p>
-        </div>
+        <a href="#anfrage" class="btn btn-ghost btn-lg" style="width:100%;justify-content:center;">
+          Auftrag anfragen →
+        </a>
       </div>
-    </div>
-  </section>
 
-  <!-- USPs -->
-  <section class="usps">
-    <div class="container">
-      <h2 class="section-title">Warum <span class="red">Schnell Schlepper?</span></h2>
-      <p class="section-subtitle">Unser Versprechen an Sie – jeden Tag, jede Nacht.</p>
-      <div class="usps-grid">
-        <div class="usp-item">
-          <div class="usp-icon">⚡</div>
-          <h3>Blitzschnell</h3>
-          <p>In durchschnittlich 30 Minuten sind wir bei Ihnen – auch nachts, am Wochenende und an Feiertagen.</p>
-        </div>
-        <div class="usp-item">
-          <div class="usp-icon">💶</div>
-          <h3>Faire Festpreise</h3>
-          <p>Transparente Preise ohne versteckte Kosten. Was wir nennen, gilt – egal wie lange der Einsatz dauert.</p>
-        </div>
-        <div class="usp-item">
-          <div class="usp-icon">🛡️</div>
-          <h3>Erfahren &amp; Zertifiziert</h3>
-          <p>Ausgebildete Fachkräfte mit langjähriger Erfahrung. Ihr Fahrzeug ist bei uns in besten Händen.</p>
-        </div>
-        <div class="usp-item">
-          <div class="usp-icon">📱</div>
-          <h3>Immer erreichbar</h3>
-          <p>24 Stunden, 7 Tage die Woche, 365 Tage im Jahr – Ihr Notfall ist unser Auftrag.</p>
-        </div>
-      </div>
     </div>
-  </section>
-
-  <!-- ANFRAGE / BOOKING FORM -->
-  <section class="booking" id="anfrage">
-    <div class="container">
-      <div class="booking-inner">
-        <div class="booking-header">
-          <h2>Auftrag <span class="red">anfragen</span></h2>
-          <p>Schnell, einfach und unverbindlich. Wir melden uns innerhalb von 15 Minuten.</p>
-        </div>
-        <form id="bookingForm" onsubmit="submitForm(event)" novalidate>
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="name">Ihr Name *</label>
-              <input type="text" id="name" name="name" placeholder="Max Mustermann" required />
-            </div>
-            <div class="form-group">
-              <label for="phone">Telefonnummer *</label>
-              <input type="tel" id="phone" name="phone" placeholder="+49 XXX XXXXXXX" required />
-            </div>
-            <div class="form-group">
-              <label for="pickup">Abholort *</label>
-              <input type="text" id="pickup" name="pickup" placeholder="Straße, Hausnummer, Stadt" required />
-            </div>
-            <div class="form-group">
-              <label for="destination">Zielort *</label>
-              <input type="text" id="destination" name="destination" placeholder="Werkstatt, Zieladresse …" required />
-            </div>
-            <div class="form-group">
-              <label for="vehicle">Fahrzeugtyp *</label>
-              <select id="vehicle" name="vehicle" required>
-                <option value="">– Bitte wählen –</option>
-                <option>PKW</option>
-                <option>Transporter / Van</option>
-                <option>Motorrad</option>
-                <option>Oldtimer</option>
-                <option>Elektrofahrzeug</option>
-                <option>LKW (bis 3,5 t)</option>
-                <option>LKW (über 3,5 t)</option>
-                <option>Sonstiges</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="damage">Art des Problems *</label>
-              <select id="damage" name="damage" required>
-                <option value="">– Bitte wählen –</option>
-                <option>Panne / Motor springt nicht an</option>
-                <option>Reifenpanne / Platten</option>
-                <option>Unfall / Totalschaden</option>
-                <option>Fahrzeug steckt fest (Schnee, Graben)</option>
-                <option>Kraftstoff leer</option>
-                <option>Fahrzeugtransport (kein Notfall)</option>
-                <option>Sonstiges</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="datetime">Wunschtermin *</label>
-              <input type="datetime-local" id="datetime" name="datetime" required />
-            </div>
-            <div class="form-group">
-              <label for="weight">Gewichtsklasse (optional)</label>
-              <select id="weight" name="weight">
-                <option value="">– Optional –</option>
-                <option>bis 2.000 kg</option>
-                <option>2.000 – 3.500 kg</option>
-                <option>3.500 – 7.500 kg</option>
-                <option>über 7.500 kg</option>
-              </select>
-            </div>
-            <div class="form-group form-full">
-              <label for="notes">Bemerkungen</label>
-              <textarea id="notes" name="notes" placeholder="z. B. Schlüssel liegt unter der Fußmatte • Fahrzeug steht in Tiefgarage Ebene -2 • Bitte ab 8 Uhr kommen …"></textarea>
-            </div>
-          </div>
-          <div class="form-submit">
-            <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
-              🚗 Auftrag absenden
-            </button>
-          </div>
-          <p class="form-note">⚠️ Bei akutem Notfall bitte immer direkt anrufen – das geht schneller!</p>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- EINSATZGEBIET -->
-  <section class="area" id="einsatzgebiet">
-    <div class="container">
-      <div class="area-inner">
-        <div>
-          <h2>Unser <span class="red">Einsatzgebiet</span></h2>
-          <p>Wir sind hauptsächlich im Raum Hannover und Umgebung aktiv. Für Langstreckentransporte sind wir deutschlandweit und europaweit für Sie tätig.</p>
-          <ul class="area-list">
-            <li>Hannover</li>
-            <li>Garbsen</li>
-            <li>Langenhagen</li>
-            <li>Isernhagen</li>
-            <li>Burgdorf</li>
-            <li>Lehrte</li>
-            <li>Sehnde</li>
-            <li>Pattensen</li>
-            <li>Ronnenberg</li>
-            <li>Barsinghausen</li>
-            <li>Wunstorf</li>
-            <li>Neustadt a. Rbge.</li>
-          </ul>
-          <p class="area-note">Ihr Ort nicht dabei? Einfach anrufen – wir fahren auch darüber hinaus!</p>
-        </div>
-        <div class="area-visual">
-          <div class="big-icon">📍</div>
-          <h3>Hannover &amp; Umgebung</h3>
-          <div class="red-line"></div>
-          <p>Radius ca. 50 km<br>Fernstrecke: Deutschlandweit &amp; Europa</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BEWERTUNGEN -->
-  <section class="reviews" id="bewertungen">
-    <div class="container">
-      <h2 class="section-title">Was unsere <span class="red">Kunden sagen</span></h2>
-      <p class="section-subtitle">Echte Erfahrungen – echte Menschen.</p>
-      <div class="reviews-grid">
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">„Mitten in der Nacht auf der A2 liegen geblieben. In 25 Minuten war Schnell Schlepper da. Professionell, freundlich und absolut faire Preise. Klare Empfehlung!"</p>
-          <p class="review-author">— Thomas K., Hannover</p>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">„Unfall auf der B65. Das Team hat alles perfekt abgewickelt – Fahrzeug gesichert, Versicherung unterstützt. Schnell, kompetent und sehr freundlich. Danke!"</p>
-          <p class="review-author">— Sandra M., Langenhagen</p>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">„Meinen Oldtimer haben sie mit größter Sorgfalt transportiert. Man merkt sofort, dass die Profis am Werk sind. Werde immer wieder auf Schnell Schlepper zurückgreifen."</p>
-          <p class="review-author">— Klaus B., Garbsen</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- B2B -->
-  <section class="b2b">
-    <div class="container">
-      <h2 class="section-title">Für <span style="text-decoration:underline;text-underline-offset:4px;">Geschäftskunden</span></h2>
-      <p class="section-subtitle">Zuverlässiger Partner für Autohäuser, Werkstätten, Versicherungen und mehr.</p>
-      <div class="b2b-grid">
-        <div class="b2b-item">
-          <div class="icon">🏢</div>
-          <p>Autohäuser &amp; Werkstätten</p>
-        </div>
-        <div class="b2b-item">
-          <div class="icon">🛡️</div>
-          <p>Versicherungen</p>
-        </div>
-        <div class="b2b-item">
-          <div class="icon">👮</div>
-          <p>Polizei &amp; Behörden</p>
-        </div>
-        <div class="b2b-item">
-          <div class="icon">🏠</div>
-          <p>Hausverwaltungen</p>
-        </div>
-        <div class="b2b-item">
-          <div class="icon">🚗</div>
-          <p>Flottenservice</p>
-        </div>
-      </div>
-      <p class="b2b-cta">Interesse an einem Rahmenvertrag? <a href="tel:+49XXXXXXXXXX">Jetzt anrufen →</a></p>
-    </div>
-  </section>
-
-  <!-- KONTAKT -->
-  <section class="contact" id="kontakt">
-    <div class="container">
-      <h2 class="section-title">So erreichen <span class="red">Sie uns</span></h2>
-      <div class="contact-grid">
-        <div class="contact-item">
-          <div class="contact-icon">📞</div>
-          <h3>Telefon &amp; Notfall</h3>
-          <a href="tel:+49XXXXXXXXXX" class="contact-main">+49 XXX XXXXXXX</a>
-          <span class="contact-sub">24 Stunden / 7 Tage die Woche</span>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon">💬</div>
-          <h3>WhatsApp</h3>
-          <a href="https://wa.me/49XXXXXXXXXX" class="contact-main" target="_blank" rel="noopener">WhatsApp schreiben</a>
-          <span class="contact-sub">Foto &amp; Standort einfach senden</span>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon">📍</div>
-          <h3>Standort</h3>
-          <a href="#" class="contact-main" style="font-size:1rem;">[Ihre Adresse]</a>
-          <span class="contact-sub">Hannover &amp; Umgebung</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-links">
-      <a href="impressum.html">Impressum</a>
-      <a href="datenschutz.html">Datenschutz</a>
-      <a href="#kontakt">Kontakt</a>
-    </div>
-    <p>&copy; 2025 Schnell Schlepper – Wenn's drauf ankommt.</p>
-  </footer>
-
-  <!-- MOBILE STICKY CTA -->
-  <div class="mobile-cta" role="complementary" aria-label="Schnellkontakt">
-    <a href="tel:+49XXXXXXXXXX" class="cta-call">📞 Jetzt anrufen</a>
-    <a href="https://wa.me/49XXXXXXXXXX" class="cta-whatsapp" target="_blank" rel="noopener">💬 WhatsApp</a>
   </div>
+</section>
 
-  <script>
-    function toggleNav() {
-      const nav = document.getElementById('nav');
-      nav.classList.toggle('open');
-    }
 
-    document.querySelectorAll('.nav a').forEach(function(link) {
-      link.addEventListener('click', function() {
-        document.getElementById('nav').classList.remove('open');
-      });
+<!-- ═══════ LEISTUNGEN ═══════ -->
+<section class="services" id="leistungen">
+  <div class="container">
+    <span class="section-label" style="display:block;text-align:center;">Was wir tun</span>
+    <h2 class="headline section-head fade-up">Unsere <span class="accent">Leistungen</span></h2>
+    <p class="section-sub fade-up">Vom PKW bis zum Spezialfahrzeug – für jede Situation die passende Lösung.</p>
+    <div class="services-grid fade-up">
+      <div class="service-card">
+        <span class="s-icon">🚗</span>
+        <h3>Abschleppen</h3>
+        <p>PKW, Transporter, Motorräder – schonend zur Wunsch­werkstatt.</p>
+        <span class="service-arrow">→</span>
+      </div>
+      <div class="service-card">
+        <span class="s-icon">🔧</span>
+        <h3>Pannenhilfe vor Ort</h3>
+        <p>Starthilfe, Reifenwechsel, Kraftstoff – direkt bei Ihnen.</p>
+        <span class="service-arrow">→</span>
+      </div>
+      <div class="service-card">
+        <span class="s-icon">🏔️</span>
+        <h3>Fahrzeugbergung</h3>
+        <p>Unfall, Graben, Schnee – mit Spezialgerät sicher geborgen.</p>
+        <span class="service-arrow">→</span>
+      </div>
+      <div class="service-card">
+        <span class="s-icon">🚛</span>
+        <h3>Fahrzeugtransport</h3>
+        <p>Regional bis europaweit – Oldtimer, EV und Spezialfahrzeuge.</p>
+        <span class="service-arrow">→</span>
+      </div>
+      <div class="service-card">
+        <span class="s-icon">🔄</span>
+        <h3>Fahrzeugrückführung</h3>
+        <p>Liegengeblieben im Ausland? Wir holen es zurück.</p>
+        <span class="service-arrow">→</span>
+      </div>
+      <div class="service-card">
+        <span class="s-icon">📋</span>
+        <h3>Versicherungsservice</h3>
+        <p>Sichern, dokumentieren, Abwicklung unterstützen.</p>
+        <span class="service-arrow">→</span>
+      </div>
+      <div class="service-card">
+        <span class="s-icon">🏠</span>
+        <h3>Fahrzeugeinlagerung</h3>
+        <p>Kurz- oder langfristig – witterungsgeschützt und sicher.</p>
+        <span class="service-arrow">→</span>
+      </div>
+      <div class="service-card">
+        <span class="s-icon">♻️</span>
+        <h3>Fahrzeugentsorgung</h3>
+        <p>Altfahrzeuge fachgerecht und umweltgerecht verwerten.</p>
+        <span class="service-arrow">→</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════ EINSATZGEBIET ═══════ -->
+<section class="area" id="einsatzgebiet">
+  <div class="container">
+    <span class="section-label" style="display:block;text-align:center;">Wo wir arbeiten</span>
+    <h2 class="headline section-head fade-up">Unser <span class="accent">Einsatzgebiet</span></h2>
+    <p class="section-sub fade-up">Wir unterscheiden klar zwischen regionalem Soforteinsatz und nationalen sowie internationalen Transporten.</p>
+
+    <div class="area-grid">
+
+      <!-- REGIONAL -->
+      <div class="area-card fade-up">
+        <div class="area-badge">📍 Regional</div>
+        <h3>Hannover &amp; Umgebung</h3>
+        <p>Unser Kerngebiet für Soforteinsätze – schnelle Reaktionszeiten dank optimaler Positionierung.</p>
+        <div class="area-radius">100 km</div>
+        <div class="area-radius-label">Einsatzradius ab Hannover</div>
+        <div class="city-grid">
+          <span class="city-tag">Hannover</span>
+          <span class="city-tag">Garbsen</span>
+          <span class="city-tag">Langenhagen</span>
+          <span class="city-tag">Burgdorf</span>
+          <span class="city-tag">Lehrte</span>
+          <span class="city-tag">Pattensen</span>
+          <span class="city-tag">Wunstorf</span>
+          <span class="city-tag">Ronnenberg</span>
+          <span class="city-tag">Barsinghausen</span>
+          <span class="city-tag">Isernhagen</span>
+          <span class="city-tag">Sehnde</span>
+          <span class="city-tag">+ weitere</span>
+        </div>
+      </div>
+
+      <!-- NATIONAL / INTERNATIONAL -->
+      <div class="area-card fade-up" style="transition-delay:0.12s">
+        <div class="area-badge">🌍 National &amp; International</div>
+        <h3>Deutschlandweit &amp; Europa</h3>
+        <p>Für geplante Transporte, Fahrzeugrückführungen und Spezialaufträge sind wir auch über den Radius hinaus tätig.</p>
+        <span class="national-icon">🗺️</span>
+        <div class="national-features">
+          <div class="nat-feature">
+            <span class="nf-icon">🇩🇪</span>
+            <div>
+              <h4>Deutschlandweit</h4>
+              <p>Fahrzeugtransport von A nach B – Überführung, Reparaturtransport, Flottenlogistik.</p>
+            </div>
+          </div>
+          <div class="nat-feature">
+            <span class="nf-icon">🇪🇺</span>
+            <div>
+              <h4>Europaweit</h4>
+              <p>Fahrzeug im Urlaub oder im Ausland liegengeblieben? Wir holen es zurück.</p>
+            </div>
+          </div>
+          <div class="nat-feature">
+            <span class="nf-icon">📞</span>
+            <div>
+              <h4>Zeitnah anfragen</h4>
+              <p>Route, Termin und Fahrzeug einfach mitteilen – wir erstellen Ihr Angebot sofort.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════ USPs ═══════ -->
+<section class="usps fade-up">
+  <div class="container">
+    <span class="section-label" style="display:block;text-align:center;">Warum Schnell Schlepper</span>
+    <h2 class="headline section-head">Unser <span class="accent">Versprechen</span></h2>
+    <p class="section-sub">Vier Gründe, die jeden Tag für uns sprechen.</p>
+    <div class="usps-grid">
+      <div class="usp-card">
+        <div class="usp-num">30'</div>
+        <h3>Blitzschnell</h3>
+        <p>Durchschnittliche Einsatzzeit von 30 Minuten – auch nachts und an Feiertagen.</p>
+      </div>
+      <div class="usp-card">
+        <div class="usp-num">24/7</div>
+        <h3>Immer erreichbar</h3>
+        <p>365 Tage im Jahr, rund um die Uhr – Ihr Notfall ist unser Auftrag.</p>
+      </div>
+      <div class="usp-card">
+        <div class="usp-num">0€</div>
+        <h3>Keine Überraschungen</h3>
+        <p>Klarer Festpreis, bevor wir fahren. Was genannt wird, gilt – Punkt.</p>
+      </div>
+      <div class="usp-card">
+        <div class="usp-num">★★★</div>
+        <h3>Erfahren &amp; zertifiziert</h3>
+        <p>Ausgebildete Fachkräfte. Ihr Fahrzeug ist in den besten Händen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════ ANFRAGE / FORM ═══════ -->
+<section class="booking" id="anfrage">
+  <div class="container">
+    <div class="booking-inner fade-up">
+      <div class="booking-header">
+        <span class="section-label" style="display:block;">Auftrag stellen</span>
+        <h2 class="headline">Route &amp; Auftrag <span class="accent">anfragen</span></h2>
+        <p>Schnell, einfach, unverbindlich. Bei Notfall bitte direkt anrufen!</p>
+      </div>
+      <form id="bookingForm" onsubmit="submitForm(event)" novalidate>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name">Ihr Name *</label>
+            <input type="text" id="name" name="name" placeholder="Max Mustermann" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">Telefon *</label>
+            <input type="tel" id="phone" name="phone" placeholder="+49 511 XXXXXXX" required />
+          </div>
+          <div class="form-group">
+            <label for="pickup">Abholort *</label>
+            <input type="text" id="pickup" name="pickup" placeholder="Straße, Ort" required />
+          </div>
+          <div class="form-group">
+            <label for="destination">Zielort *</label>
+            <input type="text" id="destination" name="destination" placeholder="Werkstatt, Zieladresse …" required />
+          </div>
+          <div class="form-group">
+            <label for="vehicle">Fahrzeugtyp *</label>
+            <select id="vehicle" name="vehicle" required>
+              <option value="">– Bitte wählen –</option>
+              <option>PKW</option>
+              <option>Transporter / Van</option>
+              <option>Motorrad</option>
+              <option>Oldtimer</option>
+              <option>Elektrofahrzeug</option>
+              <option>LKW (bis 3,5 t)</option>
+              <option>LKW (über 3,5 t)</option>
+              <option>Sonstiges</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="damage">Art des Auftrags *</label>
+            <select id="damage" name="damage" required>
+              <option value="">– Bitte wählen –</option>
+              <option>Panne / Motor springt nicht an</option>
+              <option>Reifenpanne / Platten</option>
+              <option>Unfall / Totalschaden</option>
+              <option>Fahrzeug steckt fest</option>
+              <option>Kraftstoff leer</option>
+              <option>Geplanter Fahrzeugtransport</option>
+              <option>Fahrzeugrückführung (Ausland)</option>
+              <option>Sonstiges</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="datetime">Wunschtermin *</label>
+            <input type="datetime-local" id="datetime" name="datetime" required />
+          </div>
+          <div class="form-group">
+            <label for="weight">Gewichtsklasse</label>
+            <select id="weight" name="weight">
+              <option value="">– Optional –</option>
+              <option>bis 2.000 kg</option>
+              <option>2.000 – 3.500 kg</option>
+              <option>3.500 – 7.500 kg</option>
+              <option>über 7.500 kg</option>
+            </select>
+          </div>
+          <div class="form-group form-full">
+            <label for="notes">Bemerkungen</label>
+            <textarea id="notes" name="notes" placeholder="z. B. Schlüssel unter Fußmatte · Tiefgarage Ebene −2 · Bitte ab 8 Uhr · sonstiges …"></textarea>
+          </div>
+        </div>
+        <div class="form-submit">
+          <button type="submit" class="btn btn-red btn-lg" id="submitBtn" style="width:100%;justify-content:center;">
+            Auftrag absenden →
+          </button>
+        </div>
+        <p class="form-note">⚠️ Notfall? Bitte direkt anrufen – das ist schneller!</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════ BEWERTUNGEN ═══════ -->
+<section class="reviews" id="bewertungen">
+  <div class="container">
+    <span class="section-label" style="display:block;text-align:center;">Kundenstimmen</span>
+    <h2 class="headline section-head fade-up">Was unsere <span class="accent">Kunden sagen</span></h2>
+    <p class="section-sub fade-up">Echte Erfahrungen. Echte Menschen.</p>
+    <div class="reviews-grid">
+      <div class="review-card fade-up">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">„Mitten in der Nacht auf der A2 liegengeblieben. In 25 Minuten war Schnell Schlepper da. Professionell, freundlich, fairer Preis. Absolute Empfehlung!"</p>
+        <p class="review-author">— Thomas K., Hannover</p>
+      </div>
+      <div class="review-card fade-up" style="transition-delay:0.1s">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">„Unfall auf der B65. Das Team hat alles perfekt abgewickelt – Fahrzeug gesichert, Versicherung unterstützt. Schnell, kompetent, sehr freundlich."</p>
+        <p class="review-author">— Sandra M., Langenhagen</p>
+      </div>
+      <div class="review-card fade-up" style="transition-delay:0.2s">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">„Meinen Oldtimer haben sie mit größter Sorgfalt transportiert. Man merkt, dass das echte Profis sind. Komme immer wieder."</p>
+        <p class="review-author">— Klaus B., Garbsen</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════ B2B ═══════ -->
+<section class="b2b">
+  <div class="container">
+    <span class="section-label" style="display:block;text-align:center;">Geschäftskunden</span>
+    <h2 class="headline section-head fade-up">Partner für <span class="accent">Unternehmen</span></h2>
+    <p class="section-sub fade-up">Zuverlässige Zusammenarbeit für Autohäuser, Werkstätten, Versicherungen und mehr.</p>
+    <div class="b2b-grid fade-up">
+      <div class="b2b-card"><div class="icon">🏢</div><p>Autohäuser &amp; Werkstätten</p></div>
+      <div class="b2b-card"><div class="icon">🛡️</div><p>Versicherungen</p></div>
+      <div class="b2b-card"><div class="icon">👮</div><p>Polizei &amp; Behörden</p></div>
+      <div class="b2b-card"><div class="icon">🏠</div><p>Hausverwaltungen</p></div>
+      <div class="b2b-card"><div class="icon">🚗</div><p>Flottenservice</p></div>
+    </div>
+    <p style="text-align:center;margin-top:40px;color:var(--text-dim);font-size:0.9rem;">
+      Rahmenvertrag gewünscht? <a href="tel:+49XXXXXXXXXX" style="color:var(--text);font-weight:700;border-bottom:1px solid rgba(255,255,255,0.2);padding-bottom:1px;">Jetzt anrufen →</a>
+    </p>
+  </div>
+</section>
+
+
+<!-- ═══════ KONTAKT ═══════ -->
+<section class="contact" id="kontakt">
+  <div class="container">
+    <span class="section-label" style="display:block;text-align:center;">Kontakt</span>
+    <h2 class="headline section-head fade-up">So erreichen <span class="accent">Sie uns</span></h2>
+    <div class="contact-grid">
+      <div class="contact-card fade-up">
+        <div class="contact-icon-wrap">📞</div>
+        <h3>Telefon &amp; Notfall</h3>
+        <a href="tel:+49XXXXXXXXXX" class="main-link">+49 XXX XXXXXXX</a>
+        <span class="sub">24 Stunden · 7 Tage die Woche</span>
+      </div>
+      <div class="contact-card fade-up" style="transition-delay:0.1s">
+        <div class="contact-icon-wrap">💬</div>
+        <h3>WhatsApp</h3>
+        <a href="https://wa.me/49XXXXXXXXXX" class="main-link" target="_blank" rel="noopener">WhatsApp schreiben</a>
+        <span class="sub">Foto &amp; Standort einfach senden</span>
+      </div>
+      <div class="contact-card fade-up" style="transition-delay:0.2s">
+        <div class="contact-icon-wrap">📍</div>
+        <h3>Standort</h3>
+        <a href="#" class="main-link" style="font-size:1rem;">[Ihre Adresse]</a>
+        <span class="sub">Hannover &amp; Umgebung</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="footer">
+  <div class="footer-links">
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html">Datenschutz</a>
+    <a href="#kontakt">Kontakt</a>
+  </div>
+  <p>&copy; 2025 Schnell Schlepper – Wenn's drauf ankommt.</p>
+</footer>
+
+
+<!-- ═══════ MOBILE STICKY BAR ═══════ -->
+<div class="mobile-bar" role="complementary" aria-label="Schnellkontakt">
+  <a href="tel:+49XXXXXXXXXX" class="mb-call">📞 Anrufen</a>
+  <a href="https://wa.me/49XXXXXXXXXX" class="mb-wa" target="_blank" rel="noopener">💬 WhatsApp</a>
+</div>
+
+
+<script>
+  /* Nav toggle */
+  function toggleNav() {
+    document.getElementById('nav').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav a').forEach(function(l) {
+    l.addEventListener('click', function() {
+      document.getElementById('nav').classList.remove('open');
     });
+  });
 
-    function submitForm(e) {
-      e.preventDefault();
-      const btn = document.getElementById('submitBtn');
-      btn.textContent = '✅ Auftrag gesendet! Wir melden uns gleich.';
-      btn.style.background = '#22c55e';
-      btn.disabled = true;
-      setTimeout(function() {
-        btn.textContent = '🚗 Auftrag absenden';
-        btn.style.background = '';
-        btn.disabled = false;
-        e.target.reset();
-      }, 5000);
-    }
-  </script>
+  /* Scroll fade-in */
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(function(el) {
+    observer.observe(el);
+  });
+
+  /* Form submit */
+  function submitForm(e) {
+    e.preventDefault();
+    var btn = document.getElementById('submitBtn');
+    btn.textContent = '✅ Auftrag eingegangen – wir melden uns!';
+    btn.style.background = '#16a34a';
+    btn.disabled = true;
+    setTimeout(function() {
+      btn.textContent = 'Auftrag absenden →';
+      btn.style.background = '';
+      btn.disabled = false;
+      e.target.reset();
+    }, 5000);
+  }
+</script>
 
 </body>
 </html>
