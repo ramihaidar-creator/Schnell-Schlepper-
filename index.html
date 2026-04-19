@@ -266,26 +266,52 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   background-position: center;
   opacity: 0;
   transform: scale(1.06);
-  transition: opacity 1.3s ease-in-out, transform 8s ease-out;
+  transition: opacity 1.4s ease-in-out, transform 9s ease-out;
   will-change: opacity, transform;
+  /* Vignette: Ränder lösen sich wolkig ins Schwarz auf */
+  -webkit-mask-image: radial-gradient(
+    ellipse 80% 76% at 50% 46%,
+    #000 28%,
+    rgba(0,0,0,0.88) 45%,
+    rgba(0,0,0,0.55) 60%,
+    rgba(0,0,0,0.18) 76%,
+    transparent 92%
+  );
+  mask-image: radial-gradient(
+    ellipse 80% 76% at 50% 46%,
+    #000 28%,
+    rgba(0,0,0,0.88) 45%,
+    rgba(0,0,0,0.55) 60%,
+    rgba(0,0,0,0.18) 76%,
+    transparent 92%
+  );
 }
 .slide-bg.active {
   opacity: 1;
   transform: scale(1);
 }
 
-/* Placeholder gradients – ersetzen durch eigene Fotos: url('img/slide1.jpg') etc. */
+/* Echte Fotos */
 .slide-bg:nth-child(1) {
-  background:
-    linear-gradient(135deg, #0d0d0d 0%, #1a0a00 40%, #2a1200 100%);
+  background: url('img/slide1.jpg') center/cover no-repeat;
 }
+/* Video-Slide: wird per JS gesteuert */
 .slide-bg:nth-child(2) {
-  background:
-    linear-gradient(135deg, #0a0a1a 0%, #0d1a0d 40%, #001a10 100%);
+  background: #0a0a0a;
 }
 .slide-bg:nth-child(3) {
-  background:
-    linear-gradient(135deg, #1a0000 0%, #2d0000 50%, #0d0d0d 100%);
+  background: url('img/slide2.jpg') center/cover no-repeat;
+}
+
+/* Video innerhalb Slide 2 */
+.slide-bg video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* gleiche Vignette auch auf Video */
 }
 
 /* Dark overlay */
@@ -936,9 +962,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 <!-- ═══════ HERO SLIDESHOW ═══════ -->
 <section class="slideshow" id="start">
 
-  <!-- Hintergrundbilder: eigene Fotos in img/slide1.jpg, img/slide2.jpg, img/slide3.jpg ablegen -->
   <div class="slide-bg active"></div>
-  <div class="slide-bg"></div>
+  <div class="slide-bg" id="slide-video-bg">
+    <video id="heroVideo" muted playsinline preload="auto">
+      <source src="video/hero.mp4" type="video/mp4">
+    </video>
+  </div>
   <div class="slide-bg"></div>
 
   <div class="slide-overlay"></div>
@@ -1383,15 +1412,45 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   var dots  = document.querySelectorAll('.dot');
   var bar   = document.getElementById('progressBar');
 
+  var vid = document.getElementById('heroVideo');
+
   function goToSlide(n) {
     bgs[currentSlide].classList.remove('active');
     texts[currentSlide].classList.remove('active');
     dots[currentSlide].classList.remove('active');
+    if (vid) { vid.pause(); vid.onended = null; }
     currentSlide = (n + totalSlides) % totalSlides;
     bgs[currentSlide].classList.add('active');
     texts[currentSlide].classList.add('active');
     dots[currentSlide].classList.add('active');
-    startProgress();
+    if (currentSlide === 1 && vid) {
+      startVideoSlide();
+    } else {
+      startProgress();
+    }
+  }
+
+  function startVideoSlide() {
+    clearTimeout(slideTimer);
+    if (!bar) return;
+    /* Progressbar läuft mit Video-Dauer – Fallback 10s */
+    var dur = (vid.duration && isFinite(vid.duration)) ? vid.duration * 1000 : 10000;
+    bar.style.transition = 'none';
+    bar.style.width = '0%';
+    bar.offsetHeight;
+    bar.style.transition = 'width ' + dur + 'ms linear';
+    bar.style.width = '100%';
+    vid.currentTime = 0;
+    vid.play().catch(function(){});
+    vid.onended = function() {
+      vid.onended = null;
+      goToSlide(currentSlide + 1);
+    };
+    /* Sicherheits-Fallback falls Video nicht endet */
+    slideTimer = setTimeout(function() {
+      vid.onended = null;
+      goToSlide(currentSlide + 1);
+    }, Math.max(dur + 500, 10500));
   }
 
   function startProgress() {
@@ -1399,7 +1458,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     if (!bar) return;
     bar.style.transition = 'none';
     bar.style.width = '0%';
-    bar.offsetHeight; /* reflow */
+    bar.offsetHeight;
     bar.style.transition = 'width ' + SLIDE_DURATION + 'ms linear';
     bar.style.width = '100%';
     slideTimer = setTimeout(function() { goToSlide(currentSlide + 1); }, SLIDE_DURATION);
