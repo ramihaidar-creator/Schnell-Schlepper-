@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Leistungen von Schnell Schlepper – Abschleppen, Pannenhilfe, Bergung, Fahrzeugtransport und mehr. Hannover & Umgebung, 24/7." />
+  <title>Leistungen – Schnell Schlepper</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#f7f7f8;--surface:#ffffff;--surface2:#f3f4f6;--surface3:#e9eaec;
+  --red:#CC0000;--red-bright:#e60000;
+  --text:#0f0f10;--text-dim:rgba(15,15,16,0.58);--text-subtle:rgba(15,15,16,0.38);
+  --border:rgba(0,0,0,0.09);--border-hover:rgba(0,0,0,0.18);
+  --r-sm:10px;--r-md:16px;--r-lg:24px;--r-xl:32px;--r-pill:100px;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--black);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+/* HEADER */
+.header{position:fixed;top:0;left:0;right:0;z-index:1000;background:transparent;padding:12px 20px}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 24px;max-width:1040px;margin:0 auto;gap:20px;background:rgba(255,255,255,0.97);backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);border-radius:20px;box-shadow:0 4px 28px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.10)}
+.logo{display:flex;align-items:center;flex-shrink:0;text-decoration:none}
+.logo img{height:48px;width:auto;display:block;mix-blend-mode:multiply}
+.nav{display:flex;align-items:center;gap:2px;flex:1;justify-content:center}
+.nav a{color:#444;font-size:0.88rem;font-weight:500;padding:7px 13px;border-radius:var(--r-sm);transition:color 0.2s,background 0.2s;white-space:nowrap}
+.nav a:hover,.nav a.active{color:#111;background:rgba(0,0,0,0.05)}
+.nav a.active{font-weight:600}
+.nav-back{color:#888 !important;display:flex;align-items:center;gap:5px;border-right:1px solid rgba(0,0,0,0.1);padding-right:14px !important;margin-right:6px}
+.header-right{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.header-contact{display:flex;flex-direction:column;align-items:flex-end;gap:1px}
+.header-contact a{display:flex;align-items:center;gap:5px;color:#444;font-size:0.78rem;font-weight:600;transition:color 0.2s;white-space:nowrap}
+.header-contact a:hover{color:#111}
+.header-contact svg{opacity:0.5;flex-shrink:0}
+.header-book-btn{background:var(--red);color:white;padding:10px 22px;border-radius:var(--r-pill);font-weight:700;font-size:0.88rem;transition:background 0.2s,transform 0.15s;white-space:nowrap}
+.header-book-btn:hover{background:var(--red-bright);transform:scale(1.03)}
+
+/* LAYOUT */
+.container{max-width:1040px;margin:0 auto;padding:0 28px}
+.page-top{padding-top:120px}
+
+/* PAGE HERO */
+.page-hero{background:#0f0f10;padding:100px 28px 80px;text-align:center;position:relative;overflow:hidden}
+.page-hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 50% 110%,rgba(204,0,0,0.09),transparent 65%);pointer-events:none}
+.page-hero-label{font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:16px;display:block}
+.page-hero h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:900;line-height:1.08;letter-spacing:-0.03em;color:#fff;margin-bottom:20px}
+.page-hero h1 span{color:var(--red)}
+.page-hero p{font-size:1.05rem;color:rgba(255,255,255,0.6);max-width:540px;margin:0 auto;line-height:1.65}
+
+/* LEISTUNGEN GRID */
+.leistungen{padding:80px 28px}
+.l-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:960px;margin:0 auto}
+.l-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:36px 32px;transition:border-color 0.25s,transform 0.25s;position:relative;overflow:hidden}
+.l-card:hover{border-color:rgba(204,0,0,0.2);transform:translateY(-3px)}
+.l-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform 0.3s ease}
+.l-card:hover::before{transform:scaleX(1)}
+.l-icon{width:48px;height:48px;background:rgba(204,0,0,0.08);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--red);margin-bottom:20px}
+.l-card h2{font-size:1.15rem;font-weight:800;margin-bottom:10px;letter-spacing:-0.01em}
+.l-desc{font-size:0.9rem;color:var(--text-dim);line-height:1.65;margin-bottom:20px}
+.l-details{display:flex;flex-direction:column;gap:7px;margin-bottom:24px}
+.l-detail{display:flex;align-items:flex-start;gap:8px;font-size:0.83rem;color:var(--text-dim)}
+.l-detail::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--red);flex-shrink:0;margin-top:5px}
+.l-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(204,0,0,0.07);border:1px solid rgba(204,0,0,0.15);color:var(--red);font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 10px;border-radius:var(--r-pill);margin-bottom:16px}
+.l-cta{display:inline-flex;align-items:center;gap:6px;color:var(--red);font-size:0.85rem;font-weight:700;transition:gap 0.2s}
+.l-cta:hover{gap:10px}
+
+/* HINWEIS BAND */
+.hinweis{background:var(--surface2);padding:56px 28px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.hinweis-inner{max-width:720px;margin:0 auto;display:flex;gap:24px;align-items:flex-start}
+.hinweis-icon{width:48px;height:48px;background:rgba(204,0,0,0.1);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--red);flex-shrink:0}
+.hinweis h3{font-size:1rem;font-weight:700;margin-bottom:6px}
+.hinweis p{font-size:0.88rem;color:var(--text-dim);line-height:1.65}
+.hinweis a{color:var(--red);font-weight:700}
+
+/* CTA BAND */
+.cta-band{background:#0f0f10;padding:72px 28px;text-align:center;position:relative;overflow:hidden}
+.cta-band::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 50% 110%,rgba(204,0,0,0.08),transparent);pointer-events:none}
+.cta-band h2{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;color:#fff;margin-bottom:12px;letter-spacing:-0.02em}
+.cta-band p{color:rgba(255,255,255,0.55);margin-bottom:32px;font-size:0.97rem}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-red{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;padding:14px 28px;border-radius:var(--r-pill);font-weight:700;font-size:0.93rem;transition:background 0.2s,transform 0.15s}
+.btn-red:hover{background:var(--red-bright);transform:translateY(-1px)}
+.btn-ghost-light{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.18);padding:14px 28px;border-radius:var(--r-pill);font-weight:600;font-size:0.93rem;transition:background 0.2s}
+.btn-ghost-light:hover{background:rgba(255,255,255,0.14)}
+
+/* FOOTER */
+.footer{background:var(--black);border-top:1px solid var(--border);padding:32px 28px;text-align:center}
+.footer-links{display:flex;justify-content:center;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.footer-links a{color:var(--text-subtle);font-size:0.82rem;padding:4px 12px;border-radius:var(--r-pill);transition:color 0.2s,background 0.2s}
+.footer-links a:hover{color:var(--text);background:rgba(0,0,0,0.05)}
+.footer p{font-size:0.78rem;color:var(--text-subtle)}
+
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s cubic-bezier(0.22,1,0.36,1)}
+.fade-up.visible{opacity:1;transform:none}
+
+@media(max-width:720px){
+  .l-grid{grid-template-columns:1fr}
+  .header-contact{display:none}
+  .hinweis-inner{flex-direction:column}
+  .page-hero{padding:100px 20px 60px}
+  .leistungen{padding:56px 20px}
+}
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="logo.png" alt="Schnell Schlepper" onerror="this.style.display='none'">
+    </a>
+    <nav class="nav">
+      <a href="index.html" class="nav-back"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Startseite</a>
+      <a href="leistungen.html" class="active">Leistungen</a>
+      <a href="faq.html">FAQ</a>
+      <a href="ueber-uns.html">Über uns</a>
+    </nav>
+    <div class="header-right">
+      <div class="header-contact">
+        <a href="tel:+4917672421238">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 13.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.88 2.84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          +49 176 72421238
+        </a>
+        <a href="mailto:info@schnellschlepper.de">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+          info@schnellschlepper.de
+        </a>
+      </div>
+      <a href="index.html#anfrage" class="header-book-btn">Buchen</a>
+    </div>
+  </div>
+</header>
+
+<div class="page-top">
+  <section class="page-hero">
+    <span class="page-hero-label">Was wir tun</span>
+    <h1>Für jede Situation<br><span>die richtige Lösung</span></h1>
+    <p>Kein Auftrag ist wie der andere. Deshalb schauen wir genau hin – und sagen Ihnen ehrlich, was wir tun können und was es kostet.</p>
+  </section>
+</div>
+
+<section class="leistungen">
+  <div class="container">
+    <div class="l-grid">
+
+      <!-- Abschleppen -->
+      <div class="l-card fade-up">
+        <div class="l-badge">24 / 7</div>
+        <div class="l-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <h2>Abschleppen</h2>
+        <p class="l-desc">Wenn Ihr Fahrzeug nicht mehr fahren kann, kommen wir – und bringen es sicher dorthin, wo es hingehört.</p>
+        <div class="l-details">
+          <span class="l-detail">PKW, Transporter, Motorräder und Vans</span>
+          <span class="l-detail">Transport zur Werkstatt Ihrer Wahl oder unserem Empfehlungsnetzwerk</span>
+          <span class="l-detail">Schonend verladen, fachgerecht gesichert</span>
+          <span class="l-detail">Auf Wunsch direkt zum Gutachter oder TÜV</span>
+        </div>
+        <a href="tel:+4917672421238" class="l-cta">Jetzt anrufen →</a>
+      </div>
+
+      <!-- Pannenhilfe -->
+      <div class="l-card fade-up" style="transition-delay:0.08s">
+        <div class="l-badge">Vor Ort</div>
+        <div class="l-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <h2>Pannenhilfe vor Ort</h2>
+        <p class="l-desc">Manchmal braucht es keinen Abschleppdienst – sondern jemanden, der direkt hilft. Wir kommen zu Ihnen.</p>
+        <div class="l-details">
+          <span class="l-detail">Starthilfe bei leer gefahrener Batterie</span>
+          <span class="l-detail">Reifenwechsel – Reserverad oder Notlösung</span>
+          <span class="l-detail">Kraftstoffversorgung bei leerem Tank</span>
+          <span class="l-detail">Schlüssel im Auto eingeschlossen</span>
+        </div>
+        <a href="tel:+4917672421238" class="l-cta">Jetzt anrufen →</a>
+      </div>
+
+      <!-- Bergung -->
+      <div class="l-card fade-up" style="transition-delay:0.12s">
+        <div class="l-badge">Spezialeinsatz</div>
+        <div class="l-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h2>Fahrzeugbergung</h2>
+        <p class="l-desc">Wenn das Fahrzeug von der Fahrbahn abgekommen ist oder in einer schwierigen Lage steckt, braucht es mehr als ein Abschleppseil.</p>
+        <div class="l-details">
+          <span class="l-detail">Bergung aus Graben, Böschung, Tiefschnee</span>
+          <span class="l-detail">Kranbedienschein vorhanden – für schwierige Lagen</span>
+          <span class="l-detail">Unfallbergung mit Schadensminimierung</span>
+          <span class="l-detail">Sicherung der Unfallstelle bis zur Bergung</span>
+        </div>
+        <a href="tel:+4917672421238" class="l-cta">Jetzt anrufen →</a>
+      </div>
+
+      <!-- Fahrzeugtransport -->
+      <div class="l-card fade-up" style="transition-delay:0.16s">
+        <div class="l-badge">Geplant</div>
+        <div class="l-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+        </div>
+        <h2>Fahrzeugtransport</h2>
+        <p class="l-desc">Sie möchten ein Fahrzeug von A nach B bringen lassen – ohne Kilometer draufzulegen. Sicher, pünktlich, transportversichert.</p>
+        <div class="l-details">
+          <span class="l-detail">Oldtimer und Liebhaberfahrzeuge – besonders schonend</span>
+          <span class="l-detail">Elektrofahrzeuge ausschließlich auf der Ladefläche</span>
+          <span class="l-detail">Regional im 100-km-Radius: unsere Stärke</span>
+          <span class="l-detail">Deutschlandweit und europaweit auf Anfrage</span>
+        </div>
+        <a href="index.html#anfrage" class="l-cta">Auftrag anfragen →</a>
+      </div>
+
+      <!-- Fahrzeugrückführung -->
+      <div class="l-card fade-up" style="transition-delay:0.2s">
+        <div class="l-badge">Ausland</div>
+        <div class="l-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/><path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/></svg>
+        </div>
+        <h2>Fahrzeugrückführung</h2>
+        <p class="l-desc">Liegengeblieben im Urlaub oder Ausland? Wir holen Ihr Fahrzeug zurück nach Deutschland – auch wenn es weit ist.</p>
+        <div class="l-details">
+          <span class="l-detail">Rückführung aus dem europäischen Ausland</span>
+          <span class="l-detail">Koordination mit lokalen Pannendiensten möglich</span>
+          <span class="l-detail">Vorabangebot nach Ihrer Standortangabe</span>
+          <span class="l-detail">Ablieferung direkt zur Werkstatt oder nach Hause</span>
+        </div>
+        <a href="index.html#anfrage" class="l-cta">Auftrag anfragen →</a>
+      </div>
+
+      <!-- Entsorgung & Einlagerung -->
+      <div class="l-card fade-up" style="transition-delay:0.24s">
+        <div class="l-badge">Weiteres</div>
+        <div class="l-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <h2>Einlagerung & Entsorgung</h2>
+        <p class="l-desc">Fahrzeug wird nicht mehr gebraucht oder wartet auf Reparatur? Wir lagern es ein oder kümmern uns um eine fachgerechte Verwertung.</p>
+        <div class="l-details">
+          <span class="l-detail">Kurz- und langfristige Fahrzeugeinlagerung</span>
+          <span class="l-detail">Altfahrzeugentsorgung – umweltgerecht und legal</span>
+          <span class="l-detail">Direktübergabe an zertifizierte Autoverwerter</span>
+          <span class="l-detail">Abholung des Fahrzeugs auf Wunsch inklusive</span>
+        </div>
+        <a href="tel:+4917672421238" class="l-cta">Jetzt anrufen →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="hinweis">
+  <div class="container">
+    <div class="hinweis-inner fade-up">
+      <div class="hinweis-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <div>
+        <h3>Nicht sicher welche Leistung Sie brauchen?</h3>
+        <p>Rufen Sie einfach an und schildern Sie kurz Ihre Situation. Wir sagen Ihnen direkt, was sinnvoll ist und was es kostet – ohne Umwege. <a href="tel:+4917672421238">+49 176 72421238</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <h2>Notfall? Jetzt sofort anrufen.</h2>
+    <p>24 Stunden erreichbar, 365 Tage im Jahr – in ca. 30 Minuten vor Ort.</p>
+    <div class="cta-btns">
+      <a href="tel:+4917672421238" class="btn-red">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 13.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.88 2.84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        +49 176 72421238
+      </a>
+      <a href="index.html#anfrage" class="btn-ghost-light">Auftrag schriftlich anfragen</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-links">
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html">Datenschutz</a>
+    <a href="index.html#kontakt">Kontakt</a>
+  </div>
+  <p>&copy; 2025 Schnell Schlepper – Rami Haidar, Inh. · Hannover</p>
+</footer>
+
+<script>
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(function(el) { obs.observe(el); });
+</script>
+</body>
+</html>

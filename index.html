@@ -15,21 +15,22 @@
 ═══════════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* LIGHT MODE — zum Zurückwechseln einfach die Werte unten durch die auskommentierten ersetzen */
 :root {
-  --black:        #000000;
-  --dark:         #0a0a0a;
-  --surface:      #111111;
-  --surface2:     #161616;
-  --surface3:     #1c1c1e;
+  /* LIGHT */ --black:        #f0f0f2;   /* DARK war: #000000 */
+  /* LIGHT */ --dark:         #f0f0f2;   /* DARK war: #0a0a0a */
+  /* LIGHT */ --surface:      #ffffff;   /* DARK war: #111111 */
+  /* LIGHT */ --surface2:     #f3f4f6;   /* DARK war: #161616 */
+  /* LIGHT */ --surface3:     #e9eaec;   /* DARK war: #1c1c1e */
   --red:          #CC0000;
   --red-bright:   #e60000;
-  --red-glow:     rgba(204,0,0,0.15);
-  --red-glow-lg:  rgba(204,0,0,0.08);
-  --text:         #f5f5f7;
-  --text-dim:     rgba(245,245,247,0.65);
-  --text-subtle:  rgba(245,245,247,0.35);
-  --border:       rgba(255,255,255,0.07);
-  --border-hover: rgba(255,255,255,0.14);
+  --red-glow:     rgba(204,0,0,0.12);
+  --red-glow-lg:  rgba(204,0,0,0.06);
+  /* LIGHT */ --text:         #0f0f10;   /* DARK war: #f5f5f7 */
+  /* LIGHT */ --text-dim:     rgba(15,15,16,0.58);  /* DARK war: rgba(245,245,247,0.65) */
+  /* LIGHT */ --text-subtle:  rgba(15,15,16,0.38);  /* DARK war: rgba(245,245,247,0.35) */
+  /* LIGHT */ --border:       rgba(0,0,0,0.09);     /* DARK war: rgba(255,255,255,0.07) */
+  /* LIGHT */ --border-hover: rgba(0,0,0,0.18);     /* DARK war: rgba(255,255,255,0.14) */
   --white:        #ffffff;
   --r-sm:   10px;
   --r-md:   16px;
@@ -124,13 +125,23 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   box-shadow: 0 8px 32px rgba(204,0,0,0.35);
 }
 .btn-ghost {
-  background: rgba(255,255,255,0.07);
+  background: transparent;
   color: var(--text);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(0,0,0,0.18);
 }
 .btn-ghost:hover {
-  background: rgba(255,255,255,0.13);
-  border-color: var(--border-hover);
+  background: rgba(0,0,0,0.05);
+  border-color: rgba(0,0,0,0.28);
+}
+/* Ghost-Buttons auf dunklem Hintergrund (Slideshow) */
+.slide-ctas .btn-ghost {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  border-color: rgba(255,255,255,0.35);
+}
+.slide-ctas .btn-ghost:hover {
+  background: rgba(255,255,255,0.22);
+  border-color: rgba(255,255,255,0.5);
 }
 .btn-lg { padding: 16px 36px; font-size: 1rem; font-weight: 700; }
 .btn-xl { padding: 20px 48px; font-size: 1.1rem; font-weight: 800; }
@@ -139,10 +150,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    HEADER
 ═══════════════════════════════════════════ */
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
-  /* Kein eigener Hintergrund – die Pill trägt ihn */
   background: transparent;
   padding: 12px 20px;
 }
@@ -159,80 +171,64 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   backdrop-filter: blur(22px) saturate(180%);
   -webkit-backdrop-filter: blur(22px) saturate(180%);
   border-radius: 20px;
-  box-shadow: 0 4px 28px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 28px rgba(0,0,0,0.13), 0 0 0 1px rgba(0,0,0,0.10);
   transition: box-shadow 0.3s;
 }
 .header-inner:hover { box-shadow: 0 6px 36px rgba(0,0,0,0.13), 0 0 0 1px rgba(0,0,0,0.07); }
 
-/* Logo – transparentes PNG, freigestellt */
-.logo { display: flex; align-items: center; flex-shrink: 0; }
+/* Logo */
+.logo { display: flex; align-items: center; flex-shrink: 0; text-decoration: none; }
 .logo img {
-  height: 52px;
+  height: 48px;
   width: auto;
   display: block;
-}
-.logo-fallback {
-  color: var(--dark);
-  font-weight: 900;
-  font-size: 1rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  mix-blend-mode: multiply;
 }
 
-/* Tagline */
-.header-tagline {
-  flex: 1;
-  text-align: center;
-  overflow: hidden;
-  height: 22px;
-  position: relative;
+/* Nav */
+.nav { display: flex; align-items: center; gap: 2px; flex: 1; justify-content: center; }
+.nav a {
+  color: #444;
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 7px 13px;
+  border-radius: var(--r-sm);
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
 }
-.tagline-words {
-  display: flex;
-  flex-direction: column;
-  animation: slideWords 16s infinite;
-}
-.tagline-word {
-  height: 22px;
-  line-height: 22px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #555;
-  flex-shrink: 0;
-  letter-spacing: 0.03em;
-}
-.tagline-word .kw { color: var(--red); font-weight: 700; }
-
-@keyframes slideWords {
-  0%,  17% { transform: translateY(0); }
-  20%, 37% { transform: translateY(-22px); }
-  40%, 57% { transform: translateY(-44px); }
-  60%, 77% { transform: translateY(-66px); }
-  80%, 97% { transform: translateY(-88px); }
-  100%      { transform: translateY(0); }
-}
+.nav a:hover { color: #111; background: rgba(0,0,0,0.05); }
 
 /* Header right */
-.header-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-.header-phone {
+.header-right { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+.header-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+}
+.header-contact a {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 5px;
   color: #444;
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   font-weight: 600;
+  transition: color 0.2s;
+  white-space: nowrap;
 }
-.header-phone svg { opacity: 0.6; }
-.header-call-btn {
+.header-contact a:hover { color: #111; }
+.header-contact svg { opacity: 0.5; flex-shrink: 0; }
+.header-book-btn {
   background: var(--red);
   color: white;
-  padding: 9px 20px;
+  padding: 10px 22px;
   border-radius: var(--r-pill);
   font-weight: 700;
-  font-size: 0.85rem;
-  transition: background 0.2s, transform 0.2s;
+  font-size: 0.88rem;
+  transition: background 0.2s, transform 0.15s;
+  white-space: nowrap;
 }
-.header-call-btn:hover { background: var(--red-bright); transform: scale(1.02); }
+.header-book-btn:hover { background: var(--red-bright); transform: scale(1.03); }
 
 /* Mobile hamburger */
 .hamburger {
@@ -245,18 +241,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .hamburger:hover { background: rgba(0,0,0,0.06); }
 .hamburger span { display: block; width: 22px; height: 1.5px; background: #333; border-radius: 2px; transition: 0.3s; }
-
-/* Nav */
-.nav { display: flex; align-items: center; gap: 4px; }
-.nav a {
-  color: #444;
-  font-size: 0.83rem;
-  font-weight: 500;
-  padding: 6px 10px;
-  border-radius: var(--r-sm);
-  transition: color 0.2s, background 0.2s;
-}
-.nav a:hover { color: #111; background: rgba(0,0,0,0.05); }
 
 /* ═══════════════════════════════════════════
    HERO SLIDESHOW
@@ -478,7 +462,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /* Split cards below slideshow */
 .hero-split-section {
-  background: linear-gradient(180deg, var(--surface) 0%, var(--surface2) 100%);
+  background: var(--black);
   padding: 72px 28px;
 }
 .hero-split {
@@ -509,21 +493,130 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .hero-card.emergency:hover::before { opacity: 1; }
 .hero-card.plan::before { background: radial-gradient(ellipse at top right, rgba(255,255,255,0.03), transparent 70%); }
 .hero-card.plan:hover::before { opacity: 1; }
-.card-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 20px; }
-.emergency .card-icon { background: rgba(204,0,0,0.15); }
-.plan .card-icon { background: rgba(255,255,255,0.06); }
+.card-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+.emergency .card-icon { background: rgba(204,0,0,0.15); color: var(--red); }
+.plan .card-icon { background: rgba(0,0,0,0.06); color: var(--text-dim); }
 .hero-card .card-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-subtle); margin-bottom: 8px; }
 .hero-card h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 12px; line-height: 1.2; }
 .hero-card p { color: var(--text-dim); font-size: 0.9rem; line-height: 1.6; margin-bottom: 28px; }
 .card-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
-.meta-tag { background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 5px 12px; border-radius: var(--r-pill); font-size: 0.78rem; font-weight: 500; color: var(--text-dim); }
-.meta-tag.red { background: rgba(204,0,0,0.1); border-color: rgba(204,0,0,0.2); color: #ff8080; }
+.meta-tag { background: rgba(0,0,0,0.05); border: 1px solid var(--border); padding: 5px 12px; border-radius: var(--r-pill); font-size: 0.78rem; font-weight: 500; color: var(--text-dim); }
+.meta-tag.red { background: rgba(204,0,0,0.08); border-color: rgba(204,0,0,0.2); color: var(--red); }
+
+/* ═══════════════════════════════════════════
+   STATS BAND – Zahlen mit Wow-Effekt
+═══════════════════════════════════════════ */
+.stats-band {
+  background: var(--black);
+  padding: 80px 28px;
+  position: relative;
+  overflow: hidden;
+}
+.stats-mesh-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  z-index: 0;
+}
+.stats-band::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 80% at 50% 110%, rgba(204,0,0,0.07), transparent 65%);
+  pointer-events: none;
+  z-index: 1;
+}
+.stats-topline {
+  height: 2px;
+  background: var(--red);
+  width: 0;
+  margin: 0 auto 64px;
+  max-width: 80px;
+  border-radius: 2px;
+  transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  z-index: 3;
+}
+.stats-band.in-view .stats-topline { width: 80px; }
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  max-width: 960px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 3;
+}
+.stat-item {
+  text-align: center;
+  padding: 20px 24px 28px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.stats-band.in-view .stat-item:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.05s; }
+.stats-band.in-view .stat-item:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.17s; }
+.stats-band.in-view .stat-item:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.29s; }
+.stats-band.in-view .stat-item:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.41s; }
+.stat-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 15%; bottom: 15%;
+  width: 1px;
+  background: rgba(255,255,255,0.07);
+}
+.stat-number {
+  font-size: clamp(3rem, 5.5vw, 4.8rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 14px;
+  color: #ffffff;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px;
+}
+.stat-val { display: inline-block; }
+.stat-suffix {
+  color: var(--red);
+  font-size: 0.52em;
+  font-weight: 900;
+  margin-left: 3px;
+  letter-spacing: 0;
+}
+.stat-unit {
+  font-size: 0.38em;
+  color: rgba(255,255,255,0.45);
+  font-weight: 600;
+  margin-left: 4px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  align-self: flex-end;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.88);
+  margin-bottom: 4px;
+  letter-spacing: 0.01em;
+}
+.stat-sub {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.35);
+  font-weight: 400;
+}
 
 /* ═══════════════════════════════════════════
    SERVICES
 ═══════════════════════════════════════════ */
 .services {
-  background: linear-gradient(180deg, var(--surface) 0%, var(--surface2) 100%);
+  background: var(--black);
   padding: 100px 28px;
 }
 .services-grid {
@@ -542,7 +635,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .service-card:hover { background: var(--surface3); }
 .service-card:hover .service-arrow { opacity: 1; transform: translateX(0); }
-.s-icon { font-size: 1.8rem; margin-bottom: 18px; display: block; }
+.s-icon { display: flex; align-items: center; justify-content: flex-start; margin-bottom: 18px; color: var(--red); width: 28px; height: 28px; }
 .service-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--text); }
 .service-card p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.6; }
 .service-arrow {
@@ -559,7 +652,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    EINSATZGEBIET – radius / national split
 ═══════════════════════════════════════════ */
 .area {
-  background: linear-gradient(180deg, var(--surface2) 0%, var(--black) 100%);
+  background: var(--black);
   padding: 100px 28px;
 }
 .area-grid {
@@ -585,7 +678,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   gap: 6px;
   background: rgba(204,0,0,0.1);
   border: 1px solid rgba(204,0,0,0.2);
-  color: #ff7070;
+  color: var(--red);
   padding: 5px 13px;
   border-radius: var(--r-pill);
   font-size: 0.72rem;
@@ -620,7 +713,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .city-tag::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
 
-.national-icon { font-size: 3rem; margin-bottom: 20px; display: block; }
+.national-icon { display: flex; align-items: center; justify-content: flex-start; margin-bottom: 20px; color: var(--red); width: 36px; height: 36px; }
 .national-features { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
 .nat-feature {
   display: flex;
@@ -631,7 +724,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   border: 1px solid var(--border);
   border-radius: var(--r-md);
 }
-.nat-feature .nf-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+.nat-feature .nf-icon { flex-shrink: 0; margin-top: 1px; color: var(--red); width: 20px; height: 20px; display: flex; align-items: center; }
 .nat-feature h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 2px; }
 .nat-feature p { font-size: 0.8rem; color: var(--text-dim); line-height: 1.4; }
 
@@ -671,7 +764,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    BOOKING FORM
 ═══════════════════════════════════════════ */
 .booking {
-  background: linear-gradient(180deg, var(--black) 0%, var(--surface) 100%);
+  background: var(--black);
   padding: 100px 28px;
 }
 .booking-inner {
@@ -700,7 +793,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .form-group select,
 .form-group textarea {
   padding: 13px 16px;
-  background: rgba(255,255,255,0.04);
+  background: #ffffff;
   border: 1px solid var(--border);
   border-radius: var(--r-md);
   font-size: 0.93rem;
@@ -712,12 +805,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .form-group input::placeholder,
 .form-group textarea::placeholder { color: var(--text-subtle); }
-.form-group select option { background: #1c1c1e; color: var(--text); }
+.form-group select option { background: #ffffff; color: var(--text); }
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
   border-color: rgba(204,0,0,0.5);
-  background: rgba(255,255,255,0.06);
+  background: #ffffff;
 }
 .form-group textarea { resize: vertical; min-height: 96px; }
 
@@ -734,7 +827,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    REVIEWS
 ═══════════════════════════════════════════ */
 .reviews {
-  background: linear-gradient(180deg, var(--surface) 0%, var(--surface2) 100%);
+  background: var(--black);
   padding: 100px 28px;
 }
 .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
@@ -754,29 +847,29 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    B2B
 ═══════════════════════════════════════════ */
 .b2b {
-  background: var(--surface2);
+  background: var(--black);
   padding: 100px 28px;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
 .b2b-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
 .b2b-card {
-  background: rgba(255,255,255,0.03);
+  background: #ffffff;
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
   padding: 24px 18px;
   text-align: center;
   transition: background 0.2s, border-color 0.2s;
 }
-.b2b-card:hover { background: rgba(255,255,255,0.06); border-color: var(--border-hover); }
-.b2b-card .icon { font-size: 1.6rem; margin-bottom: 10px; }
+.b2b-card:hover { background: var(--surface3); border-color: var(--border-hover); }
+.b2b-card .icon { margin-bottom: 10px; color: var(--red); width: 28px; height: 28px; display: flex; align-items: center; }
 .b2b-card p { font-size: 0.82rem; color: var(--text-dim); font-weight: 500; line-height: 1.4; }
 
 /* ═══════════════════════════════════════════
    CONTACT
 ═══════════════════════════════════════════ */
 .contact {
-  background: linear-gradient(180deg, var(--surface2) 0%, var(--black) 100%);
+  background: var(--black);
   padding: 100px 28px;
 }
 .contact-grid {
@@ -833,7 +926,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   border-radius: var(--r-pill);
   transition: color 0.2s, background 0.2s;
 }
-.footer-links a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+.footer-links a:hover { color: var(--text); background: rgba(0,0,0,0.05); }
 .footer p { font-size: 0.78rem; color: var(--text-subtle); }
 
 /* ═══════════════════════════════════════════
@@ -867,10 +960,179 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 ═══════════════════════════════════════════ */
 .fade-up {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+  transform: translateY(36px);
+  transition: opacity 0.95s cubic-bezier(0.16,1,0.3,1), transform 0.95s cubic-bezier(0.16,1,0.3,1);
 }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ═══════════════════════════════════════════
+   PREMIUM INTERACTIONS
+═══════════════════════════════════════════ */
+
+/* Cinematic slide – slower crossfade, blur on exit */
+.slide-bg {
+  transition: opacity 2s cubic-bezier(0.4,0,0.2,1), transform 10s ease-out, filter 0.65s ease-in;
+  filter: blur(0px);
+  will-change: opacity, transform, filter;
+}
+.slide-bg.active {
+  opacity: 1; transform: scale(1); filter: blur(0px);
+  transition: opacity 2s cubic-bezier(0.4,0,0.2,1), transform 10s ease-out, filter 0.85s ease-out;
+}
+.slide-bg.exiting { filter: blur(5px); }
+
+/* Hero bottom gradient → matches stats-band background */
+.slide-fade-bottom {
+  background: linear-gradient(0deg, var(--black) 0%, transparent 100%);
+}
+
+/* Buttons – spring hover + click feedback */
+.btn-red {
+  transition: background 0.22s, transform 0.28s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.28s;
+}
+.btn-red:hover {
+  background: var(--red-bright);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 10px 32px rgba(204,0,0,0.40), 0 0 0 3px rgba(204,0,0,0.10);
+}
+.btn-red:active { transform: scale(0.97); box-shadow: 0 2px 8px rgba(204,0,0,0.18); transition-duration: 0.08s; }
+.btn-ghost { transition: all 0.22s cubic-bezier(0.4,0,0.2,1); }
+.btn-ghost:active { transform: scale(0.97); transition-duration: 0.08s; }
+.header-book-btn {
+  transition: background 0.22s, transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s;
+}
+.header-book-btn:hover { background: var(--red-bright); transform: scale(1.07); box-shadow: 0 4px 18px rgba(204,0,0,0.32); }
+
+/* Nav – animated underline indicator */
+.nav a { position: relative; }
+.nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 2px; left: 50%; right: 50%;
+  height: 1.5px;
+  background: var(--red);
+  border-radius: 2px;
+  transition: left 0.28s cubic-bezier(0.16,1,0.3,1), right 0.28s cubic-bezier(0.16,1,0.3,1);
+}
+.nav a:hover::after, .nav a.active::after { left: 12px; right: 12px; }
+
+/* Hero cards – deep elevation on hover */
+.hero-card {
+  transition: border-color 0.32s, transform 0.42s cubic-bezier(0.23,1,0.32,1), box-shadow 0.42s;
+  will-change: transform;
+}
+.hero-card:hover {
+  transform: translateY(-7px) scale(1.01);
+  box-shadow: 0 28px 70px rgba(0,0,0,0.12), 0 8px 24px rgba(0,0,0,0.06);
+  border-color: rgba(204,0,0,0.18);
+}
+
+/* Stat numbers – spring on hover */
+.stat-number { transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1); }
+.stats-band.in-view .stat-item:hover .stat-number { transform: scale(1.1); }
+
+/* USP cards */
+.usp-card { transition: border-color 0.3s, transform 0.4s cubic-bezier(0.23,1,0.32,1), box-shadow 0.4s; }
+.usp-card:hover { transform: translateY(-7px); box-shadow: 0 20px 52px rgba(0,0,0,0.10); border-color: rgba(204,0,0,0.25); }
+
+/* Contact cards */
+.contact-card { transition: border-color 0.3s, transform 0.4s cubic-bezier(0.23,1,0.32,1), box-shadow 0.4s; }
+.contact-card:hover { transform: translateY(-7px); box-shadow: 0 20px 52px rgba(0,0,0,0.10); border-color: rgba(204,0,0,0.22); }
+
+/* Area cards */
+.area-card { transition: border-color 0.3s, transform 0.38s cubic-bezier(0.23,1,0.32,1), box-shadow 0.38s; }
+.area-card:hover { transform: translateY(-5px); box-shadow: 0 16px 42px rgba(0,0,0,0.09); }
+
+/* Review cards */
+.review-card { transition: border-color 0.25s, transform 0.35s cubic-bezier(0.23,1,0.32,1), box-shadow 0.35s; }
+.review-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,0,0,0.08); }
+
+/* B2B cards */
+.b2b-card { transition: background 0.22s, border-color 0.22s, transform 0.35s cubic-bezier(0.23,1,0.32,1), box-shadow 0.35s; }
+.b2b-card:hover { transform: translateY(-4px); box-shadow: 0 10px 26px rgba(0,0,0,0.09); }
+
+/* Signature – 3D perspective container for hero cards */
+.hero-split-section { perspective: 1400px; }
+.hero-card { transform-origin: center center; }
+
+/* ═══════════════════════════════════════════
+   EINSATZGEBIET – kompakt visuell
+═══════════════════════════════════════════ */
+.area-visual { max-width: 860px; margin: 0 auto; display: grid; grid-template-columns: 220px 1fr; gap: 48px; align-items: center; }
+.area-map-wrap { display: flex; align-items: center; justify-content: center; }
+.area-map { position: relative; width: 200px; height: 200px; flex-shrink: 0; }
+.map-ring { position: absolute; border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.map-ring-1 { width: 58px;  height: 58px;  border: 2px solid rgba(204,0,0,0.45); }
+.map-ring-2 { width: 118px; height: 118px; border: 1.5px dashed rgba(204,0,0,0.22); }
+.map-ring-3 { width: 188px; height: 188px; border: 1px dashed rgba(204,0,0,0.09); }
+.map-dot {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 30px; height: 30px; background: var(--red); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 0.48rem; font-weight: 900; letter-spacing: 0.04em;
+  box-shadow: 0 0 0 5px rgba(204,0,0,0.14), 0 4px 14px rgba(204,0,0,0.38);
+}
+.map-radius-tag {
+  position: absolute; top: 50%; left: calc(50% + 32px); transform: translateY(-50%);
+  background: rgba(204,0,0,0.08); border: 1px solid rgba(204,0,0,0.2);
+  color: var(--red); font-size: 0.63rem; font-weight: 700;
+  padding: 3px 8px; border-radius: var(--r-pill); white-space: nowrap;
+}
+.area-facts { display: flex; flex-direction: column; gap: 10px; }
+.area-fact {
+  display: flex; align-items: flex-start; gap: 14px; padding: 14px 18px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg);
+  transition: border-color 0.25s, transform 0.3s cubic-bezier(0.23,1,0.32,1);
+}
+.area-fact:hover { border-color: rgba(204,0,0,0.22); transform: translateX(4px); }
+.area-fact-icon { color: var(--red); flex-shrink: 0; margin-top: 2px; }
+.area-fact-body h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 2px; }
+.area-fact-body h4 strong { color: var(--red); }
+.area-fact-body p { font-size: 0.79rem; color: var(--text-dim); line-height: 1.5; margin: 0; }
+.city-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.city-chip { background: rgba(204,0,0,0.05); border: 1px solid rgba(204,0,0,0.12); color: var(--text-dim); font-size: 0.73rem; padding: 3px 9px; border-radius: var(--r-pill); }
+
+/* ═══════════════════════════════════════════
+   ABLAUF
+═══════════════════════════════════════════ */
+.ablauf { background: var(--black); padding: 100px 28px; }
+.ablauf-steps { display: grid; grid-template-columns: repeat(4, 1fr); max-width: 900px; margin: 0 auto; position: relative; }
+.ablauf-steps::before {
+  content: ''; position: absolute; top: 26px; left: 13%; right: 13%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border) 10%, var(--border) 90%, transparent);
+}
+.ablauf-step { text-align: center; padding: 0 14px 28px; position: relative; z-index: 1; }
+.ablauf-num {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--surface); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; font-weight: 900; color: var(--red); margin: 0 auto 16px;
+  transition: background 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+.ablauf-step:hover .ablauf-num { border-color: rgba(204,0,0,0.42); background: rgba(204,0,0,0.07); box-shadow: 0 4px 16px rgba(204,0,0,0.16); }
+.ablauf-step h3 { font-size: 0.92rem; font-weight: 700; margin-bottom: 6px; }
+.ablauf-step p { font-size: 0.80rem; color: var(--text-dim); line-height: 1.55; }
+
+/* ═══════════════════════════════════════════
+   PREISE
+═══════════════════════════════════════════ */
+.preise { background: var(--black); padding: 100px 28px; }
+.preise-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; max-width: 960px; margin: 0 auto 36px; }
+.preis-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-xl); padding: 32px 20px; text-align: center;
+  transition: border-color 0.3s, transform 0.38s cubic-bezier(0.23,1,0.32,1), box-shadow 0.38s;
+}
+.preis-card:hover { border-color: rgba(204,0,0,0.22); transform: translateY(-5px); box-shadow: 0 18px 48px rgba(0,0,0,0.09); }
+.preis-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-subtle); margin-bottom: 14px; }
+.preis-amount { font-size: 2.1rem; font-weight: 900; color: var(--text); letter-spacing: -0.04em; line-height: 1; margin-bottom: 3px; }
+.preis-amount sub { font-size: 0.85rem; font-weight: 500; color: var(--text-dim); vertical-align: baseline; letter-spacing: 0; }
+.preis-anfrage { font-size: 1.25rem; font-weight: 800; color: var(--red); }
+.preis-card p { font-size: 0.81rem; color: var(--text-dim); line-height: 1.5; margin-top: 10px; }
+.preise-trust { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; max-width: 680px; margin: 0 auto 36px; }
+.trust-item { display: flex; align-items: center; gap: 8px; font-size: 0.84rem; color: var(--text-dim); }
+.trust-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+.preise-cta { text-align: center; }
 
 /* ═══════════════════════════════════════════
    RESPONSIVE
@@ -896,6 +1158,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .slide-ctas { flex-direction: column; }
   .slide-ctas .btn { justify-content: center; }
   .hero-split-section { padding: 48px 20px; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .stat-item:nth-child(2)::after { display: none; }
+  .stats-band { padding: 56px 20px; }
   .hero-split { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
   .booking-inner { padding: 36px 22px; }
   .form-grid { grid-template-columns: 1fr; }
@@ -904,13 +1169,20 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .mobile-bar { display: flex; }
   body { padding-bottom: 64px; }
 
-  .section, .services, .area, .usps, .reviews, .b2b, .contact { padding: 72px 20px; }
+  .section, .services, .area, .usps, .reviews, .b2b, .contact, .ablauf, .preise { padding: 72px 20px; }
+  .ablauf-steps { grid-template-columns: 1fr 1fr; gap: 32px 16px; }
+  .ablauf-steps::before { display: none; }
+  .preise-grid { grid-template-columns: 1fr 1fr; }
+  .area-visual { grid-template-columns: 1fr; gap: 32px; }
+  .area-map { margin: 0 auto; }
 }
 
 @media (max-width: 480px) {
   .display { font-size: 2rem; }
   .usps-grid { grid-template-columns: 1fr 1fr; }
   .city-grid { grid-template-columns: 1fr 1fr; }
+  .ablauf-steps { grid-template-columns: 1fr; }
+  .preise-grid { grid-template-columns: 1fr; }
 }
 
   </style>
@@ -923,33 +1195,27 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
     <a href="#" class="logo" aria-label="Schnell Schlepper Startseite">
       <img src="logo.png" alt="Schnell Schlepper"
-           style="height:38px;width:auto;"
-           onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-      <span class="logo-fallback" style="display:none">SCHNELL SCHLEPPER</span>
+           onerror="this.style.display='none'">
     </a>
 
-    <div class="header-tagline" aria-hidden="true">
-      <div class="tagline-words">
-        <span class="tagline-word"><span class="kw">24/7</span> erreichbar – Tag und Nacht</span>
-        <span class="tagline-word">In <span class="kw">30 Minuten</span> vor Ort</span>
-        <span class="tagline-word"><span class="kw">100 km</span> Einsatzradius Hannover</span>
-        <span class="tagline-word"><span class="kw">Fairer</span> Festpreis – keine Überraschungen</span>
-        <span class="tagline-word"><span class="kw">Deutschlandweit</span> &amp; europaweit</span>
-      </div>
-    </div>
+    <nav class="nav" id="nav">
+      <a href="leistungen.html">Leistungen</a>
+      <a href="faq.html">FAQ</a>
+      <a href="ueber-uns.html">Über uns</a>
+    </nav>
 
     <div class="header-right">
-      <nav class="nav" id="nav">
-        <a href="#leistungen">Leistungen</a>
-        <a href="#einsatzgebiet">Einsatzgebiet</a>
-        <a href="#anfrage">Anfrage</a>
-        <a href="#kontakt">Kontakt</a>
-      </nav>
-      <div class="header-phone">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 13.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.88 2.84h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-        +49 XXX XXXXXXX
+      <div class="header-contact">
+        <a href="tel:+4917672421238">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 13.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.88 2.84h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          +49 176 72421238
+        </a>
+        <a href="mailto:info@schnellschlepper.de">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+          info@schnellschlepper.de
+        </a>
       </div>
-      <a href="tel:+49XXXXXXXXXX" class="header-call-btn">Anrufen</a>
+      <a href="#kontakt" class="header-book-btn">Buchen</a>
       <button class="hamburger" onclick="toggleNav()" aria-label="Menü">
         <span></span><span></span><span></span>
       </button>
@@ -976,8 +1242,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       <h1 class="slide-h1">Bei uns sind Sie<br>in <span class="r">SICHEREN</span> Händen.</h1>
       <p class="slide-sub">Kooperation mit Werkstätten, Kfz-Gutachtern &amp; Autoverwertungen – für Ihre lückenlose Betreuung.</p>
       <div class="slide-ctas">
-        <a href="tel:+49XXXXXXXXXX" class="btn btn-red btn-lg">📞 Jetzt anrufen</a>
-        <a href="#anfrage" class="btn btn-ghost btn-lg">Auftrag anfragen</a>
+        <a href="tel:+4917672421238" class="btn btn-red btn-lg"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 13.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.88 2.84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> Jetzt anrufen</a>
+        <a href="#kontakt" class="btn btn-ghost btn-lg">Auftrag anfragen</a>
       </div>
     </div>
 
@@ -987,7 +1253,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       <h1 class="slide-h1">Jedes Fahrzeug.<br>Jede <span class="r">Herausforderung</span>.</h1>
       <p class="slide-sub">Von der Bergung bis zum Spezialtransport – professionell ausgerüstet, pünktlich &amp; transparent.</p>
       <div class="slide-ctas">
-        <a href="tel:+49XXXXXXXXXX" class="btn btn-red btn-lg">📞 Sofort Hilfe</a>
+        <a href="tel:+4917672421238" class="btn btn-red btn-lg"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 13.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.88 2.84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> Sofort Hilfe</a>
         <a href="#leistungen" class="btn btn-ghost btn-lg">Leistungen ansehen</a>
       </div>
     </div>
@@ -998,7 +1264,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       <h1 class="slide-h1"><span class="r">24 / 7</span> für Sie<br>im Einsatz.</h1>
       <p class="slide-sub">Faire Festpreise, keine Überraschungen – Hannover &amp; Umgebung, Deutschlandweit &amp; Europaweit.</p>
       <div class="slide-ctas">
-        <a href="tel:+49XXXXXXXXXX" class="btn btn-red btn-lg">📞 Jetzt anrufen</a>
+        <a href="tel:+4917672421238" class="btn btn-red btn-lg"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 13.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.88 2.84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> Jetzt anrufen</a>
         <a href="#einsatzgebiet" class="btn btn-ghost btn-lg">Einsatzgebiet</a>
       </div>
     </div>
@@ -1028,7 +1294,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 <section class="hero-split-section">
   <div class="hero-split">
     <div class="hero-card emergency fade-up">
-      <div class="card-icon">🚨</div>
+      <div class="card-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
       <div class="card-label">Sofortiger Einsatz</div>
       <h2>Notfall &amp; Panne</h2>
       <p>Liegengeblieben? Unfall? Wir sind in ca. 30 Minuten bei Ihnen – zu jeder Uhrzeit, 365 Tage im Jahr.</p>
@@ -1038,23 +1304,51 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
         <span class="meta-tag">Pannenhilfe</span>
         <span class="meta-tag">Bergung</span>
       </div>
-      <a href="tel:+49XXXXXXXXXX" class="btn btn-red btn-lg" style="width:100%;justify-content:center;">📞 Jetzt sofort anrufen</a>
+      <a href="tel:+4917672421238" class="btn btn-red btn-lg" style="width:100%;justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 13.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.88 2.84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> Jetzt sofort anrufen</a>
     </div>
     <div class="hero-card plan fade-up" style="transition-delay:0.1s">
-      <div class="card-icon">📍</div>
+      <div class="card-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></div>
       <div class="card-label">Geplanter Transport</div>
-      <h2>Route anfragen</h2>
-      <p>Transport planen, Fahrzeugrückführung oder Spedition? Wählen Sie Termin und Route – wir melden uns.</p>
+      <h2>Transport planen</h2>
+      <p>Überführung, Rückführung oder Spezialauftrag? Termin und Route mitteilen – wir erstellen Ihr Angebot.</p>
       <div class="card-meta">
         <span class="meta-tag">100 km Regional</span>
         <span class="meta-tag">Deutschlandweit</span>
         <span class="meta-tag">Europaweit</span>
       </div>
-      <a href="#anfrage" class="btn btn-ghost btn-lg" style="width:100%;justify-content:center;">Auftrag anfragen →</a>
+      <a href="#kontakt" class="btn btn-ghost btn-lg" style="width:100%;justify-content:center;">Anfrage stellen →</a>
     </div>
   </div>
 </section>
 
+
+<!-- ═══════ STATS BAND ═══════ -->
+<section class="stats-band" id="zahlen">
+  <canvas class="stats-mesh-canvas" id="meshCanvas" aria-hidden="true"></canvas>
+  <div class="stats-topline"></div>
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-number"><span class="stat-val" data-target="25">0</span><span class="stat-unit">Jahre</span></div>
+      <div class="stat-label">Erfahrung</div>
+      <div class="stat-sub">Familienunternehmen seit 1999</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number"><span class="stat-val" data-target="30">0</span><span class="stat-unit">Min.</span></div>
+      <div class="stat-label">Reaktionszeit</div>
+      <div class="stat-sub">im Schnitt vor Ort</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number"><span class="stat-val" data-target="100">0</span><span class="stat-suffix">%</span></div>
+      <div class="stat-label">Faire Preise</div>
+      <div class="stat-sub">kalkuliert, bevor wir fahren</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number"><span class="stat-val" data-target="100">0</span><span class="stat-unit">km</span></div>
+      <div class="stat-label">Einsatzradius</div>
+      <div class="stat-sub">ab Hannover</div>
+    </div>
+  </div>
+</section>
 
 <!-- ═══════ LEISTUNGEN ═══════ -->
 <section class="services" id="leistungen">
@@ -1064,49 +1358,49 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     <p class="section-sub fade-up">Vom PKW bis zum Spezialfahrzeug – für jede Situation die passende Lösung.</p>
     <div class="services-grid fade-up">
       <div class="service-card">
-        <span class="s-icon">🚗</span>
+        <span class="s-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span>
         <h3>Abschleppen</h3>
         <p>PKW, Transporter, Motorräder – schonend zur Wunsch­werkstatt.</p>
         <span class="service-arrow">→</span>
       </div>
       <div class="service-card">
-        <span class="s-icon">🔧</span>
+        <span class="s-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></span>
         <h3>Pannenhilfe vor Ort</h3>
         <p>Starthilfe, Reifenwechsel, Kraftstoff – direkt bei Ihnen.</p>
         <span class="service-arrow">→</span>
       </div>
       <div class="service-card">
-        <span class="s-icon">🏔️</span>
+        <span class="s-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
         <h3>Fahrzeugbergung</h3>
         <p>Unfall, Graben, Schnee – mit Spezialgerät sicher geborgen.</p>
         <span class="service-arrow">→</span>
       </div>
       <div class="service-card">
-        <span class="s-icon">🚛</span>
+        <span class="s-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span>
         <h3>Fahrzeugtransport</h3>
         <p>Regional bis europaweit – Oldtimer, EV und Spezialfahrzeuge.</p>
         <span class="service-arrow">→</span>
       </div>
       <div class="service-card">
-        <span class="s-icon">🔄</span>
+        <span class="s-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/><path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/></svg></span>
         <h3>Fahrzeugrückführung</h3>
         <p>Liegengeblieben im Ausland? Wir holen es zurück.</p>
         <span class="service-arrow">→</span>
       </div>
       <div class="service-card">
-        <span class="s-icon">📋</span>
+        <span class="s-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
         <h3>Versicherungsservice</h3>
         <p>Sichern, dokumentieren, Abwicklung unterstützen.</p>
         <span class="service-arrow">→</span>
       </div>
       <div class="service-card">
-        <span class="s-icon">🏠</span>
+        <span class="s-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>
         <h3>Fahrzeugeinlagerung</h3>
         <p>Kurz- oder langfristig – witterungsgeschützt und sicher.</p>
         <span class="service-arrow">→</span>
       </div>
       <div class="service-card">
-        <span class="s-icon">♻️</span>
+        <span class="s-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg></span>
         <h3>Fahrzeugentsorgung</h3>
         <p>Altfahrzeuge fachgerecht und umweltgerecht verwerten.</p>
         <span class="service-arrow">→</span>
@@ -1121,64 +1415,86 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   <div class="container">
     <span class="section-label" style="display:block;text-align:center;">Wo wir arbeiten</span>
     <h2 class="headline section-head fade-up">Unser <span class="accent">Einsatzgebiet</span></h2>
-    <p class="section-sub fade-up">Wir unterscheiden klar zwischen regionalem Soforteinsatz und nationalen sowie internationalen Transporten.</p>
+    <p class="section-sub fade-up">Vom Soforteinsatz vor der Tür bis zur Rückführung aus dem Ausland.</p>
 
-    <div class="area-grid">
-
-      <!-- REGIONAL -->
-      <div class="area-card fade-up">
-        <div class="area-badge">📍 Regional</div>
-        <h3>Hannover &amp; Umgebung</h3>
-        <p>Unser Kerngebiet für Soforteinsätze – schnelle Reaktionszeiten dank optimaler Positionierung.</p>
-        <div class="area-radius">100 km</div>
-        <div class="area-radius-label">Einsatzradius ab Hannover</div>
-        <div class="city-grid">
-          <span class="city-tag">Hannover</span>
-          <span class="city-tag">Garbsen</span>
-          <span class="city-tag">Langenhagen</span>
-          <span class="city-tag">Burgdorf</span>
-          <span class="city-tag">Lehrte</span>
-          <span class="city-tag">Pattensen</span>
-          <span class="city-tag">Wunstorf</span>
-          <span class="city-tag">Ronnenberg</span>
-          <span class="city-tag">Barsinghausen</span>
-          <span class="city-tag">Isernhagen</span>
-          <span class="city-tag">Sehnde</span>
-          <span class="city-tag">+ weitere</span>
+    <div class="area-visual fade-up">
+      <!-- Map visual -->
+      <div class="area-map">
+        <div class="map-ring map-ring-3"></div>
+        <div class="map-ring map-ring-2"></div>
+        <div class="map-ring map-ring-1"></div>
+        <div class="map-dot">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
       </div>
 
-      <!-- NATIONAL / INTERNATIONAL -->
-      <div class="area-card fade-up" style="transition-delay:0.12s">
-        <div class="area-badge">🌍 National &amp; International</div>
-        <h3>Deutschlandweit &amp; Europa</h3>
-        <p>Für geplante Transporte, Fahrzeugrückführungen und Spezialaufträge sind wir auch über den Radius hinaus tätig.</p>
-        <span class="national-icon">🗺️</span>
-        <div class="national-features">
-          <div class="nat-feature">
-            <span class="nf-icon">🇩🇪</span>
-            <div>
-              <h4>Deutschlandweit</h4>
-              <p>Fahrzeugtransport von A nach B – Überführung, Reparaturtransport, Flottenlogistik.</p>
-            </div>
+      <!-- Fact rows -->
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="area-fact fade-up">
+          <div style="width:38px;height:38px;border-radius:50%;background:rgba(204,0,0,0.09);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
           </div>
-          <div class="nat-feature">
-            <span class="nf-icon">🇪🇺</span>
-            <div>
-              <h4>Europaweit</h4>
-              <p>Fahrzeug im Urlaub oder im Ausland liegengeblieben? Wir holen es zurück.</p>
-            </div>
-          </div>
-          <div class="nat-feature">
-            <span class="nf-icon">📞</span>
-            <div>
-              <h4>Zeitnah anfragen</h4>
-              <p>Route, Termin und Fahrzeug einfach mitteilen – wir erstellen Ihr Angebot sofort.</p>
+          <div>
+            <div style="font-weight:700;font-size:0.95rem;color:var(--text);">100 km Sofort-Radius</div>
+            <div style="font-size:0.82rem;color:var(--text-dim);margin-top:2px;">Hannover &amp; gesamte Region – schnelle Reaktionszeiten</div>
+            <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;">
+              <span class="city-tag">Hannover</span><span class="city-tag">Garbsen</span><span class="city-tag">Langenhagen</span><span class="city-tag">Burgdorf</span><span class="city-tag">Wunstorf</span><span class="city-tag">Lehrte</span><span class="city-tag">Barsinghausen</span><span class="city-tag">+ weitere</span>
             </div>
           </div>
         </div>
-      </div>
 
+        <div class="area-fact fade-up" style="transition-delay:0.08s">
+          <div style="width:38px;height:38px;border-radius:50%;background:rgba(204,0,0,0.06);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:700;font-size:0.95rem;color:var(--text);">Deutschlandweit</div>
+            <div style="font-size:0.82rem;color:var(--text-dim);margin-top:2px;">Überführung, Reparaturtransport, Flottenlogistik – auf Anfrage</div>
+          </div>
+        </div>
+
+        <div class="area-fact fade-up" style="transition-delay:0.16s">
+          <div style="width:38px;height:38px;border-radius:50%;background:rgba(204,0,0,0.04);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:700;font-size:0.95rem;color:var(--text);">Europaweit</div>
+            <div style="font-size:0.82rem;color:var(--text-dim);margin-top:2px;">Fahrzeug im Ausland liegengeblieben? Wir holen es zurück.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════ ABLAUF ═══════ -->
+<section class="ablauf" id="ablauf">
+  <div class="container">
+    <span class="section-label" style="display:block;text-align:center;">So läuft es ab</span>
+    <h2 class="headline section-head fade-up">In <span class="accent">4 Schritten</span> zum Einsatz</h2>
+    <p class="section-sub fade-up">Kein Papierkram, kein Warten – nur schnelle, klare Hilfe.</p>
+    <div class="ablauf-steps fade-up">
+      <div class="ablauf-step">
+        <div class="ablauf-num">1</div>
+        <h4 class="ablauf-title">Anrufen</h4>
+        <p class="ablauf-desc">Kurz beschreiben, wo Sie sind und was passiert ist – das genügt.</p>
+      </div>
+      <div class="ablauf-step">
+        <div class="ablauf-num">2</div>
+        <h4 class="ablauf-title">~30 Min. vor Ort</h4>
+        <p class="ablauf-desc">Wir bestätigen die Anfahrt sofort und nennen eine konkrete Ankunftszeit.</p>
+      </div>
+      <div class="ablauf-step">
+        <div class="ablauf-num">3</div>
+        <h4 class="ablauf-title">Professioneller Einsatz</h4>
+        <p class="ablauf-desc">Bergung, Abschleppen oder Pannenhilfe – sicher und schonend für Ihr Fahrzeug.</p>
+      </div>
+      <div class="ablauf-step">
+        <div class="ablauf-num">4</div>
+        <h4 class="ablauf-title">Faire Abrechnung</h4>
+        <p class="ablauf-desc">Festpreis im Voraus. Keine versteckten Kosten, keine Überraschungen.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1216,16 +1532,153 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 </section>
 
 
-<!-- ═══════ ANFRAGE / FORM ═══════ -->
-<section class="booking" id="anfrage">
+<!-- ═══════ BEWERTUNGEN ═══════ -->
+<section class="reviews" id="bewertungen">
   <div class="container">
-    <div class="booking-inner fade-up">
+    <span class="section-label" style="display:block;text-align:center;">Kundenstimmen</span>
+    <h2 class="headline section-head fade-up">Was unsere <span class="accent">Kunden sagen</span></h2>
+    <p class="section-sub fade-up">Echte Erfahrungen. Echte Menschen.</p>
+    <div class="reviews-grid">
+      <div class="review-card fade-up">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">„Mitten in der Nacht auf der A2 liegengeblieben. In 25 Minuten war Schnell Schlepper da. Professionell, freundlich, fairer Preis. Absolute Empfehlung!"</p>
+        <p class="review-author">— Thomas K., Hannover</p>
+      </div>
+      <div class="review-card fade-up" style="transition-delay:0.1s">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">„Unfall auf der B65. Das Team hat alles perfekt abgewickelt – Fahrzeug gesichert, Versicherung unterstützt. Schnell, kompetent, sehr freundlich."</p>
+        <p class="review-author">— Sandra M., Langenhagen</p>
+      </div>
+      <div class="review-card fade-up" style="transition-delay:0.2s">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">„Meinen Oldtimer haben sie mit größter Sorgfalt transportiert. Man merkt, dass das echte Profis sind. Komme immer wieder."</p>
+        <p class="review-author">— Klaus B., Garbsen</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════ B2B ═══════ -->
+<section class="b2b">
+  <div class="container">
+    <span class="section-label" style="display:block;text-align:center;">Geschäftskunden</span>
+    <h2 class="headline section-head fade-up">Partner für <span class="accent">Unternehmen</span></h2>
+    <p class="section-sub fade-up">Zuverlässige Zusammenarbeit für Autohäuser, Werkstätten, Versicherungen und mehr.</p>
+    <div class="b2b-grid fade-up">
+      <div class="b2b-card"><div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div><p>Autohäuser &amp; Werkstätten</p></div>
+      <div class="b2b-card"><div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><p>Versicherungen</p></div>
+      <div class="b2b-card"><div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div><p>Polizei &amp; Behörden</p></div>
+      <div class="b2b-card"><div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><p>Hausverwaltungen</p></div>
+      <div class="b2b-card"><div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><p>Flottenservice</p></div>
+    </div>
+    <p style="text-align:center;margin-top:40px;color:var(--text-dim);font-size:0.9rem;">
+      Rahmenvertrag gewünscht? <a href="tel:+4917672421238" style="color:var(--text);font-weight:700;border-bottom:1px solid rgba(255,255,255,0.2);padding-bottom:1px;">Jetzt anrufen →</a>
+    </p>
+  </div>
+</section>
+
+
+<!-- ═══════ PREISE ═══════ -->
+<section class="preise" id="preise">
+  <div class="container">
+    <span class="section-label" style="display:block;text-align:center;">Transparente Preise</span>
+    <h2 class="headline section-head fade-up">Faire Preise, <span class="accent">keine Überraschungen</span></h2>
+    <p class="section-sub fade-up">Festpreis im Voraus – was genannt wird, gilt. Kostenlose Anfrage in unter einer Minute.</p>
+
+    <div class="preise-grid fade-up">
+      <div class="preis-card">
+        <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;">Kurzstrecke</div>
+        <div class="preis-amount">ab 89 €</div>
+        <div style="font-size:0.8rem;color:var(--text-dim);margin:8px 0 18px;">bis 20 km, PKW</div>
+        <ul style="list-style:none;padding:0;margin:0;font-size:0.82rem;color:var(--text-dim);display:flex;flex-direction:column;gap:6px;">
+          <li style="display:flex;align-items:center;gap:7px;"><span style="color:var(--red);font-weight:900;">✓</span> Abschleppen &amp; Pannenhilfe</li>
+          <li style="display:flex;align-items:center;gap:7px;"><span style="color:var(--red);font-weight:900;">✓</span> 24/7 verfügbar</li>
+          <li style="display:flex;align-items:center;gap:7px;"><span style="color:var(--red);font-weight:900;">✓</span> Festpreis</li>
+        </ul>
+      </div>
+      <div class="preis-card">
+        <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;">Langstrecke</div>
+        <div class="preis-amount">ab 189 €</div>
+        <div style="font-size:0.8rem;color:var(--text-dim);margin:8px 0 18px;">ab 50 km, PKW</div>
+        <ul style="list-style:none;padding:0;margin:0;font-size:0.82rem;color:var(--text-dim);display:flex;flex-direction:column;gap:6px;">
+          <li style="display:flex;align-items:center;gap:7px;"><span style="color:var(--red);font-weight:900;">✓</span> Deutschlandweit</li>
+          <li style="display:flex;align-items:center;gap:7px;"><span style="color:var(--red);font-weight:900;">✓</span> Überführung &amp; Transport</li>
+          <li style="display:flex;align-items:center;gap:7px;"><span style="color:var(--red);font-weight:900;">✓</span> Festpreis</li>
+        </ul>
+      </div>
+      <div class="preis-card">
+        <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;">Pannenhilfe</div>
+        <div class="preis-amount">ab 69 €</div>
+        <div style="font-size:0.8rem;color:var(--text-dim);margin:8px 0 18px;">Vor-Ort-Hilfe</div>
+        <ul style="list-style:none;padding:0;margin:0;font-size:0.82rem;color:var(--text-dim);display:flex;flex-direction:column;gap:6px;">
+          <li style="display:flex;align-items:center;gap:7px;"><span style="color:var(--red);font-weight:900;">✓</span> Starthilfe, Reifen, Schlüssel</li>
+          <li style="display:flex;align-items:center;gap:7px;"><span style="color:var(--red);font-weight:900;">✓</span> ~30 Min. Reaktionszeit</li>
+          <li style="display:flex;align-items:center;gap:7px;"><span style="color:var(--red);font-weight:900;">✓</span> Festpreis</li>
+        </ul>
+      </div>
+      <div class="preis-card" style="border-color:rgba(204,0,0,0.18);background:rgba(204,0,0,0.03);">
+        <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--red);margin-bottom:12px;">Individuell</div>
+        <div class="preis-amount" style="font-size:1.6rem;">Auf Anfrage</div>
+        <div style="font-size:0.8rem;color:var(--text-dim);margin:8px 0 18px;">Sonderaufträge &amp; B2B</div>
+        <ul style="list-style:none;padding:0;margin:0;font-size:0.82rem;color:var(--text-dim);display:flex;flex-direction:column;gap:6px;">
+          <li style="display:flex;align-items:center;gap:7px;"><span style="color:var(--red);font-weight:900;">✓</span> Bergung, LKW, Europaweit</li>
+          <li style="display:flex;align-items:center;gap:7px;"><span style="color:var(--red);font-weight:900;">✓</span> Rahmenvertrag möglich</li>
+          <li style="display:flex;align-items:center;gap:7px;"><span style="color:var(--red);font-weight:900;">✓</span> Sofortangebot</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="preise-trust fade-up">
+      <div class="trust-item"><span class="trust-dot"></span>Kein Anfahrtszuschlag nachts</div>
+      <div class="trust-item"><span class="trust-dot"></span>Keine versteckten Kosten</div>
+      <div class="trust-item"><span class="trust-dot"></span>Preisbestätigung vor dem Einsatz</div>
+      <div class="trust-item"><span class="trust-dot"></span>Alle gängigen Zahlungsmittel</div>
+    </div>
+
+    <div style="text-align:center;">
+      <a href="preise.html" class="btn btn-ghost">Preise im Detail →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════ KONTAKT ═══════ -->
+<section class="contact" id="kontakt">
+  <div class="container">
+    <span class="section-label" style="display:block;text-align:center;">Kontakt</span>
+    <h2 class="headline section-head fade-up">So erreichen <span class="accent">Sie uns</span></h2>
+    <div class="contact-grid">
+      <div class="contact-card fade-up">
+        <div class="contact-icon-wrap"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 13.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.88 2.84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+        <h3>Telefon &amp; Notfall</h3>
+        <a href="tel:+4917672421238" class="main-link">+49 176 72421238</a>
+        <span class="sub">24 Stunden · 7 Tage die Woche</span>
+      </div>
+      <div class="contact-card fade-up" style="transition-delay:0.1s">
+        <div class="contact-icon-wrap"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <h3>WhatsApp</h3>
+        <a href="https://wa.me/4917672421238" class="main-link" target="_blank" rel="noopener">WhatsApp schreiben</a>
+        <span class="sub">Foto &amp; Standort einfach senden</span>
+      </div>
+      <div class="contact-card fade-up" style="transition-delay:0.2s">
+        <div class="contact-icon-wrap"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <h3>E-Mail</h3>
+        <a href="mailto:info@schnellschlepper.de" class="main-link" style="font-size:0.95rem;">info@schnellschlepper.de</a>
+        <span class="sub">Für Angebote &amp; geplante Aufträge</span>
+      </div>
+    </div>
+
+    <!-- Anfrage-Formular -->
+    <div class="booking-inner fade-up" id="anfrage" style="margin-top:60px;">
       <div class="booking-header">
         <span class="section-label" style="display:block;">Auftrag stellen</span>
         <h2 class="headline">Route &amp; Auftrag <span class="accent">anfragen</span></h2>
         <p>Schnell, einfach, unverbindlich. Bei Notfall bitte direkt anrufen!</p>
       </div>
       <form id="bookingForm" onsubmit="submitForm(event)" novalidate>
+        <input type="hidden" name="_subject" value="Neue Anfrage – Schnell Schlepper" />
+        <input type="hidden" name="_language" value="de" />
         <div class="form-grid">
           <div class="form-group">
             <label for="name">Ihr Name *</label>
@@ -1234,6 +1687,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <div class="form-group">
             <label for="phone">Telefon *</label>
             <input type="tel" id="phone" name="phone" placeholder="+49 511 XXXXXXX" required />
+          </div>
+          <div class="form-group form-full">
+            <label for="email">E-Mail-Adresse * <span style="font-weight:400;color:var(--text-subtle);text-transform:none;letter-spacing:0;">(für unser Rückangebot)</span></label>
+            <input type="email" id="email" name="email" placeholder="ihre@email.de" required />
           </div>
           <div class="form-group">
             <label for="pickup">Abholort *</label>
@@ -1295,84 +1752,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
             Auftrag absenden →
           </button>
         </div>
-        <p class="form-note">⚠️ Notfall? Bitte direkt anrufen – das ist schneller!</p>
+        <p class="form-note">Notfall? Bitte direkt anrufen – das ist schneller!</p>
       </form>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════ BEWERTUNGEN ═══════ -->
-<section class="reviews" id="bewertungen">
-  <div class="container">
-    <span class="section-label" style="display:block;text-align:center;">Kundenstimmen</span>
-    <h2 class="headline section-head fade-up">Was unsere <span class="accent">Kunden sagen</span></h2>
-    <p class="section-sub fade-up">Echte Erfahrungen. Echte Menschen.</p>
-    <div class="reviews-grid">
-      <div class="review-card fade-up">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">„Mitten in der Nacht auf der A2 liegengeblieben. In 25 Minuten war Schnell Schlepper da. Professionell, freundlich, fairer Preis. Absolute Empfehlung!"</p>
-        <p class="review-author">— Thomas K., Hannover</p>
-      </div>
-      <div class="review-card fade-up" style="transition-delay:0.1s">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">„Unfall auf der B65. Das Team hat alles perfekt abgewickelt – Fahrzeug gesichert, Versicherung unterstützt. Schnell, kompetent, sehr freundlich."</p>
-        <p class="review-author">— Sandra M., Langenhagen</p>
-      </div>
-      <div class="review-card fade-up" style="transition-delay:0.2s">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">„Meinen Oldtimer haben sie mit größter Sorgfalt transportiert. Man merkt, dass das echte Profis sind. Komme immer wieder."</p>
-        <p class="review-author">— Klaus B., Garbsen</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════ B2B ═══════ -->
-<section class="b2b">
-  <div class="container">
-    <span class="section-label" style="display:block;text-align:center;">Geschäftskunden</span>
-    <h2 class="headline section-head fade-up">Partner für <span class="accent">Unternehmen</span></h2>
-    <p class="section-sub fade-up">Zuverlässige Zusammenarbeit für Autohäuser, Werkstätten, Versicherungen und mehr.</p>
-    <div class="b2b-grid fade-up">
-      <div class="b2b-card"><div class="icon">🏢</div><p>Autohäuser &amp; Werkstätten</p></div>
-      <div class="b2b-card"><div class="icon">🛡️</div><p>Versicherungen</p></div>
-      <div class="b2b-card"><div class="icon">👮</div><p>Polizei &amp; Behörden</p></div>
-      <div class="b2b-card"><div class="icon">🏠</div><p>Hausverwaltungen</p></div>
-      <div class="b2b-card"><div class="icon">🚗</div><p>Flottenservice</p></div>
-    </div>
-    <p style="text-align:center;margin-top:40px;color:var(--text-dim);font-size:0.9rem;">
-      Rahmenvertrag gewünscht? <a href="tel:+49XXXXXXXXXX" style="color:var(--text);font-weight:700;border-bottom:1px solid rgba(255,255,255,0.2);padding-bottom:1px;">Jetzt anrufen →</a>
-    </p>
-  </div>
-</section>
-
-
-<!-- ═══════ KONTAKT ═══════ -->
-<section class="contact" id="kontakt">
-  <div class="container">
-    <span class="section-label" style="display:block;text-align:center;">Kontakt</span>
-    <h2 class="headline section-head fade-up">So erreichen <span class="accent">Sie uns</span></h2>
-    <div class="contact-grid">
-      <div class="contact-card fade-up">
-        <div class="contact-icon-wrap">📞</div>
-        <h3>Telefon &amp; Notfall</h3>
-        <a href="tel:+49XXXXXXXXXX" class="main-link">+49 XXX XXXXXXX</a>
-        <span class="sub">24 Stunden · 7 Tage die Woche</span>
-      </div>
-      <div class="contact-card fade-up" style="transition-delay:0.1s">
-        <div class="contact-icon-wrap">💬</div>
-        <h3>WhatsApp</h3>
-        <a href="https://wa.me/49XXXXXXXXXX" class="main-link" target="_blank" rel="noopener">WhatsApp schreiben</a>
-        <span class="sub">Foto &amp; Standort einfach senden</span>
-      </div>
-      <div class="contact-card fade-up" style="transition-delay:0.2s">
-        <div class="contact-icon-wrap">📍</div>
-        <h3>Standort</h3>
-        <a href="#" class="main-link" style="font-size:1rem;">[Ihre Adresse]</a>
-        <span class="sub">Hannover &amp; Umgebung</span>
-      </div>
     </div>
   </div>
 </section>
@@ -1391,12 +1772,181 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 <!-- ═══════ MOBILE STICKY BAR ═══════ -->
 <div class="mobile-bar" role="complementary" aria-label="Schnellkontakt">
-  <a href="tel:+49XXXXXXXXXX" class="mb-call">📞 Anrufen</a>
-  <a href="https://wa.me/49XXXXXXXXXX" class="mb-wa" target="_blank" rel="noopener">💬 WhatsApp</a>
+  <a href="tel:+4917672421238" class="mb-call"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 13.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.88 2.84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> Anrufen</a>
+  <a href="https://wa.me/4917672421238" class="mb-wa" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> WhatsApp</a>
 </div>
 
 
 <script>
+  /* ── Stats Band Counter ── */
+  (function() {
+    var band = document.getElementById('zahlen');
+    if (!band) return;
+    var triggered = false;
+
+    function easeOutExpo(t) {
+      return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+    }
+
+    function animateCounter(el, target, duration, delay) {
+      setTimeout(function() {
+        var start = null;
+        function step(ts) {
+          if (!start) start = ts;
+          var progress = Math.min((ts - start) / duration, 1);
+          var val = Math.round(easeOutExpo(progress) * target);
+          el.textContent = val;
+          if (progress < 1) requestAnimationFrame(step);
+          else el.textContent = target;
+        }
+        requestAnimationFrame(step);
+      }, delay);
+    }
+
+    var observer = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting && !triggered) {
+        triggered = true;
+        band.classList.add('in-view');
+        var counters = band.querySelectorAll('.stat-val[data-target]');
+        counters.forEach(function(el, i) {
+          var target = parseInt(el.getAttribute('data-target'), 10);
+          animateCounter(el, target, 1600, 120 + i * 160);
+        });
+      }
+    }, { threshold: 0.35 });
+
+    observer.observe(band);
+  })();
+
+  /* ── Low-Poly Mesh Background ── */
+  (function() {
+    var canvas = document.getElementById('meshCanvas');
+    if (!canvas) return;
+
+    function seededRand(seed) {
+      return function() {
+        seed = (seed * 1664525 + 1013904223) & 0xffffffff;
+        return (seed >>> 0) / 4294967296;
+      };
+    }
+
+    function drawMesh() {
+      var W = canvas.offsetWidth;
+      var H = canvas.offsetHeight;
+      if (!W || !H) return;
+      canvas.width  = W;
+      canvas.height = H;
+      var ctx = canvas.getContext('2d');
+      var rand = seededRand(42);
+
+      var cols = Math.ceil(W / 90) + 1;
+      var rows = Math.ceil(H / 80) + 1;
+      var cw   = W / (cols - 1);
+      var ch   = H / (rows - 1);
+
+      var pts = [];
+      for (var r = 0; r < rows; r++) {
+        pts[r] = [];
+        for (var c = 0; c < cols; c++) {
+          var jx = (c === 0 || c === cols - 1) ? 0 : (rand() - 0.5) * cw * 0.72;
+          var jy = (r === 0 || r === rows - 1) ? 0 : (rand() - 0.5) * ch * 0.72;
+          pts[r][c] = { x: c * cw + jx, y: r * ch + jy };
+        }
+      }
+
+      var peaks = [
+        { x: W * 0.22, y: H * 0.38 },
+        { x: W * 0.58, y: H * 0.62 },
+        { x: W * 0.80, y: H * 0.28 }
+      ];
+
+      function peakProximity(cx, cy) {
+        var best = 0;
+        peaks.forEach(function(p) {
+          var dx = cx - p.x, dy = cy - p.y;
+          var d = Math.sqrt(dx * dx + dy * dy);
+          var infl = Math.max(0, 1 - d / (Math.min(W, H) * 0.28));
+          if (infl > best) best = infl;
+        });
+        return best;
+      }
+
+      for (var row = 0; row < rows - 1; row++) {
+        for (var col = 0; col < cols - 1; col++) {
+          var tl = pts[row][col];
+          var tr = pts[row][col + 1];
+          var bl = pts[row + 1][col];
+          var br = pts[row + 1][col + 1];
+
+          [[tl,tr,br],[tl,br,bl]].forEach(function(tri) {
+            var mx = (tri[0].x + tri[1].x + tri[2].x) / 3;
+            var my = (tri[0].y + tri[1].y + tri[2].y) / 3;
+            var prox = peakProximity(mx, my);
+            var vy = my / H;
+            var vfade = 1 - Math.abs(vy * 2 - 1);
+            var alpha = vfade * vfade;
+            var noise = (rand() - 0.5) * 0.06;
+            var base  = 0.055 + noise + prox * 0.04;
+            var isRed = rand() < 0.028 && prox < 0.2;
+            var fill;
+            if (isRed) {
+              fill = 'rgba(204,0,0,' + (0.06 + rand() * 0.06) * alpha + ')';
+            } else {
+              var bright = Math.round((base + prox * 0.08) * 255);
+              fill = 'rgba(' + bright + ',' + bright + ',' + bright + ',' + alpha + ')';
+            }
+            ctx.beginPath();
+            ctx.moveTo(tri[0].x, tri[0].y);
+            ctx.lineTo(tri[1].x, tri[1].y);
+            ctx.lineTo(tri[2].x, tri[2].y);
+            ctx.closePath();
+            ctx.fillStyle = fill;
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(255,255,255,' + (0.025 + prox * 0.04) * alpha + ')';
+            ctx.lineWidth = 0.3 + prox * 0.5;
+            ctx.stroke();
+          });
+        }
+      }
+
+      /* dark overlay keeps text readable */
+      var core = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, Math.max(W,H)*0.6);
+      core.addColorStop(0,   'rgba(15,15,16,0.82)');
+      core.addColorStop(0.6, 'rgba(15,15,16,0.72)');
+      core.addColorStop(1,   'rgba(15,15,16,0)');
+      ctx.fillStyle = core;
+      ctx.fillRect(0, 0, W, H);
+
+      /* fade into surrounding sections — drawn LAST so they paint over everything */
+      var fh = H * 0.42;
+
+      /* top: section above has white (#fff) background */
+      var tg = ctx.createLinearGradient(0, 0, 0, fh);
+      tg.addColorStop(0,    'rgba(255,255,255,1)');
+      tg.addColorStop(0.45, 'rgba(255,255,255,0.55)');
+      tg.addColorStop(0.75, 'rgba(255,255,255,0.12)');
+      tg.addColorStop(1,    'rgba(255,255,255,0)');
+      ctx.fillStyle = tg;
+      ctx.fillRect(0, 0, W, fh);
+
+      /* bottom: fade to page background #f0f0f2 = var(--black) */
+      var bg = ctx.createLinearGradient(0, H - fh, 0, H);
+      bg.addColorStop(0,    'rgba(240,240,242,0)');
+      bg.addColorStop(0.25, 'rgba(240,240,242,0.12)');
+      bg.addColorStop(0.55, 'rgba(240,240,242,0.55)');
+      bg.addColorStop(1,    'rgba(240,240,242,1)');
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, H - fh, W, fh);
+    }
+
+    drawMesh();
+    var resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(drawMesh, 120);
+    });
+  })();
+
   /* ── Slideshow ── */
   var SLIDE_DURATION = 5000;
   var currentSlide   = 0;
@@ -1455,19 +2005,112 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     observer.observe(el);
   });
 
-  /* Form submit */
+  /* ── Cinematic slide: blur outgoing ── */
+  var _origGoTo = goToSlide;
+  goToSlide = function(n) {
+    var out = bgs[currentSlide];
+    out.classList.add('exiting');
+    setTimeout(function() { out.classList.remove('exiting'); }, 2400);
+    _origGoTo(n);
+  };
+
+  /* ── Hero parallax + mouse tracking ── */
+  (function() {
+    var content = document.querySelector('.slide-content');
+    var ss      = document.querySelector('.slideshow');
+    if (!content || !ss) return;
+    var tx = 0, ty = 0, cx = 0, cy = 0, sy = 0;
+    function lerp(a,b,t){ return a+(b-a)*t; }
+    function loop() {
+      cx = lerp(cx, tx, 0.065);
+      cy = lerp(cy, ty, 0.065);
+      content.style.transform = 'translate('+cx+'px,'+(cy+sy)+'px)';
+      requestAnimationFrame(loop);
+    }
+    var stk = false;
+    window.addEventListener('scroll', function() {
+      if (!stk) { requestAnimationFrame(function(){ sy = -Math.min(window.scrollY*0.14,72); stk=false; }); stk=true; }
+    }, { passive:true });
+    ss.addEventListener('mousemove', function(e) {
+      var r = ss.getBoundingClientRect();
+      tx = ((e.clientX-r.left)/r.width -0.5)*10;
+      ty = ((e.clientY-r.top) /r.height-0.5)*7;
+    }, { passive:true });
+    ss.addEventListener('mouseleave', function(){ tx=0; ty=0; });
+    loop();
+  })();
+
+  /* ── Signature: 3D card tilt ── */
+  (function() {
+    document.querySelectorAll('.hero-card').forEach(function(card) {
+      card.addEventListener('mousemove', function(e) {
+        var r  = card.getBoundingClientRect();
+        var mx = (e.clientX-r.left)/r.width  - 0.5;
+        var my = (e.clientY-r.top) /r.height - 0.5;
+        var rx = -my * 9, ry = mx * 12;
+        card.style.transform  = 'translateY(-7px) scale(1.01) rotateX('+rx+'deg) rotateY('+ry+'deg)';
+        card.style.boxShadow  = ((-mx*14)|0)+'px '+((18-my*8)|0)+'px 60px rgba(0,0,0,0.14), 0 6px 20px rgba(0,0,0,0.07)';
+      }, { passive:true });
+      card.addEventListener('mouseleave', function(){
+        card.style.transform = '';
+        card.style.boxShadow = '';
+      });
+    });
+  })();
+
+  /* Form submit – Formspree */
+  var FORMSPREE_ID = 'YOUR_FORM_ID'; // ← hier deine Formspree-ID eintragen
+
   function submitForm(e) {
     e.preventDefault();
-    var btn = document.getElementById('submitBtn');
-    btn.textContent = '✅ Auftrag eingegangen – wir melden uns!';
-    btn.style.background = '#16a34a';
+    var form = e.target;
+    var btn  = document.getElementById('submitBtn');
+
+    // Pflichtfelder prüfen
+    var ok = true;
+    form.querySelectorAll('[required]').forEach(function(el) {
+      if (!el.value.trim()) {
+        el.style.borderColor = 'rgba(204,0,0,0.65)';
+        ok = false;
+      } else {
+        el.style.borderColor = '';
+      }
+    });
+    if (!ok) return;
+
+    btn.textContent = 'Wird gesendet …';
     btn.disabled = true;
-    setTimeout(function() {
-      btn.textContent = 'Auftrag absenden →';
-      btn.style.background = '';
+
+    var data = {};
+    new FormData(form).forEach(function(val, key) { data[key] = val; });
+
+    fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body:    JSON.stringify(data)
+    })
+    .then(function(res) { return res.json(); })
+    .then(function(json) {
+      if (json.ok) {
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Auftrag eingegangen – wir melden uns!';
+        btn.style.background = '#16a34a';
+        form.reset();
+        setTimeout(function() {
+          btn.innerHTML = 'Auftrag absenden →';
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 7000);
+      } else {
+        btn.textContent = 'Fehler – bitte direkt anrufen';
+        btn.style.background = 'rgba(150,0,0,0.85)';
+        btn.disabled = false;
+      }
+    })
+    .catch(function() {
+      btn.textContent = 'Keine Verbindung – bitte direkt anrufen';
+      btn.style.background = 'rgba(150,0,0,0.85)';
       btn.disabled = false;
-      e.target.reset();
-    }, 5000);
+    });
   }
 </script>
 

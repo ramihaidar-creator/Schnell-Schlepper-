@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Häufige Fragen zu Schnell Schlepper – Preise, Transportversicherung, Reaktionszeit, Werkstattnetzwerk und mehr." />
+  <title>FAQ – Schnell Schlepper</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#f7f7f8;--surface:#ffffff;--surface2:#f3f4f6;--surface3:#e9eaec;
+  --red:#CC0000;--red-bright:#e60000;
+  --text:#0f0f10;--text-dim:rgba(15,15,16,0.58);--text-subtle:rgba(15,15,16,0.38);
+  --border:rgba(0,0,0,0.09);--border-hover:rgba(0,0,0,0.18);
+  --r-sm:10px;--r-md:16px;--r-lg:24px;--r-xl:32px;--r-pill:100px;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--black);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+/* HEADER */
+.header{position:fixed;top:0;left:0;right:0;z-index:1000;background:transparent;padding:12px 20px}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 24px;max-width:1040px;margin:0 auto;gap:20px;background:rgba(255,255,255,0.97);backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);border-radius:20px;box-shadow:0 4px 28px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.10)}
+.logo{display:flex;align-items:center;flex-shrink:0;text-decoration:none}
+.logo img{height:48px;width:auto;display:block;mix-blend-mode:multiply}
+.nav{display:flex;align-items:center;gap:2px;flex:1;justify-content:center}
+.nav a{color:#444;font-size:0.88rem;font-weight:500;padding:7px 13px;border-radius:var(--r-sm);transition:color 0.2s,background 0.2s;white-space:nowrap}
+.nav a:hover,.nav a.active{color:#111;background:rgba(0,0,0,0.05)}
+.nav a.active{font-weight:600}
+.nav-back{color:#888 !important;display:flex;align-items:center;gap:5px;border-right:1px solid rgba(0,0,0,0.1);padding-right:14px !important;margin-right:6px}
+.header-right{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.header-contact{display:flex;flex-direction:column;align-items:flex-end;gap:1px}
+.header-contact a{display:flex;align-items:center;gap:5px;color:#444;font-size:0.78rem;font-weight:600;transition:color 0.2s;white-space:nowrap}
+.header-contact a:hover{color:#111}
+.header-contact svg{opacity:0.5;flex-shrink:0}
+.header-book-btn{background:var(--red);color:white;padding:10px 22px;border-radius:var(--r-pill);font-weight:700;font-size:0.88rem;transition:background 0.2s,transform 0.15s;white-space:nowrap}
+.header-book-btn:hover{background:var(--red-bright);transform:scale(1.03)}
+
+/* LAYOUT */
+.container{max-width:1040px;margin:0 auto;padding:0 28px}
+.page-top{padding-top:120px}
+
+/* PAGE HERO */
+.page-hero{background:#0f0f10;padding:100px 28px 80px;text-align:center;position:relative;overflow:hidden}
+.page-hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 50% 110%,rgba(204,0,0,0.09),transparent 65%);pointer-events:none}
+.page-hero-label{font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:16px;display:block}
+.page-hero h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:900;line-height:1.08;letter-spacing:-0.03em;color:#fff;margin-bottom:20px}
+.page-hero h1 span{color:var(--red)}
+.page-hero p{font-size:1.05rem;color:rgba(255,255,255,0.6);max-width:520px;margin:0 auto;line-height:1.65}
+
+/* FAQ */
+.faq-section{padding:80px 28px}
+.faq-grid{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:0}
+.faq-item{border-bottom:1px solid var(--border);overflow:hidden}
+.faq-item:first-child{border-top:1px solid var(--border)}
+.faq-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 0;background:none;border:none;cursor:pointer;text-align:left;font-family:inherit}
+.faq-q{font-size:1.02rem;font-weight:700;color:var(--text);line-height:1.35;flex:1}
+.faq-icon{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text-dim);transition:background 0.2s,border-color 0.2s,transform 0.3s}
+.faq-item.open .faq-icon{background:var(--red);border-color:var(--red);color:#fff;transform:rotate(45deg)}
+.faq-body{max-height:0;overflow:hidden;transition:max-height 0.4s cubic-bezier(0.22,1,0.36,1)}
+.faq-item.open .faq-body{max-height:600px}
+.faq-answer{padding:0 0 28px;color:var(--text-dim);line-height:1.75;font-size:0.95rem}
+.faq-answer strong{color:var(--text);font-weight:600}
+.faq-answer a{color:var(--red);font-weight:600}
+.faq-answer a:hover{text-decoration:underline}
+.faq-answer ul{margin:10px 0 0 0;display:flex;flex-direction:column;gap:6px}
+.faq-answer ul li{display:flex;align-items:flex-start;gap:8px;font-size:0.9rem}
+.faq-answer ul li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--red);flex-shrink:0;margin-top:7px}
+
+/* CATEGORY LABELS */
+.faq-category{padding:48px 0 12px;max-width:760px;margin:0 auto}
+.faq-category:first-child{padding-top:0}
+.faq-cat-label{font-size:0.7rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:var(--red)}
+
+/* CTA BAND */
+.cta-band{background:#0f0f10;padding:72px 28px;text-align:center;position:relative;overflow:hidden}
+.cta-band::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 50% 110%,rgba(204,0,0,0.08),transparent);pointer-events:none}
+.cta-band h2{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;color:#fff;margin-bottom:12px;letter-spacing:-0.02em}
+.cta-band p{color:rgba(255,255,255,0.55);margin-bottom:32px;font-size:0.97rem}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-red{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;padding:14px 28px;border-radius:var(--r-pill);font-weight:700;font-size:0.93rem;transition:background 0.2s,transform 0.15s}
+.btn-red:hover{background:var(--red-bright);transform:translateY(-1px)}
+.btn-ghost-light{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.18);padding:14px 28px;border-radius:var(--r-pill);font-weight:600;font-size:0.93rem;transition:background 0.2s}
+.btn-ghost-light:hover{background:rgba(255,255,255,0.14)}
+
+/* FOOTER */
+.footer{background:var(--black);border-top:1px solid var(--border);padding:32px 28px;text-align:center}
+.footer-links{display:flex;justify-content:center;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.footer-links a{color:var(--text-subtle);font-size:0.82rem;padding:4px 12px;border-radius:var(--r-pill);transition:color 0.2s,background 0.2s}
+.footer-links a:hover{color:var(--text);background:rgba(0,0,0,0.05)}
+.footer p{font-size:0.78rem;color:var(--text-subtle)}
+
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s cubic-bezier(0.22,1,0.36,1)}
+.fade-up.visible{opacity:1;transform:none}
+
+@media(max-width:700px){
+  .header-contact{display:none}
+  .page-hero{padding:100px 20px 60px}
+  .faq-section{padding:56px 20px}
+}
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="logo.png" alt="Schnell Schlepper" onerror="this.style.display='none'">
+    </a>
+    <nav class="nav">
+      <a href="index.html" class="nav-back"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Startseite</a>
+      <a href="leistungen.html">Leistungen</a>
+      <a href="faq.html" class="active">FAQ</a>
+      <a href="ueber-uns.html">Über uns</a>
+    </nav>
+    <div class="header-right">
+      <div class="header-contact">
+        <a href="tel:+4917672421238">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 13.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.88 2.84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          +49 176 72421238
+        </a>
+        <a href="mailto:info@schnellschlepper.de">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+          info@schnellschlepper.de
+        </a>
+      </div>
+      <a href="index.html#anfrage" class="header-book-btn">Buchen</a>
+    </div>
+  </div>
+</header>
+
+<div class="page-top">
+  <section class="page-hero">
+    <span class="page-hero-label">Häufige Fragen</span>
+    <h1>Was Kunden uns<br><span>wirklich fragen</span></h1>
+    <p>Keine Hochglanz-Antworten. Hier steht, was Sie wirklich wissen wollen – direkt und ehrlich.</p>
+  </section>
+</div>
+
+<section class="faq-section">
+  <div class="container">
+
+    <div class="faq-category fade-up">
+      <span class="faq-cat-label">Preise & Kosten</span>
+    </div>
+    <div class="faq-grid fade-up">
+
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span class="faq-q">Was kostet ein Abschleppen oder Panneneinsatz?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-answer">
+            <p>Den Preis nennen wir Ihnen <strong>bevor wir losfahren</strong> – individuell kalkuliert, klar kommuniziert. Es gibt bei uns keinen Pauschaltarif, weil kein Auftrag wie der andere ist: Strecke, Fahrzeugtyp, Uhrzeit und Aufwand spielen alle eine Rolle.</p>
+            <p style="margin-top:12px">Was wir Ihnen versprechen: <strong>Was wir nennen, gilt.</strong> Keine versteckten Aufschläge, keine Überraschungen am Ende. Rufen Sie einfach an und schildern Sie kurz Ihre Situation – der Preis folgt sofort.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span class="faq-q">Gibt es Festpreise oder wird nach Zeit abgerechnet?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-answer">
+            <p>Wir kalkulieren den Preis pro Auftrag – das ist fairer als starre Festpreise, die oft entweder zu hoch oder zu niedrig angesetzt sind. Sie bekommen einen <strong>klaren Preis vor Beginn des Einsatzes</strong>, dem Sie zustimmen müssen. Erst dann fahren wir.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="faq-category fade-up" style="padding-top:40px">
+      <span class="faq-cat-label">Versicherung & Sicherheit</span>
+    </div>
+    <div class="faq-grid fade-up">
+
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span class="faq-q">Ist mein Fahrzeug während des Transports versichert?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-answer">
+            <p>Ja. Wir sind <strong>transportversichert</strong> – Ihr Fahrzeug ist während des gesamten Einsatzes abgesichert. Sollten Sie im Einzelfall eine Bestätigung benötigen, sprechen Sie uns einfach direkt an.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span class="faq-q">Wie wird mein Fahrzeug gesichert – insbesondere bei hochwertigen Fahrzeugen?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-answer">
+            <p>Unser Inhaber ist ausgebildeter Berufskraftfahrer mit <strong>spezialisierten Ladungssicherungsschulungen</strong>. Jedes Fahrzeug wird fachgerecht nach den geltenden Vorschriften gesichert – egal ob PKW, Oldtimer, Elektrofahrzeug oder Motorrad. Beim Transport wertvoller Fahrzeuge nehmen wir uns die Zeit, die nötig ist.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="faq-category fade-up" style="padding-top:40px">
+      <span class="faq-cat-label">Verfügbarkeit & Einsatz</span>
+    </div>
+    <div class="faq-grid fade-up">
+
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span class="faq-q">Können Sie noch heute kommen?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-answer">
+            <p>Wir versuchen es immer – und sagen Ihnen ehrlich, ob und wann wir kommen können. <strong>Bei Notfällen sind wir 24/7 erreichbar</strong> und in der Regel innerhalb von rund 30 Minuten vor Ort.</p>
+            <p style="margin-top:12px">Bei geplanten Transporten vereinbaren wir gemeinsam einen Termin, der für beide Seiten passt. Rufen Sie an – in zwei Minuten wissen Sie Bescheid.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span class="faq-q">Wie weit fahren Sie? Auch ins Ausland?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-answer">
+            <p>Unser Kerngebiet und unsere Stärke ist <strong>Hannover und der Umkreis von 100 km</strong>. Hier sind wir schnell, kennen die Wege und das Netzwerk.</p>
+            <p style="margin-top:12px">Deutschlandweite und europaweite Transporte bieten wir ebenfalls an – für Fahrzeugrückführungen oder geplante Langstreckentransporte. Sprechen Sie uns an, wir prüfen das gemeinsam.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span class="faq-q">Nehmen Sie auch Elektrofahrzeuge?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-answer">
+            <p>Ja. Elektrofahrzeuge werden bei uns grundsätzlich <strong>auf der Ladefläche transportiert</strong> – nicht abgeschleppt, da das die Technik beschädigen kann. Sagen Sie uns beim Anruf, dass es ein Elektrofahrzeug ist, damit wir entsprechend planen.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="faq-category fade-up" style="padding-top:40px">
+      <span class="faq-cat-label">Werkstatt & Netzwerk</span>
+    </div>
+    <div class="faq-grid fade-up">
+
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span class="faq-q">Kennen Sie eine gute Werkstatt in Hannover?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-answer">
+            <p>Ja – und zwar viele. In 25 Jahren haben wir ein breites Netzwerk aufgebaut:</p>
+            <ul>
+              <li>Kfz-Meisterbetriebe und Fachwerkstätten</li>
+              <li>Markenunabhängige Werkstätten für alle Fahrzeugtypen</li>
+              <li>Spezialisten für Oldtimer und Elektrofahrzeuge</li>
+              <li>Kfz-Gutachter und TÜV-Stellen</li>
+              <li>Autohändler und Autoverwerter</li>
+            </ul>
+            <p style="margin-top:12px">Wir bringen Sie direkt zur richtigen Adresse – nicht einfach irgendwo hin, sondern dorthin, wo Ihr Fahrzeug wirklich gut aufgehoben ist.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span class="faq-q">Helfen Sie auch bei der Versicherungsabwicklung?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-answer">
+            <p>Wir unterstützen Sie dabei – sichern das Fahrzeug fachgerecht, dokumentieren den Zustand und können Sie zu Gutachtern oder Versicherungspartnern in Hannover weiterempfehlen. <strong>Wir kennen das System</strong> und helfen Ihnen, den nächsten Schritt richtig zu machen.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <h2>Ihre Frage ist nicht dabei?</h2>
+    <p>Rufen Sie einfach an – in zwei Minuten haben Sie Ihre Antwort.</p>
+    <div class="cta-btns">
+      <a href="tel:+4917672421238" class="btn-red">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 13.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.88 2.84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        +49 176 72421238
+      </a>
+      <a href="index.html#anfrage" class="btn-ghost-light">Auftrag schriftlich anfragen</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-links">
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html">Datenschutz</a>
+    <a href="index.html#kontakt">Kontakt</a>
+  </div>
+  <p>&copy; 2025 Schnell Schlepper – Rami Haidar, Inh. · Hannover</p>
+</footer>
+
+<script>
+  function toggleFaq(btn) {
+    var item = btn.closest('.faq-item');
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(el) { el.classList.remove('open'); });
+    if (!isOpen) item.classList.add('open');
+  }
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(function(el) { obs.observe(el); });
+</script>
+</body>
+</html>
