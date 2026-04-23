@@ -2274,9 +2274,7 @@ html { overflow-x: hidden; }
     });
   })();
 
-  /* Form submit – Formspree */
-  var FORMSPREE_ID = 'YOUR_FORM_ID'; // ← hier deine Formspree-ID eintragen
-
+  /* Form submit – Formsubmit.co (kein Account nötig) */
   function submitForm(e) {
     e.preventDefault();
     var form = e.target;
@@ -2299,15 +2297,16 @@ html { overflow-x: hidden; }
 
     var data = {};
     new FormData(form).forEach(function(val, key) { data[key] = val; });
+    data['_subject'] = 'Neue Anfrage – Schnell Schlepper';
 
-    fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+    fetch('https://formsubmit.co/ajax/info@schnellschlepper.de', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body:    JSON.stringify(data)
     })
     .then(function(res) { return res.json(); })
     .then(function(json) {
-      if (json.ok) {
+      if (json.success === 'true' || json.success === true) {
         btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Auftrag eingegangen – wir melden uns!';
         btn.style.background = '#16a34a';
         form.reset();
