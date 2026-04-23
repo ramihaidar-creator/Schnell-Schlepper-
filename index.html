@@ -938,23 +938,42 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   position: fixed;
   bottom: 0; left: 0; right: 0;
   z-index: 999;
-  background: rgba(0,0,0,0.9);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-top: 1px solid var(--border);
-  padding: 10px 16px;
-  gap: 10px;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-top: 1px solid rgba(0,0,0,0.09);
+  box-shadow: 0 -4px 28px rgba(0,0,0,0.09);
+  padding: 10px 14px;
+  padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+  gap: 8px;
+  align-items: stretch;
 }
 .mobile-bar a {
   flex: 1;
-  text-align: center;
-  padding: 13px 10px;
-  border-radius: var(--r-md);
-  font-weight: 700;
-  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  text-decoration: none;
+  transition: transform 0.15s, opacity 0.15s;
 }
-.mb-call { background: var(--red); color: white; }
-.mb-wa { background: #1a7a3e; color: white; }
+.mobile-bar a:active { transform: scale(0.96); opacity: 0.88; }
+.mb-label { display: flex; flex-direction: column; text-align: left; gap: 1px; }
+.mb-title { font-size: 0.88rem; font-weight: 700; line-height: 1.2; }
+.mb-sub   { font-size: 0.68rem; font-weight: 400; opacity: 0.72; line-height: 1; }
+.mb-call {
+  background: var(--red);
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(204,0,0,0.30);
+}
+.mb-wa {
+  background: var(--surface2);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.mb-wa .mb-wa-icon { color: #16a34a; flex-shrink: 0; }
 
 /* ═══════════════════════════════════════════
    SCROLL FADE-IN
@@ -1154,24 +1173,21 @@ html { overflow-x: hidden; }
 /* ── Mobile 768px ── */
 @media (max-width: 768px) {
 
-  /* ── Alle Breiten einschränken ── */
-  *, *::before, *::after { max-width: 100%; box-sizing: border-box; }
-  img, video, canvas { max-width: 100%; }
-
   /* ── Header ── */
   .header { padding: 8px 12px; }
   .header-inner {
-    padding: 8px 14px;
+    padding: 8px 16px;
     border-radius: 16px;
-    gap: 8px;
-    width: calc(100% );
-    max-width: 100%;
+    gap: 10px;
+    width: 100%;
     box-sizing: border-box;
+    max-width: 100%;
   }
-  .logo img { height: 34px; width: auto; max-width: none; }
+  .logo { flex-shrink: 0; }
+  .logo img { height: 36px; width: auto; mix-blend-mode: normal; }
   .header-contact { display: none !important; }
   .header-right { gap: 8px; flex-shrink: 0; }
-  .header-book-btn { padding: 8px 16px; font-size: 0.82rem; white-space: nowrap; }
+  .header-book-btn { padding: 9px 18px; font-size: 0.84rem; white-space: nowrap; flex-shrink: 0; }
   .hamburger { display: flex; flex-shrink: 0; }
 
   /* ── Nav Dropdown ── */
@@ -1950,8 +1966,20 @@ html { overflow-x: hidden; }
 
 <!-- ═══════ MOBILE STICKY BAR ═══════ -->
 <div class="mobile-bar" role="complementary" aria-label="Schnellkontakt">
-  <a href="tel:+4917672421238" class="mb-call"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 13.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.88 2.84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> Anrufen</a>
-  <a href="https://wa.me/4917672421238" class="mb-wa" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> WhatsApp</a>
+  <a href="tel:+4917672421238" class="mb-call">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 13.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.88 2.84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    <div class="mb-label">
+      <span class="mb-title">Jetzt anrufen</span>
+      <span class="mb-sub">24 Std. · 7 Tage</span>
+    </div>
+  </a>
+  <a href="https://wa.me/4917672421238" class="mb-wa" target="_blank" rel="noopener">
+    <svg class="mb-wa-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    <div class="mb-label">
+      <span class="mb-title">WhatsApp</span>
+      <span class="mb-sub">Foto &amp; Standort senden</span>
+    </div>
+  </a>
 </div>
 
 
