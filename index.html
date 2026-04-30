@@ -1876,11 +1876,11 @@ html { overflow-x: hidden; }
         <div class="form-grid">
           <div class="form-group">
             <label for="name">Ihr Name *</label>
-            <input type="text" id="name" name="name" placeholder="Max Mustermann" required />
+            <input type="text" id="name" name="Name" placeholder="Max Mustermann" required />
           </div>
           <div class="form-group">
             <label for="phone">Telefon *</label>
-            <input type="tel" id="phone" name="phone" placeholder="+49 511 XXXXXXX" required />
+            <input type="tel" id="phone" name="Telefon" placeholder="+49 511 XXXXXXX" required />
           </div>
           <div class="form-group form-full">
             <label for="email">E-Mail-Adresse * <span style="font-weight:400;color:var(--text-subtle);text-transform:none;letter-spacing:0;">(für unser Rückangebot)</span></label>
@@ -1888,15 +1888,15 @@ html { overflow-x: hidden; }
           </div>
           <div class="form-group">
             <label for="pickup">Abholort *</label>
-            <input type="text" id="pickup" name="pickup" placeholder="Straße, Ort" required />
+            <input type="text" id="pickup" name="Abholort" placeholder="Straße, Ort" required />
           </div>
           <div class="form-group">
             <label for="destination">Zielort *</label>
-            <input type="text" id="destination" name="destination" placeholder="Werkstatt, Zieladresse …" required />
+            <input type="text" id="destination" name="Zielort" placeholder="Werkstatt, Zieladresse …" required />
           </div>
           <div class="form-group">
             <label for="vehicle">Fahrzeugtyp *</label>
-            <select id="vehicle" name="vehicle" required>
+            <select id="vehicle" name="Fahrzeugtyp" required>
               <option value="">– Bitte wählen –</option>
               <option>PKW</option>
               <option>Transporter / Van</option>
@@ -1910,7 +1910,7 @@ html { overflow-x: hidden; }
           </div>
           <div class="form-group">
             <label for="damage">Art des Auftrags *</label>
-            <select id="damage" name="damage" required>
+            <select id="damage" name="Art des Auftrags" required>
               <option value="">– Bitte wählen –</option>
               <option>Panne / Motor springt nicht an</option>
               <option>Reifenpanne / Platten</option>
@@ -1924,11 +1924,11 @@ html { overflow-x: hidden; }
           </div>
           <div class="form-group">
             <label for="datetime">Wunschtermin *</label>
-            <input type="datetime-local" id="datetime" name="datetime" required />
+            <input type="datetime-local" id="datetime" name="Wunschtermin" required />
           </div>
           <div class="form-group">
             <label for="weight">Gewichtsklasse</label>
-            <select id="weight" name="weight">
+            <select id="weight" name="Gewichtsklasse">
               <option value="">– Optional –</option>
               <option>bis 2.000 kg</option>
               <option>2.000 – 3.500 kg</option>
@@ -1938,7 +1938,7 @@ html { overflow-x: hidden; }
           </div>
           <div class="form-group form-full">
             <label for="notes">Bemerkungen</label>
-            <textarea id="notes" name="notes" placeholder="z. B. Schlüssel unter Fußmatte · Tiefgarage Ebene −2 · Bitte ab 8 Uhr · sonstiges …"></textarea>
+            <textarea id="notes" name="Bemerkungen" placeholder="z. B. Schlüssel unter Fußmatte · Tiefgarage Ebene −2 · Bitte ab 8 Uhr · sonstiges …"></textarea>
           </div>
         </div>
         <div class="form-submit">
@@ -2297,9 +2297,11 @@ html { overflow-x: hidden; }
 
     var data = {};
     new FormData(form).forEach(function(val, key) { data[key] = val; });
-    data['access_key'] = '27a3108c-e8e8-4bad-8ac1-acc3bf375dca';
-    data['subject']    = 'Neue Anfrage – Schnell Schlepper';
-    data['from_name']  = 'Schnell Schlepper Website';
+    data['access_key']    = '27a3108c-e8e8-4bad-8ac1-acc3bf375dca';
+    data['subject']       = 'Neue Anfrage – Schnell Schlepper';
+    data['from_name']     = 'Schnell Schlepper Website';
+    data['replyto']       = data['email'] || '';
+    data['botcheck']      = '';
 
     fetch('https://api.web3forms.com/submit', {
       method:  'POST',
