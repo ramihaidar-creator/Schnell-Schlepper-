@@ -2297,16 +2297,18 @@ html { overflow-x: hidden; }
 
     var data = {};
     new FormData(form).forEach(function(val, key) { data[key] = val; });
-    data['_subject'] = 'Neue Anfrage – Schnell Schlepper';
+    data['access_key'] = '27a3108c-e8e8-4bad-8ac1-acc3bf375dca';
+    data['subject']    = 'Neue Anfrage – Schnell Schlepper';
+    data['from_name']  = 'Schnell Schlepper Website';
 
-    fetch('https://formsubmit.co/ajax/info@schnellschlepper.de', {
+    fetch('https://api.web3forms.com/submit', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body:    JSON.stringify(data)
     })
     .then(function(res) { return res.json(); })
     .then(function(json) {
-      if (json.success === 'true' || json.success === true) {
+      if (json.success === true) {
         btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Auftrag eingegangen – wir melden uns!';
         btn.style.background = '#16a34a';
         form.reset();
