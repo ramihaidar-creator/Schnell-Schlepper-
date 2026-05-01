@@ -183,7 +183,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   height: 48px;
   width: auto;
   display: block;
-  mix-blend-mode: multiply;
+  mix-blend-mode: normal;
 }
 
 /* Nav */
@@ -867,48 +867,120 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .b2b-card p { font-size: 0.82rem; color: var(--text-dim); font-weight: 500; line-height: 1.4; }
 
 /* ═══════════════════════════════════════════
-   CONTACT
+   CONTACT – Dark two-column layout
 ═══════════════════════════════════════════ */
 .contact {
-  background: var(--black);
-  padding: 100px 28px;
+  background: #0f0f10;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
 }
-.contact-grid {
+.contact-bg-glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+.contact-bg-glow-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(204,0,0,0.13) 0%, transparent 70%);
+  top: -100px; left: -100px;
+}
+.contact-bg-glow-2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(204,0,0,0.07) 0%, transparent 70%);
+  bottom: -80px; right: 5%;
+}
+.contact-layout {
+  position: relative;
+  z-index: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 16px;
-  max-width: 860px;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1080px;
   margin: 0 auto;
+  min-height: 560px;
+  align-items: start;
 }
-.contact-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-xl);
-  padding: 40px 32px;
-  text-align: center;
-  transition: border-color 0.3s, transform 0.3s;
+.contact-info-panel {
+  padding: 80px 48px 80px 28px;
 }
-.contact-card:hover { border-color: rgba(204,0,0,0.3); transform: translateY(-4px); }
-.contact-icon-wrap {
-  width: 60px; height: 60px;
-  background: rgba(204,0,0,0.08);
-  border: 1px solid rgba(204,0,0,0.18);
-  border-radius: 18px;
+.contact-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.contact-method {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 16px;
+  text-decoration: none;
+  transition: background 0.25s, border-color 0.25s, transform 0.3s cubic-bezier(0.23,1,0.32,1);
+}
+.contact-method:hover {
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(204,0,0,0.35);
+  transform: translateX(5px);
+}
+.contact-method.primary {
+  background: rgba(204,0,0,0.12);
+  border-color: rgba(204,0,0,0.3);
+}
+.contact-method.primary:hover { background: rgba(204,0,0,0.18); }
+.cm-icon {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: rgba(255,255,255,0.08);
   display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 20px;
-  font-size: 1.5rem;
+  color: rgba(255,255,255,0.7);
+  flex-shrink: 0;
 }
-.contact-card h3 { font-size: 0.9rem; font-weight: 600; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
-.contact-card a.main-link {
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: var(--text);
+.cm-icon-red { background: var(--red); color: #fff; }
+.cm-body { flex: 1; }
+.cm-label {
   display: block;
-  margin-bottom: 6px;
-  transition: color 0.2s;
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+  margin-bottom: 3px;
 }
-.contact-card a.main-link:hover { color: var(--red); }
-.contact-card .sub { font-size: 0.78rem; color: var(--text-subtle); }
+.cm-value {
+  display: block;
+  font-size: 0.95rem; font-weight: 700;
+  color: rgba(255,255,255,0.88);
+}
+.cm-arrow {
+  color: rgba(255,255,255,0.25);
+  flex-shrink: 0;
+  transition: color 0.25s, transform 0.25s;
+}
+.contact-method:hover .cm-arrow { color: var(--red); transform: translateX(3px); }
+.contact-trust {
+  display: flex; flex-direction: column; gap: 8px;
+  margin-top: 32px;
+}
+.ct-item {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.82rem; color: rgba(255,255,255,0.42);
+}
+.ct-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--red); flex-shrink: 0;
+}
+.contact-form-panel {
+  padding: 60px 28px 60px 40px;
+  display: flex;
+  align-items: flex-start;
+}
+.contact-form-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 36px 32px;
+  box-shadow: 0 24px 72px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.06);
+  width: 100%;
+}
 
 /* ═══════════════════════════════════════════
    FOOTER
@@ -1261,7 +1333,7 @@ html { overflow-x: hidden; }
     max-width: 100%;
   }
   .logo { flex-shrink: 0; }
-  .logo img { height: 36px; width: auto; mix-blend-mode: normal; }
+  .logo img { height: 38px; width: auto; mix-blend-mode: normal; }
   .header-contact { display: none !important; }
   .header-right { gap: 8px; flex-shrink: 0; }
   .header-book-btn { padding: 9px 18px; font-size: 0.84rem; white-space: nowrap; flex-shrink: 0; }
@@ -1298,6 +1370,8 @@ html { overflow-x: hidden; }
 
   /* ── Hero Slideshow ── */
   .slideshow { height: 100svh; min-height: 540px; overflow: hidden; width: 100vw; max-width: 100vw; }
+  .hero-split-section { overflow: hidden; }
+  .stats-band { overflow: hidden; }
   .slide-bg, .slide-overlay, .slide-fade-bottom, .slide-content { max-width: 100vw; }
   .slide-text { left: 16px; right: 16px; top: 50%; max-width: calc(100vw - 32px); box-sizing: border-box; }
   .slide-h1 { font-size: clamp(1.85rem, 7vw, 2.6rem); }
@@ -1428,10 +1502,11 @@ html { overflow-x: hidden; }
   .preise-trust { gap: 10px; flex-direction: column; align-items: center; }
 
   /* ── Kontakt + Formular ── */
-  .contact-grid { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; }
-  .contact-card { padding: 28px 20px; }
-  .booking-inner { padding: 28px 16px; }
-  .form-grid { grid-template-columns: 1fr; }
+  .contact-layout { grid-template-columns: 1fr; }
+  .contact-info-panel { padding: 56px 20px 36px; }
+  .contact-form-panel { padding: 0 16px 56px; }
+  .contact-form-card { padding: 28px 18px; border-radius: 18px; }
+  .contact-form-card .form-grid { grid-template-columns: 1fr; }
 
   /* ── Footer ── */
   .footer { padding: 28px 16px; }
@@ -1681,126 +1756,10 @@ html { overflow-x: hidden; }
 </section>
 
 
-<!-- ═══════ EINSATZGEBIET ═══════ -->
-<section class="area" id="einsatzgebiet">
-  <div class="container">
-    <span class="section-label" style="display:block;text-align:center;">Wo wir arbeiten</span>
-    <h2 class="headline section-head fade-up">Unser <span class="accent">Einsatzgebiet</span></h2>
-    <p class="section-sub fade-up">Vom Soforteinsatz vor der Tür bis zur Rückführung aus dem Ausland.</p>
-
-    <div class="area-visual fade-up">
-      <!-- Map visual -->
-      <div class="area-map">
-        <div class="map-ring map-ring-3"></div>
-        <div class="map-ring map-ring-2"></div>
-        <div class="map-ring map-ring-1"></div>
-        <div class="map-dot">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-      </div>
-
-      <!-- Fact rows -->
-      <div style="display:flex;flex-direction:column;gap:10px;">
-        <div class="area-fact fade-up">
-          <div style="width:38px;height:38px;border-radius:50%;background:rgba(204,0,0,0.09);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div>
-            <div style="font-weight:700;font-size:0.95rem;color:var(--text);">100 km Sofort-Radius</div>
-            <div style="font-size:0.82rem;color:var(--text-dim);margin-top:2px;">Hannover &amp; gesamte Region – schnelle Reaktionszeiten</div>
-            <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;">
-              <span class="city-tag">Hannover</span><span class="city-tag">Garbsen</span><span class="city-tag">Langenhagen</span><span class="city-tag">Burgdorf</span><span class="city-tag">Wunstorf</span><span class="city-tag">Lehrte</span><span class="city-tag">Barsinghausen</span><span class="city-tag">+ weitere</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="area-fact fade-up" style="transition-delay:0.08s">
-          <div style="width:38px;height:38px;border-radius:50%;background:rgba(204,0,0,0.06);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
-          </div>
-          <div>
-            <div style="font-weight:700;font-size:0.95rem;color:var(--text);">Deutschlandweit</div>
-            <div style="font-size:0.82rem;color:var(--text-dim);margin-top:2px;">Überführung, Reparaturtransport, Flottenlogistik – auf Anfrage</div>
-          </div>
-        </div>
-
-        <div class="area-fact fade-up" style="transition-delay:0.16s">
-          <div style="width:38px;height:38px;border-radius:50%;background:rgba(204,0,0,0.04);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-          </div>
-          <div>
-            <div style="font-weight:700;font-size:0.95rem;color:var(--text);">Europaweit</div>
-            <div style="font-size:0.82rem;color:var(--text-dim);margin-top:2px;">Fahrzeug im Ausland liegengeblieben? Wir holen es zurück.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 
-<!-- ═══════ ABLAUF ═══════ -->
-<section class="ablauf" id="ablauf">
-  <div class="container">
-    <span class="section-label" style="display:block;text-align:center;">So läuft es ab</span>
-    <h2 class="headline section-head fade-up">In <span class="accent">4 Schritten</span> zum Einsatz</h2>
-    <p class="section-sub fade-up">Kein Papierkram, kein Warten – nur schnelle, klare Hilfe.</p>
-    <div class="ablauf-steps fade-up">
-      <div class="ablauf-step">
-        <div class="ablauf-num">1</div>
-        <h4 class="ablauf-title">Anrufen</h4>
-        <p class="ablauf-desc">Kurz beschreiben, wo Sie sind und was passiert ist – das genügt.</p>
-      </div>
-      <div class="ablauf-step">
-        <div class="ablauf-num">2</div>
-        <h4 class="ablauf-title">~30 Min. vor Ort</h4>
-        <p class="ablauf-desc">Wir bestätigen die Anfahrt sofort und nennen eine konkrete Ankunftszeit.</p>
-      </div>
-      <div class="ablauf-step">
-        <div class="ablauf-num">3</div>
-        <h4 class="ablauf-title">Professioneller Einsatz</h4>
-        <p class="ablauf-desc">Bergung, Abschleppen oder Pannenhilfe – sicher und schonend für Ihr Fahrzeug.</p>
-      </div>
-      <div class="ablauf-step">
-        <div class="ablauf-num">4</div>
-        <h4 class="ablauf-title">Faire Abrechnung</h4>
-        <p class="ablauf-desc">Festpreis im Voraus. Keine versteckten Kosten, keine Überraschungen.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 
-<!-- ═══════ USPs ═══════ -->
-<section class="usps fade-up">
-  <div class="container">
-    <span class="section-label" style="display:block;text-align:center;">Warum Schnell Schlepper</span>
-    <h2 class="headline section-head">Unser <span class="accent">Versprechen</span></h2>
-    <p class="section-sub">Vier Gründe, die jeden Tag für uns sprechen.</p>
-    <div class="usps-grid">
-      <div class="usp-card">
-        <div class="usp-num">30'</div>
-        <h3>Blitzschnell</h3>
-        <p>Durchschnittliche Einsatzzeit von 30 Minuten – auch nachts und an Feiertagen.</p>
-      </div>
-      <div class="usp-card">
-        <div class="usp-num">24/7</div>
-        <h3>Immer erreichbar</h3>
-        <p>365 Tage im Jahr, rund um die Uhr – Ihr Notfall ist unser Auftrag.</p>
-      </div>
-      <div class="usp-card">
-        <div class="usp-num">0€</div>
-        <h3>Keine Überraschungen</h3>
-        <p>Klarer Festpreis, bevor wir fahren. Was genannt wird, gilt – Punkt.</p>
-      </div>
-      <div class="usp-card">
-        <div class="usp-num">★★★</div>
-        <h3>Erfahren &amp; zertifiziert</h3>
-        <p>Ausgebildete Fachkräfte. Ihr Fahrzeug ist in den besten Händen.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 
 <!-- ═══════ BEWERTUNGEN ═══════ -->
@@ -1830,202 +1789,151 @@ html { overflow-x: hidden; }
 </section>
 
 
-<!-- ═══════ B2B ═══════ -->
-<section class="b2b">
+
+
+<!-- ═══════ PREISE CTA ═══════ -->
+<section style="background:var(--black);padding:64px 28px;text-align:center;">
   <div class="container">
-    <span class="section-label" style="display:block;text-align:center;">Geschäftskunden</span>
-    <h2 class="headline section-head fade-up">Partner für <span class="accent">Unternehmen</span></h2>
-    <p class="section-sub fade-up">Zuverlässige Zusammenarbeit für Autohäuser, Werkstätten, Versicherungen und mehr.</p>
-    <div class="b2b-grid fade-up">
-      <div class="b2b-card"><div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div><p>Autohäuser &amp; Werkstätten</p></div>
-      <div class="b2b-card"><div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><p>Versicherungen</p></div>
-      <div class="b2b-card"><div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div><p>Polizei &amp; Behörden</p></div>
-      <div class="b2b-card"><div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><p>Hausverwaltungen</p></div>
-      <div class="b2b-card"><div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><p>Flottenservice</p></div>
-    </div>
-    <p style="text-align:center;margin-top:40px;color:var(--text-dim);font-size:0.9rem;">
-      Rahmenvertrag gewünscht? <a href="tel:+4917672421238" style="color:var(--text);font-weight:700;border-bottom:1px solid rgba(255,255,255,0.2);padding-bottom:1px;">Jetzt anrufen →</a>
-    </p>
-  </div>
-</section>
-
-
-<!-- ═══════ PREISE ═══════ -->
-<section class="preise" id="preise">
-  <div class="container">
-    <span class="section-label" style="display:block;text-align:center;">Transparente Preise</span>
-    <h2 class="headline section-head fade-up">Faire Preise, <span class="accent">keine Überraschungen</span></h2>
-    <p class="section-sub fade-up">Festpreis im Voraus – was genannt wird, gilt. Kostenlose Anfrage in unter einer Minute.</p>
-
-    <div class="preise-grid fade-up">
-      <div class="preis-card">
-        <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;">Kurzstrecke</div>
-        <div class="preis-amount">ab 89 €</div>
-        <div style="font-size:0.8rem;color:var(--text-dim);margin:8px 0 18px;">bis 20 km, PKW</div>
-        <ul style="list-style:none;padding:0;margin:0;font-size:0.82rem;color:var(--text-dim);display:flex;flex-direction:column;gap:6px;">
-          <li style="display:flex;align-items:center;gap:7px;"><span style="color:var(--red);font-weight:900;">✓</span> Abschleppen &amp; Pannenhilfe</li>
-          <li style="display:flex;align-items:center;gap:7px;"><span style="color:var(--red);font-weight:900;">✓</span> 24/7 verfügbar</li>
-          <li style="display:flex;align-items:center;gap:7px;"><span style="color:var(--red);font-weight:900;">✓</span> Festpreis</li>
-        </ul>
-      </div>
-      <div class="preis-card">
-        <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;">Langstrecke</div>
-        <div class="preis-amount">ab 189 €</div>
-        <div style="font-size:0.8rem;color:var(--text-dim);margin:8px 0 18px;">ab 50 km, PKW</div>
-        <ul style="list-style:none;padding:0;margin:0;font-size:0.82rem;color:var(--text-dim);display:flex;flex-direction:column;gap:6px;">
-          <li style="display:flex;align-items:center;gap:7px;"><span style="color:var(--red);font-weight:900;">✓</span> Deutschlandweit</li>
-          <li style="display:flex;align-items:center;gap:7px;"><span style="color:var(--red);font-weight:900;">✓</span> Überführung &amp; Transport</li>
-          <li style="display:flex;align-items:center;gap:7px;"><span style="color:var(--red);font-weight:900;">✓</span> Festpreis</li>
-        </ul>
-      </div>
-      <div class="preis-card">
-        <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;">Pannenhilfe</div>
-        <div class="preis-amount">ab 69 €</div>
-        <div style="font-size:0.8rem;color:var(--text-dim);margin:8px 0 18px;">Vor-Ort-Hilfe</div>
-        <ul style="list-style:none;padding:0;margin:0;font-size:0.82rem;color:var(--text-dim);display:flex;flex-direction:column;gap:6px;">
-          <li style="display:flex;align-items:center;gap:7px;"><span style="color:var(--red);font-weight:900;">✓</span> Starthilfe, Reifen, Schlüssel</li>
-          <li style="display:flex;align-items:center;gap:7px;"><span style="color:var(--red);font-weight:900;">✓</span> ~30 Min. Reaktionszeit</li>
-          <li style="display:flex;align-items:center;gap:7px;"><span style="color:var(--red);font-weight:900;">✓</span> Festpreis</li>
-        </ul>
-      </div>
-      <div class="preis-card" style="border-color:rgba(204,0,0,0.18);background:rgba(204,0,0,0.03);">
-        <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--red);margin-bottom:12px;">Individuell</div>
-        <div class="preis-amount" style="font-size:1.6rem;">Auf Anfrage</div>
-        <div style="font-size:0.8rem;color:var(--text-dim);margin:8px 0 18px;">Sonderaufträge &amp; B2B</div>
-        <ul style="list-style:none;padding:0;margin:0;font-size:0.82rem;color:var(--text-dim);display:flex;flex-direction:column;gap:6px;">
-          <li style="display:flex;align-items:center;gap:7px;"><span style="color:var(--red);font-weight:900;">✓</span> Bergung, LKW, Europaweit</li>
-          <li style="display:flex;align-items:center;gap:7px;"><span style="color:var(--red);font-weight:900;">✓</span> Rahmenvertrag möglich</li>
-          <li style="display:flex;align-items:center;gap:7px;"><span style="color:var(--red);font-weight:900;">✓</span> Sofortangebot</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="preise-trust fade-up">
-      <div class="trust-item"><span class="trust-dot"></span>Kein Anfahrtszuschlag nachts</div>
-      <div class="trust-item"><span class="trust-dot"></span>Keine versteckten Kosten</div>
-      <div class="trust-item"><span class="trust-dot"></span>Preisbestätigung vor dem Einsatz</div>
-      <div class="trust-item"><span class="trust-dot"></span>Alle gängigen Zahlungsmittel</div>
-    </div>
-
-    <div style="text-align:center;">
-      <a href="preise.html" class="btn btn-ghost">Preise im Detail →</a>
-    </div>
+    <span class="section-label" style="display:block;text-align:center;">Faire Preise</span>
+    <h2 class="headline section-head">Festpreise. <span class="accent">Keine Überraschungen.</span></h2>
+    <p class="section-sub" style="margin-bottom:32px;">Kurzstrecke ab 89 € · Pannenhilfe ab 69 € · Langstrecke auf Anfrage</p>
+    <a href="preise.html" class="btn btn-red btn-lg">Preise im Detail →</a>
   </div>
 </section>
 
 
 <!-- ═══════ KONTAKT ═══════ -->
 <section class="contact" id="kontakt">
-  <div class="container">
-    <span class="section-label" style="display:block;text-align:center;">Kontakt</span>
-    <h2 class="headline section-head fade-up">So erreichen <span class="accent">Sie uns</span></h2>
-    <div class="contact-grid">
-      <div class="contact-card fade-up">
-        <div class="contact-icon-wrap"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 13.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.88 2.84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
-        <h3>Telefon &amp; Notfall</h3>
-        <a href="tel:+4917672421238" class="main-link">+49 176 72421238</a>
-        <span class="sub">24 Stunden · 7 Tage die Woche</span>
+
+  <!-- Hintergrundeffekte -->
+  <div class="contact-bg-glow contact-bg-glow-1"></div>
+  <div class="contact-bg-glow contact-bg-glow-2"></div>
+
+  <div class="contact-layout">
+
+    <!-- Links: Kontaktmethoden -->
+    <div class="contact-info-panel">
+      <span class="section-label" style="color:rgba(255,255,255,0.45);">Direktkontakt</span>
+      <h2 class="headline" style="color:#fff;margin-bottom:12px;">So erreichen<br><span style="color:var(--red);">Sie uns</span></h2>
+      <p style="color:rgba(255,255,255,0.55);font-size:0.95rem;line-height:1.6;margin-bottom:36px;">Für Notfälle immer anrufen – wir sind 24 Stunden am Tag, 7 Tage die Woche für Sie da.</p>
+
+      <div class="contact-methods">
+        <a href="tel:+4917672421238" class="contact-method primary">
+          <div class="cm-icon cm-icon-red">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 13.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.88 2.84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div class="cm-body">
+            <span class="cm-label">Telefon &amp; Notfall · 24/7</span>
+            <span class="cm-value">+49 176 72421238</span>
+          </div>
+          <svg class="cm-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+
+        <a href="https://wa.me/4917672421238" class="contact-method" target="_blank" rel="noopener">
+          <div class="cm-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <div class="cm-body">
+            <span class="cm-label">WhatsApp</span>
+            <span class="cm-value">Foto &amp; Standort senden</span>
+          </div>
+          <svg class="cm-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+
+        <a href="mailto:info@schnellschlepper.de" class="contact-method">
+          <div class="cm-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+          </div>
+          <div class="cm-body">
+            <span class="cm-label">E-Mail</span>
+            <span class="cm-value">info@schnellschlepper.de</span>
+          </div>
+          <svg class="cm-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
       </div>
-      <div class="contact-card fade-up" style="transition-delay:0.1s">
-        <div class="contact-icon-wrap"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
-        <h3>WhatsApp</h3>
-        <a href="https://wa.me/4917672421238" class="main-link" target="_blank" rel="noopener">WhatsApp schreiben</a>
-        <span class="sub">Foto &amp; Standort einfach senden</span>
-      </div>
-      <div class="contact-card fade-up" style="transition-delay:0.2s">
-        <div class="contact-icon-wrap"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-        <h3>E-Mail</h3>
-        <a href="mailto:info@schnellschlepper.de" class="main-link" style="font-size:0.95rem;">info@schnellschlepper.de</a>
-        <span class="sub">Für Angebote &amp; geplante Aufträge</span>
+
+      <!-- Vertrauen -->
+      <div class="contact-trust">
+        <div class="ct-item"><span class="ct-dot"></span>Durchschnittlich 30 Min. vor Ort</div>
+        <div class="ct-item"><span class="ct-dot"></span>Festpreis – vor dem Einsatz</div>
+        <div class="ct-item"><span class="ct-dot"></span>Seit 1999 im Einsatz</div>
       </div>
     </div>
 
-    <!-- Anfrage-Formular -->
-    <div class="booking-inner fade-up" id="anfrage" style="margin-top:60px;">
-      <div class="booking-header">
-        <span class="section-label" style="display:block;">Auftrag stellen</span>
-        <h2 class="headline">Route &amp; Auftrag <span class="accent">anfragen</span></h2>
-        <p>Schnell, einfach, unverbindlich. Bei Notfall bitte direkt anrufen!</p>
+    <!-- Rechts: Formular -->
+    <div class="contact-form-panel" id="anfrage">
+      <div class="contact-form-card">
+        <div class="booking-header" style="text-align:left;margin-bottom:28px;">
+          <span class="section-label" style="display:block;">Route anfragen</span>
+          <h2 class="headline" style="font-size:1.5rem;margin-bottom:8px;">Auftrag <span class="accent">stellen</span></h2>
+          <p style="color:var(--text-dim);font-size:0.88rem;">Schnell &amp; unverbindlich. Bei Notfall bitte direkt anrufen!</p>
+        </div>
+        <form id="bookingForm" onsubmit="submitForm(event)" novalidate>
+          <input type="hidden" name="_subject" value="Neue Anfrage – Schnell Schlepper" />
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="name">Ihr Name *</label>
+              <input type="text" id="name" name="Name" placeholder="Max Mustermann" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Telefon *</label>
+              <input type="tel" id="phone" name="Telefon" placeholder="+49 511 XXXXXXX" required />
+            </div>
+            <div class="form-group form-full">
+              <label for="email">E-Mail *</label>
+              <input type="email" id="email" name="email" placeholder="ihre@email.de" required />
+            </div>
+            <div class="form-group">
+              <label for="pickup">Abholort *</label>
+              <input type="text" id="pickup" name="Abholort" placeholder="Straße, Ort" required />
+            </div>
+            <div class="form-group">
+              <label for="destination">Zielort *</label>
+              <input type="text" id="destination" name="Zielort" placeholder="Werkstatt, Zieladresse …" required />
+            </div>
+            <div class="form-group">
+              <label for="vehicle">Fahrzeugtyp *</label>
+              <select id="vehicle" name="Fahrzeugtyp" required>
+                <option value="">– Bitte wählen –</option>
+                <option>PKW</option>
+                <option>Transporter / Van</option>
+                <option>Motorrad</option>
+                <option>Oldtimer</option>
+                <option>Elektrofahrzeug</option>
+                <option>LKW (bis 3,5 t)</option>
+                <option>LKW (über 3,5 t)</option>
+                <option>Sonstiges</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="damage">Art des Auftrags *</label>
+              <select id="damage" name="Art des Auftrags" required>
+                <option value="">– Bitte wählen –</option>
+                <option>Panne / Motor springt nicht an</option>
+                <option>Reifenpanne / Platten</option>
+                <option>Unfall / Totalschaden</option>
+                <option>Fahrzeug steckt fest</option>
+                <option>Kraftstoff leer</option>
+                <option>Geplanter Fahrzeugtransport</option>
+                <option>Fahrzeugrückführung (Ausland)</option>
+                <option>Sonstiges</option>
+              </select>
+            </div>
+            <div class="form-group form-full">
+              <label for="notes">Bemerkungen</label>
+              <textarea id="notes" name="Bemerkungen" placeholder="z. B. Fahrzeug nicht fahrbereit · Tiefgarage Ebene −2 · Bitte ab 8 Uhr …" style="min-height:80px;"></textarea>
+            </div>
+          </div>
+          <div class="form-submit">
+            <button type="submit" class="btn btn-red btn-lg" id="submitBtn" style="width:100%;justify-content:center;">
+              Auftrag absenden →
+            </button>
+          </div>
+          <p class="form-note">Notfall? Bitte direkt anrufen – das ist schneller!</p>
+        </form>
       </div>
-      <form id="bookingForm" onsubmit="submitForm(event)" novalidate>
-        <input type="hidden" name="_subject" value="Neue Anfrage – Schnell Schlepper" />
-        <input type="hidden" name="_language" value="de" />
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="name">Ihr Name *</label>
-            <input type="text" id="name" name="Name" placeholder="Max Mustermann" required />
-          </div>
-          <div class="form-group">
-            <label for="phone">Telefon *</label>
-            <input type="tel" id="phone" name="Telefon" placeholder="+49 511 XXXXXXX" required />
-          </div>
-          <div class="form-group form-full">
-            <label for="email">E-Mail-Adresse * <span style="font-weight:400;color:var(--text-subtle);text-transform:none;letter-spacing:0;">(für unser Rückangebot)</span></label>
-            <input type="email" id="email" name="email" placeholder="ihre@email.de" required />
-          </div>
-          <div class="form-group">
-            <label for="pickup">Abholort *</label>
-            <input type="text" id="pickup" name="Abholort" placeholder="Straße, Ort" required />
-          </div>
-          <div class="form-group">
-            <label for="destination">Zielort *</label>
-            <input type="text" id="destination" name="Zielort" placeholder="Werkstatt, Zieladresse …" required />
-          </div>
-          <div class="form-group">
-            <label for="vehicle">Fahrzeugtyp *</label>
-            <select id="vehicle" name="Fahrzeugtyp" required>
-              <option value="">– Bitte wählen –</option>
-              <option>PKW</option>
-              <option>Transporter / Van</option>
-              <option>Motorrad</option>
-              <option>Oldtimer</option>
-              <option>Elektrofahrzeug</option>
-              <option>LKW (bis 3,5 t)</option>
-              <option>LKW (über 3,5 t)</option>
-              <option>Sonstiges</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="damage">Art des Auftrags *</label>
-            <select id="damage" name="Art des Auftrags" required>
-              <option value="">– Bitte wählen –</option>
-              <option>Panne / Motor springt nicht an</option>
-              <option>Reifenpanne / Platten</option>
-              <option>Unfall / Totalschaden</option>
-              <option>Fahrzeug steckt fest</option>
-              <option>Kraftstoff leer</option>
-              <option>Geplanter Fahrzeugtransport</option>
-              <option>Fahrzeugrückführung (Ausland)</option>
-              <option>Sonstiges</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="datetime">Wunschtermin *</label>
-            <input type="datetime-local" id="datetime" name="Wunschtermin" required />
-          </div>
-          <div class="form-group">
-            <label for="weight">Gewichtsklasse</label>
-            <select id="weight" name="Gewichtsklasse">
-              <option value="">– Optional –</option>
-              <option>bis 2.000 kg</option>
-              <option>2.000 – 3.500 kg</option>
-              <option>3.500 – 7.500 kg</option>
-              <option>über 7.500 kg</option>
-            </select>
-          </div>
-          <div class="form-group form-full">
-            <label for="notes">Bemerkungen</label>
-            <textarea id="notes" name="Bemerkungen" placeholder="z. B. Schlüssel unter Fußmatte · Tiefgarage Ebene −2 · Bitte ab 8 Uhr · sonstiges …"></textarea>
-          </div>
-        </div>
-        <div class="form-submit">
-          <button type="submit" class="btn btn-red btn-lg" id="submitBtn" style="width:100%;justify-content:center;">
-            Auftrag absenden →
-          </button>
-        </div>
-        <p class="form-note">Notfall? Bitte direkt anrufen – das ist schneller!</p>
-      </form>
     </div>
+
   </div>
 </section>
 
@@ -2073,6 +1981,9 @@ html { overflow-x: hidden; }
 
 
 <script>
+  history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
+
   /* ── Stats Band Counter ── */
   (function() {
     var band = document.getElementById('zahlen');
