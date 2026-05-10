@@ -849,162 +849,232 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .review-author { font-size: 0.78rem; font-weight: 700; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 0.06em; }
 
 /* ═══════════════════════════════════════════
-   B2B
+   B2B – kompakte Partnerleiste
 ═══════════════════════════════════════════ */
-.b2b {
+.b2b-strip {
   background: var(--black);
-  padding: 100px 28px;
+  padding: 52px 28px;
+  text-align: center;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
-.b2b-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
-.b2b-card {
-  background: #ffffff;
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  padding: 24px 18px;
-  text-align: center;
-  transition: background 0.2s, border-color 0.2s;
+.b2b-strip-label {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-subtle); margin-bottom: 18px; display: block;
 }
-.b2b-card:hover { background: var(--surface3); border-color: var(--border-hover); }
-.b2b-card .icon { margin-bottom: 10px; color: var(--red); width: 28px; height: 28px; display: flex; align-items: center; }
-.b2b-card p { font-size: 0.82rem; color: var(--text-dim); font-weight: 500; line-height: 1.4; }
+.b2b-strip-tags {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+  margin-bottom: 20px;
+}
+.b2b-tag {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-pill); padding: 8px 16px;
+  font-size: 0.83rem; font-weight: 500; color: var(--text-dim);
+  transition: border-color 0.2s, color 0.2s;
+}
+.b2b-tag:hover { border-color: rgba(204,0,0,0.25); color: var(--text); }
+.b2b-tag svg { color: var(--red); flex-shrink: 0; }
 
-/* ═══════════════════════════════════════════
-   CONTACT – Dark two-column layout
-═══════════════════════════════════════════ */
+/* ═══ NEUE KONTAKT SEKTION ═══ */
 .contact {
-  background: #0f0f10;
-  padding: 0;
+  background: #0d0d0e;
   position: relative;
   overflow: hidden;
+  padding: 0;
 }
-.contact-bg-glow {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-}
-.contact-bg-glow-1 {
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(204,0,0,0.13) 0%, transparent 70%);
-  top: -100px; left: -100px;
-}
-.contact-bg-glow-2 {
-  width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(204,0,0,0.07) 0%, transparent 70%);
-  bottom: -80px; right: 5%;
-}
-.contact-layout {
-  position: relative;
-  z-index: 1;
+.contact-split {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  max-width: 1080px;
+  max-width: 1200px;
   margin: 0 auto;
-  min-height: 560px;
-  align-items: start;
+  min-height: 600px;
 }
-.contact-info-panel {
-  padding: 80px 48px 80px 28px;
-}
-.contact-methods {
+/* Linke Notfall-Seite */
+.contact-emg {
+  padding: 80px 52px 80px 36px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  justify-content: center;
+  position: relative;
 }
-.contact-method {
+.contact-emg::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; right: 0;
+  width: 1px;
+  background: rgba(255,255,255,0.07);
+  pointer-events: none;
+}
+.ce-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(204,0,0,0.14);
+  border: 1px solid rgba(204,0,0,0.28);
+  color: var(--red);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 14px 6px 10px;
+  border-radius: var(--r-pill);
+  margin-bottom: 28px;
+  width: fit-content;
+}
+.ce-badge::before {
+  content: '';
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--red);
+  animation: pulseDot 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(0.75); }
+}
+.ce-heading {
+  font-size: clamp(2rem, 3.2vw, 2.6rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 6px;
+}
+.ce-heading span { color: var(--red); }
+.ce-phone {
+  display: block;
+  font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+  font-weight: 900;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 6px;
+  transition: color 0.2s;
+  text-decoration: none;
+}
+.ce-phone:hover { color: #fff; }
+.ce-avail {
+  font-size: 0.79rem;
+  color: rgba(255,255,255,0.32);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin-bottom: 40px;
+}
+.ce-sep { width: 36px; height: 2px; background: rgba(204,0,0,0.4); border-radius: 2px; margin-bottom: 32px; }
+.ce-links { display: flex; flex-direction: column; gap: 9px; margin-bottom: 40px; }
+.ce-link {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 16px 18px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.09);
-  border-radius: 16px;
+  gap: 13px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 13px;
   text-decoration: none;
-  transition: background 0.25s, border-color 0.25s, transform 0.3s cubic-bezier(0.23,1,0.32,1);
+  transition: background 0.2s, border-color 0.2s, transform 0.25s cubic-bezier(0.23,1,0.32,1);
 }
-.contact-method:hover {
-  background: rgba(255,255,255,0.09);
-  border-color: rgba(204,0,0,0.35);
-  transform: translateX(5px);
-}
-.contact-method.primary {
-  background: rgba(204,0,0,0.12);
-  border-color: rgba(204,0,0,0.3);
-}
-.contact-method.primary:hover { background: rgba(204,0,0,0.18); }
-.cm-icon {
-  width: 42px; height: 42px; border-radius: 50%;
+.ce-link:hover {
   background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.14);
+  transform: translateX(4px);
+}
+.ce-link-icon {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,0.07);
   display: flex; align-items: center; justify-content: center;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.65);
   flex-shrink: 0;
 }
-.cm-icon-red { background: var(--red); color: #fff; }
-.cm-body { flex: 1; }
-.cm-label {
-  display: block;
-  font-size: 0.68rem; font-weight: 700;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: rgba(255,255,255,0.38);
-  margin-bottom: 3px;
+.ce-link-icon.wa { background: rgba(22,163,74,0.18); color: #4ade80; }
+.ce-link-lbl { font-size: 0.68rem; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.09em; font-weight: 700; display: block; }
+.ce-link-val { font-size: 0.88rem; color: rgba(255,255,255,0.8); font-weight: 600; display: block; }
+.ce-trust { display: flex; flex-direction: column; gap: 7px; }
+.ce-trust-item {
+  display: flex; align-items: center; gap: 9px;
+  font-size: 0.79rem; color: rgba(255,255,255,0.32);
 }
-.cm-value {
-  display: block;
-  font-size: 0.95rem; font-weight: 700;
-  color: rgba(255,255,255,0.88);
-}
-.cm-arrow {
-  color: rgba(255,255,255,0.25);
-  flex-shrink: 0;
-  transition: color 0.25s, transform 0.25s;
-}
-.contact-method:hover .cm-arrow { color: var(--red); transform: translateX(3px); }
-.contact-trust {
-  display: flex; flex-direction: column; gap: 8px;
-  margin-top: 32px;
-}
-.ct-item {
-  display: flex; align-items: center; gap: 10px;
-  font-size: 0.82rem; color: rgba(255,255,255,0.42);
-}
-.ct-dot {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: var(--red); flex-shrink: 0;
-}
-.contact-form-panel {
-  padding: 60px 28px 60px 40px;
-  display: flex;
-  align-items: flex-start;
-}
-.contact-form-card {
-  background: #ffffff;
-  border-radius: 24px;
-  padding: 36px 32px;
-  box-shadow: 0 24px 72px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.06);
-  width: 100%;
+.ce-trust-item::before {
+  content: ''; width: 4px; height: 4px; border-radius: 50%;
+  background: rgba(204,0,0,0.55); flex-shrink: 0;
 }
 
-/* ═══════════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════════ */
+/* Rechte Formular-Seite */
+.contact-form-side {
+  background: #f6f7f9;
+  padding: 72px 40px 72px 52px;
+  display: flex;
+  align-items: center;
+}
+.cfs-wrap { width: 100%; max-width: 440px; }
+.cfs-eyebrow {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 10px; display: block;
+}
+.cfs-title {
+  font-size: 1.55rem; font-weight: 900; letter-spacing: -0.025em;
+  color: var(--text); margin-bottom: 5px; line-height: 1.15;
+}
+.cfs-sub {
+  font-size: 0.85rem; color: var(--text-dim); margin-bottom: 28px; line-height: 1.55;
+}
+
+/* ═══ FOOTER REDESIGN ═══ */
 .footer {
-  background: var(--black);
-  border-top: 1px solid var(--border);
-  padding: 32px 28px;
-  text-align: center;
+  background: #0d0d0e;
+  border-top: 1px solid rgba(255,255,255,0.06);
 }
-.footer-links { display: flex; justify-content: center; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
-.footer-links a {
-  color: var(--text-subtle);
-  font-size: 0.82rem;
-  padding: 4px 12px;
-  border-radius: var(--r-pill);
-  transition: color 0.2s, background 0.2s;
+.footer-main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 64px 28px 48px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 48px;
 }
-.footer-links a:hover { color: var(--text); background: rgba(0,0,0,0.05); }
-.footer p { font-size: 0.78rem; color: var(--text-subtle); }
+.footer-brand-name {
+  font-size: 1rem; font-weight: 900; color: #fff;
+  letter-spacing: -0.01em; margin-bottom: 6px;
+}
+.footer-brand-tagline {
+  font-size: 0.8rem; color: rgba(255,255,255,0.32);
+  line-height: 1.6; margin-bottom: 22px;
+}
+.footer-brand-contacts { display: flex; flex-direction: column; gap: 9px; }
+.footer-brand-contacts a {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.85rem; color: rgba(255,255,255,0.5);
+  font-weight: 600; transition: color 0.2s; text-decoration: none;
+}
+.footer-brand-contacts a:hover { color: rgba(255,255,255,0.85); }
+.footer-brand-contacts svg { opacity: 0.45; flex-shrink: 0; }
+.footer-col-head {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(255,255,255,0.28);
+  margin-bottom: 18px; display: block;
+}
+.footer-col-links { display: flex; flex-direction: column; gap: 9px; }
+.footer-col-links a {
+  font-size: 0.87rem; color: rgba(255,255,255,0.45);
+  transition: color 0.2s; text-decoration: none;
+}
+.footer-col-links a:hover { color: rgba(255,255,255,0.8); }
+.footer-area-name { font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.5); margin-bottom: 3px; }
+.footer-area-desc { font-size: 0.8rem; color: rgba(255,255,255,0.28); line-height: 1.55; margin-bottom: 14px; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 18px 28px;
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; flex-wrap: wrap;
+}
+.footer-bottom p { font-size: 0.77rem; color: rgba(255,255,255,0.2); }
+.footer-bottom a { color: rgba(255,255,255,0.38); font-weight: 600; transition: color 0.2s; }
+.footer-bottom a:hover { color: rgba(255,255,255,0.7); }
+.footer-legal { display: flex; gap: 16px; }
+.footer-legal a { font-size: 0.77rem; color: rgba(255,255,255,0.2); transition: color 0.2s; }
+.footer-legal a:hover { color: rgba(255,255,255,0.5); }
 
 /* ═══════════════════════════════════════════
    COOKIE BANNER
@@ -1228,6 +1298,40 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .hero-split-section { perspective: 1400px; }
 .hero-card { transform-origin: center center; }
 
+/* ═══ COVERAGE STRIP ═══ */
+.coverage {
+  background: var(--surface);
+  padding: 64px 28px;
+  border-top: 1px solid var(--border);
+}
+.coverage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.coverage-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 28px 24px;
+  transition: border-color 0.25s, transform 0.3s cubic-bezier(0.23,1,0.32,1);
+}
+.coverage-card:hover { border-color: rgba(204,0,0,0.2); transform: translateY(-3px); }
+.coverage-icon {
+  width: 40px; height: 40px; border-radius: 12px;
+  background: rgba(204,0,0,0.08);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--red); margin-bottom: 14px;
+}
+.coverage-range {
+  font-size: 1.5rem; font-weight: 900; color: var(--red);
+  letter-spacing: -0.03em; line-height: 1; margin-bottom: 4px;
+}
+.coverage-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 6px; }
+.coverage-desc { font-size: 0.8rem; color: var(--text-dim); line-height: 1.55; }
+
 /* ═══════════════════════════════════════════
    EINSATZGEBIET – kompakt visuell
 ═══════════════════════════════════════════ */
@@ -1289,7 +1393,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* ═══════════════════════════════════════════
    PREISE
 ═══════════════════════════════════════════ */
-.preise { background: var(--black); padding: 100px 28px; }
+.preise { background: var(--surface); padding: 80px 28px; }
 .preise-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; max-width: 960px; margin: 0 auto 36px; }
 .preis-card {
   background: var(--surface); border: 1px solid var(--border);
@@ -1405,7 +1509,7 @@ html { overflow-x: hidden; }
   .section-sub { font-size: 0.9rem; margin-bottom: 36px; }
 
   /* ── Sektionen allgemein ── */
-  .area, .b2b, .contact, .ablauf, .preise { padding: 64px 16px; width: 100%; box-sizing: border-box; }
+  .area, .ablauf, .preise { padding: 64px 16px; width: 100%; box-sizing: border-box; }
 
   /* ══ LEISTUNGEN – horizontaler Scroll ══ */
   .services { padding: 64px 0; width: 100%; overflow: hidden; }
@@ -1496,8 +1600,12 @@ html { overflow-x: hidden; }
   .ablauf-steps { grid-template-columns: 1fr 1fr; gap: 28px 12px; }
   .ablauf-steps::before { display: none; }
 
-  /* ── B2B ── */
-  .b2b-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+  /* ── B2B Strip ── */
+  .b2b-strip { padding: 40px 16px; }
+  .b2b-strip-tags { gap: 6px; }
+
+  /* ── Coverage ── */
+  .coverage-grid { grid-template-columns: 1fr; gap: 10px; }
 
   /* ── Preise ── */
   .preise-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -1505,15 +1613,16 @@ html { overflow-x: hidden; }
   .preis-amount { font-size: 1.7rem; }
   .preise-trust { gap: 10px; flex-direction: column; align-items: center; }
 
-  /* ── Kontakt + Formular ── */
-  .contact-layout { grid-template-columns: 1fr; }
-  .contact-info-panel { padding: 56px 20px 36px; }
-  .contact-form-panel { padding: 0 16px 56px; }
-  .contact-form-card { padding: 28px 18px; border-radius: 18px; }
-  .contact-form-card .form-grid { grid-template-columns: 1fr; }
+  /* ── Neue Contact ── */
+  .contact-split { grid-template-columns: 1fr; }
+  .contact-emg { padding: 56px 20px 40px; }
+  .contact-emg::after { display: none; }
+  .contact-form-side { padding: 40px 20px 56px; }
+  .cfs-wrap { max-width: 100%; }
 
   /* ── Footer ── */
-  .footer { padding: 28px 16px; }
+  .footer-main { grid-template-columns: 1fr 1fr; gap: 32px; padding: 48px 20px 36px; }
+  .footer-bottom { padding: 16px 20px; }
 
   /* ── Mobile Sticky Bar ── */
   .mobile-bar { display: flex; }
@@ -1530,9 +1639,9 @@ html { overflow-x: hidden; }
   .hero-card { padding: 24px 18px; }
   .ablauf-steps { grid-template-columns: 1fr; gap: 20px; }
   .preise-grid { grid-template-columns: 1fr; }
-  .b2b-grid { grid-template-columns: 1fr 1fr; }
   .preis-amount { font-size: 1.6rem; }
   .section-head { font-size: clamp(1.4rem, 6vw, 1.9rem); }
+  .footer-main { grid-template-columns: 1fr; gap: 28px; }
 }
 
   </style>
@@ -1767,52 +1876,35 @@ html { overflow-x: hidden; }
 
 
 <!-- ═══════ EINSATZGEBIET ═══════ -->
-<section class="area" id="einsatzgebiet">
+<section class="coverage" id="einsatzgebiet">
   <div class="container">
-    <span class="section-label" style="display:block;text-align:center;">Wo wir arbeiten</span>
+    <span class="section-label" style="display:block;text-align:center;">Wo wir fahren</span>
     <h2 class="headline section-head fade-up">Unser <span class="accent">Einsatzgebiet</span></h2>
-    <p class="section-sub fade-up">Vom Soforteinsatz vor der Tür bis zur Rückführung aus dem Ausland.</p>
-
-    <div class="area-visual fade-up">
-      <div class="area-map">
-        <div class="map-ring map-ring-3"></div>
-        <div class="map-ring map-ring-2"></div>
-        <div class="map-ring map-ring-1"></div>
-        <div class="map-dot">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    <p class="section-sub fade-up">Vom Soforteinsatz in Hannover bis zur Rückführung aus dem Ausland.</p>
+    <div class="coverage-grid fade-up">
+      <div class="coverage-card">
+        <div class="coverage-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
+        <div class="coverage-range">100 km</div>
+        <div class="coverage-title">Sofort-Radius</div>
+        <p class="coverage-desc">Hannover, Garbsen, Langenhagen, Burgdorf, Wunstorf, Lehrte, Barsinghausen &amp; die gesamte Region – schnelle Reaktionszeiten garantiert.</p>
       </div>
-      <div style="display:flex;flex-direction:column;gap:10px;">
-        <div class="area-fact fade-up">
-          <div style="width:38px;height:38px;border-radius:50%;background:rgba(204,0,0,0.09);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div>
-            <div style="font-weight:700;font-size:0.95rem;color:var(--text);">100 km Sofort-Radius</div>
-            <div style="font-size:0.82rem;color:var(--text-dim);margin-top:2px;">Hannover &amp; gesamte Region – schnelle Reaktionszeiten</div>
-            <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;">
-              <span class="city-tag">Hannover</span><span class="city-tag">Garbsen</span><span class="city-tag">Langenhagen</span><span class="city-tag">Burgdorf</span><span class="city-tag">Wunstorf</span><span class="city-tag">Lehrte</span><span class="city-tag">Barsinghausen</span><span class="city-tag">+ weitere</span>
-            </div>
-          </div>
+      <div class="coverage-card">
+        <div class="coverage-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
         </div>
-        <div class="area-fact fade-up" style="transition-delay:0.08s">
-          <div style="width:38px;height:38px;border-radius:50%;background:rgba(204,0,0,0.06);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
-          </div>
-          <div>
-            <div style="font-weight:700;font-size:0.95rem;color:var(--text);">Deutschlandweit</div>
-            <div style="font-size:0.82rem;color:var(--text-dim);margin-top:2px;">Überführung, Reparaturtransport, Flottenlogistik – auf Anfrage</div>
-          </div>
+        <div class="coverage-range">D-weit</div>
+        <div class="coverage-title">Deutschlandweit</div>
+        <p class="coverage-desc">Überführung, Reparaturtransport &amp; Flottenlogistik – wir bringen Ihr Fahrzeug sicher ans Ziel, egal wohin in Deutschland.</p>
+      </div>
+      <div class="coverage-card">
+        <div class="coverage-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
         </div>
-        <div class="area-fact fade-up" style="transition-delay:0.16s">
-          <div style="width:38px;height:38px;border-radius:50%;background:rgba(204,0,0,0.04);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-          </div>
-          <div>
-            <div style="font-weight:700;font-size:0.95rem;color:var(--text);">Europaweit</div>
-            <div style="font-size:0.82rem;color:var(--text-dim);margin-top:2px;">Fahrzeug im Ausland liegengeblieben? Wir holen es zurück.</div>
-          </div>
-        </div>
+        <div class="coverage-range">Europa</div>
+        <div class="coverage-title">Europaweit</div>
+        <p class="coverage-desc">Fahrzeug im Ausland liegengeblieben? Wir koordinieren die Rückführung – mit Vorabangebot nach Standortangabe.</p>
       </div>
     </div>
   </div>
@@ -1911,22 +2003,16 @@ html { overflow-x: hidden; }
 
 
 <!-- ═══════ B2B ═══════ -->
-<section class="b2b">
-  <div class="container">
-    <span class="section-label" style="display:block;text-align:center;">Geschäftskunden</span>
-    <h2 class="headline section-head fade-up">Partner für <span class="accent">Unternehmen</span></h2>
-    <p class="section-sub fade-up">Zuverlässige Zusammenarbeit für Autohäuser, Werkstätten, Versicherungen und mehr.</p>
-    <div class="b2b-grid fade-up">
-      <div class="b2b-card"><div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div><p>Autohäuser &amp; Werkstätten</p></div>
-      <div class="b2b-card"><div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><p>Versicherungen</p></div>
-      <div class="b2b-card"><div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div><p>Polizei &amp; Behörden</p></div>
-      <div class="b2b-card"><div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><p>Hausverwaltungen</p></div>
-      <div class="b2b-card"><div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><p>Flottenservice</p></div>
-    </div>
-    <p style="text-align:center;margin-top:40px;color:var(--text-dim);font-size:0.9rem;">
-      Rahmenvertrag gewünscht? <a href="tel:+4917672421238" style="color:var(--text);font-weight:700;">Jetzt anrufen →</a>
-    </p>
+<section class="b2b-strip">
+  <span class="b2b-strip-label">Geschäftskunden &amp; Partner</span>
+  <div class="b2b-strip-tags">
+    <span class="b2b-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>Autohäuser &amp; Werkstätten</span>
+    <span class="b2b-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Versicherungen</span>
+    <span class="b2b-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>Polizei &amp; Behörden</span>
+    <span class="b2b-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Hausverwaltungen</span>
+    <span class="b2b-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Flottenservice</span>
   </div>
+  <p style="font-size:0.88rem;color:var(--text-dim);">Rahmenvertrag gewünscht? <a href="tel:+4917672421238" style="color:var(--text);font-weight:700;">Jetzt anrufen →</a></p>
 </section>
 
 
@@ -1993,70 +2079,48 @@ html { overflow-x: hidden; }
 
 <!-- ═══════ KONTAKT ═══════ -->
 <section class="contact" id="kontakt">
+  <div class="contact-split">
 
-  <!-- Hintergrundeffekte -->
-  <div class="contact-bg-glow contact-bg-glow-1"></div>
-  <div class="contact-bg-glow contact-bg-glow-2"></div>
-
-  <div class="contact-layout">
-
-    <!-- Links: Kontaktmethoden -->
-    <div class="contact-info-panel">
-      <span class="section-label" style="color:rgba(255,255,255,0.45);">Direktkontakt</span>
-      <h2 class="headline" style="color:#fff;margin-bottom:12px;">So erreichen<br><span style="color:var(--red);">Sie uns</span></h2>
-      <p style="color:rgba(255,255,255,0.55);font-size:0.95rem;line-height:1.6;margin-bottom:36px;">Für Notfälle immer anrufen – wir sind 24 Stunden am Tag, 7 Tage die Woche für Sie da.</p>
-
-      <div class="contact-methods">
-        <a href="tel:+4917672421238" class="contact-method primary">
-          <div class="cm-icon cm-icon-red">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 13.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.88 2.84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    <!-- Links: Notfall & Direktkontakt -->
+    <div class="contact-emg">
+      <span class="ce-badge">24 / 7 Notfallservice</span>
+      <h2 class="ce-heading">Panne? Unfall?<br><span>Jetzt anrufen.</span></h2>
+      <a href="tel:+4917672421238" class="ce-phone">+49 176 72421238</a>
+      <p class="ce-avail">Durchschnittlich 30 Minuten vor Ort · 365 Tage im Jahr</p>
+      <div class="ce-sep"></div>
+      <div class="ce-links">
+        <a href="https://wa.me/4917672421238" class="ce-link" target="_blank" rel="noopener">
+          <div class="ce-link-icon wa">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
           </div>
-          <div class="cm-body">
-            <span class="cm-label">Telefon &amp; Notfall · 24/7</span>
-            <span class="cm-value">+49 176 72421238</span>
+          <div>
+            <span class="ce-link-lbl">WhatsApp</span>
+            <span class="ce-link-val">Foto &amp; Standort senden</span>
           </div>
-          <svg class="cm-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
-
-        <a href="https://wa.me/4917672421238" class="contact-method" target="_blank" rel="noopener">
-          <div class="cm-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        <a href="mailto:info@schnellschlepper.de" class="ce-link">
+          <div class="ce-link-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
           </div>
-          <div class="cm-body">
-            <span class="cm-label">WhatsApp</span>
-            <span class="cm-value">Foto &amp; Standort senden</span>
+          <div>
+            <span class="ce-link-lbl">E-Mail</span>
+            <span class="ce-link-val">info@schnellschlepper.de</span>
           </div>
-          <svg class="cm-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
-
-        <a href="mailto:info@schnellschlepper.de" class="contact-method">
-          <div class="cm-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-          </div>
-          <div class="cm-body">
-            <span class="cm-label">E-Mail</span>
-            <span class="cm-value">info@schnellschlepper.de</span>
-          </div>
-          <svg class="cm-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
       </div>
-
-      <!-- Vertrauen -->
-      <div class="contact-trust">
-        <div class="ct-item"><span class="ct-dot"></span>Durchschnittlich 30 Min. vor Ort</div>
-        <div class="ct-item"><span class="ct-dot"></span>Festpreis – vor dem Einsatz</div>
-        <div class="ct-item"><span class="ct-dot"></span>Seit 1999 im Einsatz</div>
+      <div class="ce-trust">
+        <div class="ce-trust-item">Festpreis – nennen wir Ihnen vor dem Einsatz</div>
+        <div class="ce-trust-item">Kein Nacht- oder Feiertagszuschlag</div>
+        <div class="ce-trust-item">Seit 1999 im Einsatz – Hannover &amp; Region</div>
       </div>
     </div>
 
     <!-- Rechts: Formular -->
-    <div class="contact-form-panel" id="anfrage">
-      <div class="contact-form-card">
-        <div class="booking-header" style="text-align:left;margin-bottom:28px;">
-          <span class="section-label" style="display:block;">Route anfragen</span>
-          <h2 class="headline" style="font-size:1.5rem;margin-bottom:8px;">Auftrag <span class="accent">stellen</span></h2>
-          <p style="color:var(--text-dim);font-size:0.88rem;">Schnell &amp; unverbindlich. Bei Notfall bitte direkt anrufen!</p>
-        </div>
+    <div class="contact-form-side" id="anfrage">
+      <div class="cfs-wrap">
+        <span class="cfs-eyebrow">Route anfragen</span>
+        <h2 class="cfs-title">Auftrag <span class="accent">stellen</span></h2>
+        <p class="cfs-sub">Geplanter Transport, Überführung oder Rückführung – schnell &amp; unverbindlich. Für Notfälle bitte direkt anrufen!</p>
         <form id="bookingForm" onsubmit="submitForm(event)" novalidate>
           <input type="hidden" name="_subject" value="Neue Anfrage – Schnell Schlepper" />
           <div class="form-grid">
@@ -2129,12 +2193,63 @@ html { overflow-x: hidden; }
 
 <!-- ═══════ FOOTER ═══════ -->
 <footer class="footer">
-  <div class="footer-links">
-    <a href="impressum.html">Impressum</a>
-    <a href="datenschutz.html">Datenschutz</a>
-    <a href="#kontakt">Kontakt</a>
+  <div class="footer-main">
+
+    <div>
+      <div class="footer-brand-name">Schnell Schlepper</div>
+      <p class="footer-brand-tagline">24h Abschleppdienst · Hannover &amp; Region<br>Pannenhilfe, Bergung &amp; Fahrzeugtransport</p>
+      <div class="footer-brand-contacts">
+        <a href="tel:+4917672421238">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 13.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.88 2.84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          +49 176 72421238
+        </a>
+        <a href="mailto:info@schnellschlepper.de">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+          info@schnellschlepper.de
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <span class="footer-col-head">Leistungen</span>
+      <div class="footer-col-links">
+        <a href="leistungen.html#abschleppen">Abschleppen</a>
+        <a href="leistungen.html#pannenhilfe">Pannenhilfe vor Ort</a>
+        <a href="leistungen.html#bergung">Fahrzeugbergung</a>
+        <a href="leistungen.html#fahrzeugtransport">Fahrzeugtransport</a>
+        <a href="leistungen.html#fahrzeugrueckfuehrung">Rückführung</a>
+        <a href="leistungen.html#einlagerung">Einlagerung</a>
+      </div>
+    </div>
+
+    <div>
+      <span class="footer-col-head">Unternehmen</span>
+      <div class="footer-col-links">
+        <a href="ueber-uns.html">Über uns</a>
+        <a href="faq.html">FAQ</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#preise">Preise</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </div>
+    </div>
+
+    <div>
+      <span class="footer-col-head">Einsatzgebiet</span>
+      <div class="footer-area-name">100 km Sofort-Radius</div>
+      <p class="footer-area-desc">Hannover, Garbsen, Langenhagen, Burgdorf, Wunstorf, Lehrte, Barsinghausen &amp; Umgebung</p>
+      <div class="footer-area-name">Deutschlandweit &amp; Europa</div>
+      <p class="footer-area-desc">Überführungen, Rückführungen &amp; Spezialtransporte auf Anfrage</p>
+    </div>
+
   </div>
-  <p>&copy; 2025 Schnell Schlepper – Wenn's drauf ankommt.</p>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Schnell Schlepper – Rami Haidar, Inh. · Hannover</p>
+    <div class="footer-legal">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+    </div>
+  </div>
 </footer>
 
 
